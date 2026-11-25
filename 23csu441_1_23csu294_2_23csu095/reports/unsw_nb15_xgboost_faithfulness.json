@@ -1,0 +1,50 @@
+{
+  "config": {
+    "n_flows": 100,
+    "top_k": 5,
+    "random_repeats": 20,
+    "seed": 0,
+    "model": "xgboost",
+    "model_sha256": "93895f6599fcd300474f97f62cf5a9ebcba3e018c1254dd33033f2652d1e6e96",
+    "baseline": "median of background sample",
+    "background_rows": 200,
+    "lime_samples": 1000,
+    "classes_explained": {
+      "Analysis": 14,
+      "BENIGN": 13,
+      "Backdoor": 5,
+      "DoS": 8,
+      "Exploits": 12,
+      "Fuzzers": 9,
+      "Generic": 9,
+      "Reconnaissance": 12,
+      "Shellcode": 9,
+      "Worms": 9
+    },
+    "test_sample": "class-balanced sample of the test split"
+  },
+  "mean_confidence_before": 0.8012458682060242,
+  "random": {
+    "mean_drop": 0.19882320003956558,
+    "std_of_mean_across_repeats": 0.025420141430934,
+    "median_drop": 0.16626928038895128
+  },
+  "methods": {
+    "shap": {
+      "mean_drop": 0.6367375254631042,
+      "median_drop": 0.7256225347518921,
+      "mean_confidence_after": 0.16450853645801544,
+      "label_flip_rate": 0.86,
+      "share_flows_beating_random": 0.9,
+      "ratio_to_random": 3.2025313209745856
+    },
+    "lime": {
+      "mean_drop": 0.510002851486206,
+      "median_drop": 0.5392544269561768,
+      "mean_confidence_after": 0.29124322533607483,
+      "label_flip_rate": 0.71,
+      "share_flows_beating_random": 0.73,
+      "ratio_to_random": 2.565107348562522
+    }
+  }
+}

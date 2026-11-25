@@ -1,0 +1,7 @@
+# Holds the lab SOC's network namespace (see soc/netguard.sh), like netns/ does for endpoints.
+FROM alpine:3.20
+RUN apk add --no-cache iproute2 nftables
+COPY soc/netguard.sh /netguard.sh
+RUN chmod +x /netguard.sh
+HEALTHCHECK --interval=2s --timeout=2s --retries=15 CMD test -f /tmp/ready
+ENTRYPOINT ["/netguard.sh"]

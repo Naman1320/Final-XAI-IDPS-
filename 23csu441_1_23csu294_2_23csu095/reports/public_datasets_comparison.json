@@ -1,0 +1,460 @@
+{
+  "note": "rows marked pipeline 'idps.public' use the same method (sampling, class-time split, XGBoost, SHAP/LIME deletion test) but not the same difficulty (classes, networks, attack tools and features differ); the week_* CIC-IDS2017 row comes from a different pipeline and is not comparable with them. CIC-IDS2017/2018 <-> UNSW-NB15 cross-tests are not done: different feature sets and attack taxonomies. All BENIGN false-positive rates are on the deduplicated test set.",
+  "rows": [
+    {
+      "classes": [
+        "BENIGN",
+        "Bot",
+        "BruteForce",
+        "DDoS",
+        "DoS",
+        "Heartbleed",
+        "Infiltration",
+        "PortScan",
+        "WebAttack"
+      ],
+      "classes_missing_from_train": [],
+      "comparable_with_idps_public_rows": true,
+      "dataset": "CIC-IDS2017 (idps.public pipeline)",
+      "n_classes": 9,
+      "pipeline": "idps.public",
+      "pipeline_note": null,
+      "rows_by_split": {
+        "test": 265288,
+        "train": 807555,
+        "validation": 260812
+      },
+      "rows_used": 1333655,
+      "with_ports": {
+        "accuracy": 0.9439137842646482,
+        "benign_false_positive_rate": 0.06775286023425295,
+        "benign_fpr_note": "on the deduplicated test set (easy repeats removed): pessimistic",
+        "dropped_features": [],
+        "faithfulness_flows": 87,
+        "faithfulness_run": true,
+        "inference_us_per_flow": 3.731732588729495,
+        "lime": {
+          "features": 78,
+          "flows": 87,
+          "random_baseline_features": 5,
+          "ratio_to_random": 7.793200515274157,
+          "share_ci95": [
+            0.3160914661073315,
+            0.5187859468840734
+          ],
+          "share_flows_beating_random": 0.41379310344827586,
+          "verdict": "inconclusive"
+        },
+        "macro_f1": 0.7949502592859748,
+        "macro_f1_ci95": [
+          0.7562272270689365,
+          0.8160637253416186
+        ],
+        "n_features": 78,
+        "report": "cic_ids2017_xgboost.json",
+        "roc_auc_macro": 0.9976039280596929,
+        "shap": {
+          "features": 78,
+          "flows": 87,
+          "random_baseline_features": 5,
+          "ratio_to_random": 17.43073453198053,
+          "share_ci95": [
+            0.8876680217351718,
+            0.9819776031767629
+          ],
+          "share_flows_beating_random": 0.9540229885057471,
+          "verdict": "faithful"
+        },
+        "test_rows": 265288,
+        "test_rows_identical_to_a_train_row": 0.05783902777358946,
+        "train_seconds": 79.3223117919988
+      },
+      "without_ports": {
+        "accuracy": 0.9228193559230004,
+        "benign_false_positive_rate": 0.08798107255520504,
+        "benign_fpr_note": "on the deduplicated test set (easy repeats removed): pessimistic",
+        "dropped_features": [
+          "Dst Port"
+        ],
+        "faithfulness_flows": 87,
+        "faithfulness_run": true,
+        "inference_us_per_flow": 5.598130237478671,
+        "lime": {
+          "features": 77,
+          "flows": 87,
+          "random_baseline_features": 5,
+          "ratio_to_random": 3.183925613453013,
+          "share_ci95": [
+            0.23300577279734025,
+            0.4257408807182298
+          ],
+          "share_flows_beating_random": 0.3218390804597701,
+          "verdict": "not better than random"
+        },
+        "macro_f1": 0.6549486844826422,
+        "macro_f1_ci95": [
+          0.6118092390989925,
+          0.6578891395976331
+        ],
+        "n_features": 77,
+        "report": "cic_ids2017_xgboost_noport.json",
+        "roc_auc_macro": 0.9876681686993505,
+        "shap": {
+          "features": 77,
+          "flows": 87,
+          "random_baseline_features": 5,
+          "ratio_to_random": 16.077918484702554,
+          "share_ci95": [
+            0.7609521068039846,
+            0.9105464136976358
+          ],
+          "share_flows_beating_random": 0.8505747126436781,
+          "verdict": "faithful"
+        },
+        "test_rows": 232053,
+        "test_rows_identical_to_a_train_row": 0.06091280871180291,
+        "train_seconds": 78.16503874999762
+      }
+    },
+    {
+      "classes": [
+        "BENIGN",
+        "Bot",
+        "BruteForce",
+        "DDoS",
+        "DoS",
+        "Infiltration",
+        "WebAttack"
+      ],
+      "classes_missing_from_train": [],
+      "comparable_with_idps_public_rows": true,
+      "dataset": "CSE-CIC-IDS2018",
+      "n_classes": 7,
+      "pipeline": "idps.public",
+      "pipeline_note": null,
+      "rows_by_split": {
+        "test": 316775,
+        "train": 958262,
+        "validation": 299020
+      },
+      "rows_used": 1574057,
+      "with_ports": {
+        "accuracy": 0.7234630258069608,
+        "benign_false_positive_rate": 0.343278012126498,
+        "benign_fpr_note": "on the deduplicated test set (easy repeats removed): pessimistic",
+        "dropped_features": [],
+        "faithfulness_flows": 98,
+        "faithfulness_run": true,
+        "inference_us_per_flow": 2.596204719437408,
+        "lime": {
+          "features": 78,
+          "flows": 98,
+          "random_baseline_features": 5,
+          "ratio_to_random": 4.03462859295087,
+          "share_ci95": [
+            0.5235640278836827,
+            0.7120960560113073
+          ],
+          "share_flows_beating_random": 0.6224489795918368,
+          "verdict": "faithful"
+        },
+        "macro_f1": 0.8021889023590069,
+        "macro_f1_ci95": [
+          0.7949825165885624,
+          0.8096465062437365
+        ],
+        "n_features": 78,
+        "report": "cse_cic_ids2018_xgboost.json",
+        "roc_auc_macro": 0.9701500115456738,
+        "shap": {
+          "features": 78,
+          "flows": 98,
+          "random_baseline_features": 5,
+          "ratio_to_random": 8.869471543117813,
+          "share_ci95": [
+            0.9138283563963491,
+            0.9895352985344453
+          ],
+          "share_flows_beating_random": 0.9693877551020408,
+          "verdict": "faithful"
+        },
+        "test_rows": 316775,
+        "test_rows_identical_to_a_train_row": 0.10444637360902849,
+        "train_seconds": 45.84583966700302
+      },
+      "without_ports": {
+        "accuracy": 0.7193888174616028,
+        "benign_false_positive_rate": 0.3572919917539549,
+        "benign_fpr_note": "on the deduplicated test set (easy repeats removed): pessimistic",
+        "dropped_features": [
+          "Dst Port"
+        ],
+        "faithfulness_flows": 98,
+        "faithfulness_run": true,
+        "inference_us_per_flow": 4.620486173050611,
+        "lime": {
+          "features": 77,
+          "flows": 98,
+          "random_baseline_features": 5,
+          "ratio_to_random": 9.954626019288776,
+          "share_ci95": [
+            0.6396378419435089,
+            0.8120439855218884
+          ],
+          "share_flows_beating_random": 0.7346938775510204,
+          "verdict": "faithful"
+        },
+        "macro_f1": 0.794613677191566,
+        "macro_f1_ci95": [
+          0.7887919866390916,
+          0.8024022678506195
+        ],
+        "n_features": 77,
+        "report": "cse_cic_ids2018_xgboost_noport.json",
+        "roc_auc_macro": 0.9747651801921461,
+        "shap": {
+          "features": 77,
+          "flows": 98,
+          "random_baseline_features": 5,
+          "ratio_to_random": 13.736881838934766,
+          "share_ci95": [
+            0.899710305133373,
+            0.984015009472839
+          ],
+          "share_flows_beating_random": 0.9591836734693877,
+          "verdict": "faithful"
+        },
+        "test_rows": 302561,
+        "test_rows_identical_to_a_train_row": 0.1256473901130681,
+        "train_seconds": 148.20315266599937
+      }
+    },
+    {
+      "classes": [
+        "Analysis",
+        "BENIGN",
+        "Backdoor",
+        "DoS",
+        "Exploits",
+        "Fuzzers",
+        "Generic",
+        "Reconnaissance",
+        "Shellcode",
+        "Worms"
+      ],
+      "classes_missing_from_train": [],
+      "comparable_with_idps_public_rows": true,
+      "dataset": "UNSW-NB15",
+      "n_classes": 10,
+      "pipeline": "idps.public",
+      "pipeline_note": null,
+      "rows_by_split": {
+        "test": 110715,
+        "train": 329222,
+        "validation": 105707
+      },
+      "rows_used": 545644,
+      "with_ports": {
+        "accuracy": 0.9609371467840964,
+        "benign_false_positive_rate": 0.011701416660275443,
+        "benign_fpr_note": "on the deduplicated test set (easy repeats removed): pessimistic",
+        "dropped_features": [],
+        "faithfulness_flows": 100,
+        "faithfulness_run": true,
+        "inference_us_per_flow": 3.9550965630365926,
+        "lime": {
+          "features": 43,
+          "flows": 100,
+          "random_baseline_features": 5,
+          "ratio_to_random": 2.565107348562522,
+          "share_ci95": [
+            0.6356769977376873,
+            0.8073053908233518
+          ],
+          "share_flows_beating_random": 0.73,
+          "verdict": "faithful"
+        },
+        "macro_f1": 0.7079493781191826,
+        "macro_f1_ci95": [
+          0.6929003758183898,
+          0.7217807318406165
+        ],
+        "n_features": 43,
+        "report": "unsw_nb15_xgboost.json",
+        "roc_auc_macro": 0.9951592805104124,
+        "shap": {
+          "features": 43,
+          "flows": 100,
+          "random_baseline_features": 5,
+          "ratio_to_random": 3.2025313209745856,
+          "share_ci95": [
+            0.8256326956323347,
+            0.9447714583868639
+          ],
+          "share_flows_beating_random": 0.9,
+          "verdict": "faithful"
+        },
+        "test_rows": 110591,
+        "test_rows_identical_to_a_train_row": 0.013228924596034036,
+        "train_seconds": 17.35053158300434
+      },
+      "without_ports": {
+        "accuracy": 0.9542942603366832,
+        "benign_false_positive_rate": 0.011577757536516577,
+        "benign_fpr_note": "on the deduplicated test set (easy repeats removed): pessimistic",
+        "dropped_features": [
+          "sport",
+          "dsport"
+        ],
+        "faithfulness_flows": 100,
+        "faithfulness_run": true,
+        "inference_us_per_flow": 4.04078133832579,
+        "lime": {
+          "features": 41,
+          "flows": 100,
+          "random_baseline_features": 5,
+          "ratio_to_random": 2.8122270580968505,
+          "share_ci95": [
+            0.8625032899347025,
+            0.965681175635936
+          ],
+          "share_flows_beating_random": 0.93,
+          "verdict": "faithful"
+        },
+        "macro_f1": 0.6448040399861465,
+        "macro_f1_ci95": [
+          0.6296419737791762,
+          0.6573278544320474
+        ],
+        "n_features": 41,
+        "report": "unsw_nb15_xgboost_noport.json",
+        "roc_auc_macro": 0.9940811779502235,
+        "shap": {
+          "features": 41,
+          "flows": 100,
+          "random_baseline_features": 5,
+          "ratio_to_random": 2.6252839056713793,
+          "share_ci95": [
+            0.8136853697209698,
+            0.9374586804477487
+          ],
+          "share_flows_beating_random": 0.89,
+          "verdict": "faithful"
+        },
+        "test_rows": 109658,
+        "test_rows_identical_to_a_train_row": 0.019597293403126083,
+        "train_seconds": 17.03969849999703
+      }
+    },
+    {
+      "classes": [
+        "BENIGN",
+        "Bot",
+        "DDoS",
+        "DoS GoldenEye",
+        "DoS Hulk",
+        "DoS Slowhttptest",
+        "DoS slowloris",
+        "FTP-Patator",
+        "Heartbleed",
+        "Infiltration",
+        "PortScan",
+        "SSH-Patator",
+        "Web Attack - Brute Force",
+        "Web Attack - XSS"
+      ],
+      "classes_missing_from_train": [],
+      "comparable_with_idps_public_rows": false,
+      "dataset": "CIC-IDS2017 (week_* reports)",
+      "n_classes": 14,
+      "pipeline": "idps.detect (week_* reports): different pipeline, not comparable",
+      "pipeline_note": "own 42-feature extractor, 14 unmerged labels, all rows, fixed 120 s gap, 16.5% of test rows identical to a train row, 551 unbalanced faithfulness flows: do not compare its numbers with the idps.public rows",
+      "rows_by_split": {
+        "test": 194543,
+        "train": 601974,
+        "validation": 161873
+      },
+      "rows_used": 958390,
+      "with_ports": {
+        "accuracy": 0.9837054018905846,
+        "benign_false_positive_rate": 0.01137229879670463,
+        "benign_fpr_note": "on the deduplicated test set (easy repeats removed): pessimistic",
+        "dropped_features": [],
+        "faithfulness_flows": 551,
+        "faithfulness_run": true,
+        "inference_us_per_flow": null,
+        "lime": {
+          "features": 42,
+          "flows": 551,
+          "random_baseline_features": 5,
+          "ratio_to_random": 4.495747219684029,
+          "share_ci95": [
+            0.5942070532956768,
+            0.6743380593995502
+          ],
+          "share_flows_beating_random": 0.6352087114337568,
+          "verdict": "faithful"
+        },
+        "macro_f1": 0.6619774713201023,
+        "macro_f1_ci95": null,
+        "n_features": 42,
+        "report": "week_xgboost.json",
+        "roc_auc_macro": 0.9961095727761834,
+        "shap": {
+          "features": 42,
+          "flows": 551,
+          "random_baseline_features": 5,
+          "ratio_to_random": 7.829964092153427,
+          "share_ci95": [
+            0.8366449998971628,
+            0.8932930580999305
+          ],
+          "share_flows_beating_random": 0.867513611615245,
+          "verdict": "faithful"
+        },
+        "test_rows": 194543,
+        "test_rows_identical_to_a_train_row": 0.16479133147941585,
+        "train_seconds": null
+      },
+      "without_ports": {
+        "accuracy": 0.9826053880119048,
+        "benign_false_positive_rate": 0.011722389425004377,
+        "benign_fpr_note": "on the deduplicated test set (easy repeats removed): pessimistic",
+        "dropped_features": [
+          "dst_port"
+        ],
+        "faithfulness_flows": null,
+        "faithfulness_run": false,
+        "inference_us_per_flow": null,
+        "lime": {
+          "features": 41,
+          "flows": null,
+          "random_baseline_features": 5,
+          "ratio_to_random": null,
+          "share_ci95": null,
+          "share_flows_beating_random": null,
+          "verdict": "not run"
+        },
+        "macro_f1": 0.6157490572470002,
+        "macro_f1_ci95": null,
+        "n_features": 41,
+        "report": "week_xgboost_noport.json",
+        "roc_auc_macro": 0.9866853683266433,
+        "shap": {
+          "features": 41,
+          "flows": null,
+          "random_baseline_features": 5,
+          "ratio_to_random": null,
+          "share_ci95": null,
+          "share_flows_beating_random": null,
+          "verdict": "not run"
+        },
+        "test_rows": 194543,
+        "test_rows_identical_to_a_train_row": 0.16954092411446312,
+        "train_seconds": null
+      }
+    }
+  ],
+  "skipped": [],
+  "verdict_rule": "per explanation method, from the deletion test (top 5 features replaced by the background median; the random baseline deletes 5 random features, so it is 5 of N features and N is reported): the share of flows whose drop beats their random drop gets a binomial 95% Wilson interval (n = the flows tested, reported). 'inconclusive' if that interval includes 0.5; otherwise 'faithful' if the mean drop is at least 2x the random drop and the interval lies above 0.5; 'weak' if the interval lies above 0.5 and the ratio is at least 1.5 (but under 2); 'not better than random' if the interval lies below 0.5 or the ratio is under 1; 'inconclusive' otherwise; 'not run' if the method or file is absent. With about 10 flows per class the interval is wide (about +-10 points at 100 flows): a verdict is a summary, not a test"
+}

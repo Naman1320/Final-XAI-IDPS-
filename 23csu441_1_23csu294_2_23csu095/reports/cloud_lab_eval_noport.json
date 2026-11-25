@@ -1,0 +1,1125 @@
+{
+  "model": "models/staging/cloud_xgboost_noport.joblib",
+  "version": "xgboost-202611180323-11a10936",
+  "alert_floor": 0.5,
+  "min_flows": 5,
+  "attacker": "10.10.1.10",
+  "modes": {
+    "sg": {
+      "portscan": {
+        "truth": "PortScan",
+        "rows": 2048,
+        "sessions": 2,
+        "rows_per_session": {
+          "1": 1024,
+          "2": 1024
+        },
+        "alerted_share": 1.0,
+        "right_family_share": 0.001953125,
+        "records_parsed": 2052,
+        "records_malformed": 0,
+        "repeats": {
+          "1": {
+            "rows": 1024,
+            "rows_not_attacker": 0,
+            "rejected_share": 0.998046875,
+            "predicted": {
+              "DDoS": 1022,
+              "PortScan": 2
+            },
+            "alerted": 1024,
+            "alerted_share": 1.0,
+            "right_family_share": 0.001953125,
+            "alerted_rejected_share": 1.0,
+            "alerted_accepted_share": 1.0,
+            "feature_medians": {
+              "duration_ms": 0.0,
+              "fwd_packets": 1.0,
+              "bwd_packets": 0.0,
+              "fwd_bytes": 44.0,
+              "bwd_bytes": 0.0,
+              "bytes_per_s": 0.0,
+              "packets_per_s": 0.0,
+              "down_up_ratio": 0.0,
+              "fwd_pkt_len_mean": 44.0,
+              "bwd_pkt_len_mean": 0.0,
+              "rejected": 1.0
+            },
+            "alerted_windows": 1,
+            "max_alerted_rows_in_a_window": 1024,
+            "would_reach_block_threshold": true,
+            "first_alert_delay_s": 46
+          },
+          "2": {
+            "rows": 1024,
+            "rows_not_attacker": 0,
+            "rejected_share": 0.998046875,
+            "predicted": {
+              "DDoS": 1022,
+              "PortScan": 2
+            },
+            "alerted": 1024,
+            "alerted_share": 1.0,
+            "right_family_share": 0.001953125,
+            "alerted_rejected_share": 1.0,
+            "alerted_accepted_share": 1.0,
+            "feature_medians": {
+              "duration_ms": 0.0,
+              "fwd_packets": 1.0,
+              "bwd_packets": 0.0,
+              "fwd_bytes": 44.0,
+              "bwd_bytes": 0.0,
+              "bytes_per_s": 0.0,
+              "packets_per_s": 0.0,
+              "down_up_ratio": 0.0,
+              "fwd_pkt_len_mean": 44.0,
+              "bwd_pkt_len_mean": 0.0,
+              "rejected": 1.0
+            },
+            "alerted_windows": 1,
+            "max_alerted_rows_in_a_window": 1024,
+            "would_reach_block_threshold": true,
+            "first_alert_delay_s": 50
+          }
+        },
+        "lab_model": {
+          "flows": 2048,
+          "alerted_share": 1.0,
+          "right_family_share": 1.0,
+          "top_predicted": [
+            {
+              "class": "PortScan",
+              "flows": 2048,
+              "share": 1.0
+            }
+          ]
+        }
+      },
+      "ssh_bruteforce": {
+        "truth": "SSH-Patator",
+        "rows": 114,
+        "sessions": 2,
+        "rows_per_session": {
+          "1": 57,
+          "2": 57
+        },
+        "alerted_share": 0.41228070175438597,
+        "right_family_share": 0.41228070175438597,
+        "records_parsed": 228,
+        "records_malformed": 0,
+        "repeats": {
+          "1": {
+            "rows": 57,
+            "rows_not_attacker": 0,
+            "rejected_share": 0.0,
+            "predicted": {
+              "BENIGN": 31,
+              "SSH-Patator": 26
+            },
+            "alerted": 26,
+            "alerted_share": 0.45614035087719296,
+            "right_family_share": 0.45614035087719296,
+            "alerted_rejected_share": null,
+            "alerted_accepted_share": 0.45614035087719296,
+            "feature_medians": {
+              "duration_ms": 16000.0,
+              "fwd_packets": 14.0,
+              "bwd_packets": 18.0,
+              "fwd_bytes": 2331.0,
+              "bwd_bytes": 2903.0,
+              "bytes_per_s": 322.77777777777777,
+              "packets_per_s": 2.1666666666666665,
+              "down_up_ratio": 1.2598210812913264,
+              "fwd_pkt_len_mean": 151.23529411764707,
+              "bwd_pkt_len_mean": 147.22727272727272,
+              "rejected": 0.0
+            },
+            "alerted_windows": 4,
+            "max_alerted_rows_in_a_window": 8,
+            "would_reach_block_threshold": true,
+            "first_alert_delay_s": 34
+          },
+          "2": {
+            "rows": 57,
+            "rows_not_attacker": 0,
+            "rejected_share": 0.0,
+            "predicted": {
+              "BENIGN": 36,
+              "SSH-Patator": 21
+            },
+            "alerted": 21,
+            "alerted_share": 0.3684210526315789,
+            "right_family_share": 0.3684210526315789,
+            "alerted_rejected_share": null,
+            "alerted_accepted_share": 0.3684210526315789,
+            "feature_medians": {
+              "duration_ms": 14000.0,
+              "fwd_packets": 15.0,
+              "bwd_packets": 20.0,
+              "fwd_bytes": 2467.0,
+              "bwd_bytes": 3239.0,
+              "bytes_per_s": 363.125,
+              "packets_per_s": 2.4375,
+              "down_up_ratio": 1.2598210812913264,
+              "fwd_pkt_len_mean": 151.23529411764707,
+              "bwd_pkt_len_mean": 147.22727272727272,
+              "rejected": 0.0
+            },
+            "alerted_windows": 4,
+            "max_alerted_rows_in_a_window": 8,
+            "would_reach_block_threshold": true,
+            "first_alert_delay_s": 43
+          }
+        },
+        "lab_model": {
+          "flows": 90,
+          "alerted_share": 0.9889,
+          "right_family_share": 0.9889,
+          "top_predicted": [
+            {
+              "class": "SSH-Patator",
+              "flows": 89,
+              "share": 0.9889
+            },
+            {
+              "class": "BENIGN",
+              "flows": 1,
+              "share": 0.0111
+            }
+          ]
+        }
+      },
+      "syn_flood": {
+        "truth": "DoS SYN flood",
+        "rows": 57526,
+        "sessions": 2,
+        "rows_per_session": {
+          "1": 28549,
+          "2": 28977
+        },
+        "alerted_share": 0.9999826165559921,
+        "right_family_share": 0.0,
+        "records_parsed": 115052,
+        "records_malformed": 0,
+        "repeats": {
+          "1": {
+            "rows": 28549,
+            "rows_not_attacker": 0,
+            "rejected_share": 0.0,
+            "predicted": {
+              "PortScan": 28549
+            },
+            "alerted": 28549,
+            "alerted_share": 1.0,
+            "right_family_share": 0.0,
+            "alerted_rejected_share": null,
+            "alerted_accepted_share": 1.0,
+            "feature_medians": {
+              "duration_ms": 0.0,
+              "fwd_packets": 2.0,
+              "bwd_packets": 1.0,
+              "fwd_bytes": 80.0,
+              "bwd_bytes": 44.0,
+              "bytes_per_s": 0.0,
+              "packets_per_s": 0.0,
+              "down_up_ratio": 0.55,
+              "fwd_pkt_len_mean": 40.0,
+              "bwd_pkt_len_mean": 44.0,
+              "rejected": 0.0
+            },
+            "alerted_windows": 1,
+            "max_alerted_rows_in_a_window": 28549,
+            "would_reach_block_threshold": true,
+            "first_alert_delay_s": 20
+          },
+          "2": {
+            "rows": 28977,
+            "rows_not_attacker": 0,
+            "rejected_share": 0.0,
+            "predicted": {
+              "PortScan": 28976,
+              "BENIGN": 1
+            },
+            "alerted": 28976,
+            "alerted_share": 0.9999654898712772,
+            "right_family_share": 0.0,
+            "alerted_rejected_share": null,
+            "alerted_accepted_share": 0.9999654898712772,
+            "feature_medians": {
+              "duration_ms": 0.0,
+              "fwd_packets": 2.0,
+              "bwd_packets": 1.0,
+              "fwd_bytes": 80.0,
+              "bwd_bytes": 44.0,
+              "bytes_per_s": 0.0,
+              "packets_per_s": 0.0,
+              "down_up_ratio": 0.55,
+              "fwd_pkt_len_mean": 40.0,
+              "bwd_pkt_len_mean": 44.0,
+              "rejected": 0.0
+            },
+            "alerted_windows": 1,
+            "max_alerted_rows_in_a_window": 28976,
+            "would_reach_block_threshold": true,
+            "first_alert_delay_s": 29
+          }
+        },
+        "lab_model": {
+          "flows": 53742,
+          "alerted_share": 1.0,
+          "right_family_share": 0.0,
+          "top_predicted": [
+            {
+              "class": "PortScan",
+              "flows": 53741,
+              "share": 1.0
+            },
+            {
+              "class": "BENIGN",
+              "flows": 1,
+              "share": 0.0
+            }
+          ]
+        }
+      },
+      "slow_dos": {
+        "truth": "DoS slowloris",
+        "rows": 2046,
+        "sessions": 2,
+        "rows_per_session": {
+          "1": 1023,
+          "2": 1023
+        },
+        "alerted_share": 0.036656891495601175,
+        "right_family_share": 0.0,
+        "records_parsed": 4092,
+        "records_malformed": 0,
+        "repeats": {
+          "1": {
+            "rows": 1023,
+            "rows_not_attacker": 0,
+            "rejected_share": 0.0,
+            "predicted": {
+              "BENIGN": 1014,
+              "FTP-Patator": 9
+            },
+            "alerted": 7,
+            "alerted_share": 0.006842619745845552,
+            "right_family_share": 0.0,
+            "alerted_rejected_share": null,
+            "alerted_accepted_share": 0.006842619745845552,
+            "feature_medians": {
+              "duration_ms": 16000.0,
+              "fwd_packets": 6.0,
+              "bwd_packets": 4.0,
+              "fwd_bytes": 493.0,
+              "bwd_bytes": 320.0,
+              "bytes_per_s": 28.0,
+              "packets_per_s": 0.38235294117647056,
+              "down_up_ratio": 0.8387096774193549,
+              "fwd_pkt_len_mean": 82.16666666666667,
+              "bwd_pkt_len_mean": 53.333333333333336,
+              "rejected": 0.0
+            },
+            "alerted_windows": 1,
+            "max_alerted_rows_in_a_window": 7,
+            "would_reach_block_threshold": true,
+            "first_alert_delay_s": 110
+          },
+          "2": {
+            "rows": 1023,
+            "rows_not_attacker": 0,
+            "rejected_share": 0.0,
+            "predicted": {
+              "BENIGN": 949,
+              "FTP-Patator": 74
+            },
+            "alerted": 68,
+            "alerted_share": 0.06647116324535679,
+            "right_family_share": 0.0,
+            "alerted_rejected_share": null,
+            "alerted_accepted_share": 0.06647116324535679,
+            "feature_medians": {
+              "duration_ms": 6000.0,
+              "fwd_packets": 6.0,
+              "bwd_packets": 4.0,
+              "fwd_bytes": 641.0,
+              "bwd_bytes": 372.0,
+              "bytes_per_s": 27.88888888888889,
+              "packets_per_s": 0.3333333333333333,
+              "down_up_ratio": 0.8813559322033898,
+              "fwd_pkt_len_mean": 105.875,
+              "bwd_pkt_len_mean": 53.142857142857146,
+              "rejected": 0.0
+            },
+            "alerted_windows": 1,
+            "max_alerted_rows_in_a_window": 68,
+            "would_reach_block_threshold": true,
+            "first_alert_delay_s": 120
+          }
+        },
+        "lab_model": {
+          "flows": 1046,
+          "alerted_share": 0.0,
+          "right_family_share": 0.0,
+          "top_predicted": [
+            {
+              "class": "BENIGN",
+              "flows": 1046,
+              "share": 1.0
+            }
+          ]
+        }
+      },
+      "web_sqli": {
+        "truth": "Web Attack - Sql Injection",
+        "rows": 18,
+        "sessions": 2,
+        "rows_per_session": {
+          "1": 9,
+          "2": 9
+        },
+        "alerted_share": 0.3333333333333333,
+        "right_family_share": 0.3333333333333333,
+        "records_parsed": 36,
+        "records_malformed": 0,
+        "repeats": {
+          "1": {
+            "rows": 9,
+            "rows_not_attacker": 0,
+            "rejected_share": 0.0,
+            "predicted": {
+              "BENIGN": 6,
+              "Web Attack - XSS": 2,
+              "Web Attack - Brute Force": 1
+            },
+            "alerted": 3,
+            "alerted_share": 0.3333333333333333,
+            "right_family_share": 0.3333333333333333,
+            "alerted_rejected_share": null,
+            "alerted_accepted_share": 0.3333333333333333,
+            "feature_medians": {
+              "duration_ms": 0.0,
+              "fwd_packets": 6.0,
+              "bwd_packets": 4.0,
+              "fwd_bytes": 463.0,
+              "bwd_bytes": 498.0,
+              "bytes_per_s": 0.0,
+              "packets_per_s": 0.0,
+              "down_up_ratio": 0.8137254901960784,
+              "fwd_pkt_len_mean": 77.16666666666667,
+              "bwd_pkt_len_mean": 124.5,
+              "rejected": 0.0
+            },
+            "alerted_windows": 1,
+            "max_alerted_rows_in_a_window": 3,
+            "would_reach_block_threshold": false,
+            "first_alert_delay_s": 37
+          },
+          "2": {
+            "rows": 9,
+            "rows_not_attacker": 0,
+            "rejected_share": 0.0,
+            "predicted": {
+              "BENIGN": 6,
+              "Web Attack - Brute Force": 3
+            },
+            "alerted": 3,
+            "alerted_share": 0.3333333333333333,
+            "right_family_share": 0.3333333333333333,
+            "alerted_rejected_share": null,
+            "alerted_accepted_share": 0.3333333333333333,
+            "feature_medians": {
+              "duration_ms": 1000.0,
+              "fwd_packets": 6.0,
+              "bwd_packets": 4.0,
+              "fwd_bytes": 463.0,
+              "bwd_bytes": 498.0,
+              "bytes_per_s": 34.54545454545455,
+              "packets_per_s": 0.6363636363636364,
+              "down_up_ratio": 0.8137254901960784,
+              "fwd_pkt_len_mean": 77.16666666666667,
+              "bwd_pkt_len_mean": 124.5,
+              "rejected": 0.0
+            },
+            "alerted_windows": 1,
+            "max_alerted_rows_in_a_window": 3,
+            "would_reach_block_threshold": false,
+            "first_alert_delay_s": 48
+          }
+        },
+        "lab_model": {
+          "flows": 8,
+          "alerted_share": 0.0,
+          "right_family_share": 0.0,
+          "top_predicted": [
+            {
+              "class": "BENIGN",
+              "flows": 8,
+              "share": 1.0
+            }
+          ]
+        }
+      },
+      "benign": {
+        "truth": "BENIGN",
+        "rows": 288,
+        "sessions": 2,
+        "rows_per_session": {
+          "1": 179,
+          "2": 109
+        },
+        "alerted_share": 0.23958333333333334,
+        "right_family_share": 0.0,
+        "records_parsed": 568,
+        "records_malformed": 0,
+        "repeats": {
+          "1": {
+            "rows": 179,
+            "rows_not_attacker": 0,
+            "rejected_share": 0.0223463687150838,
+            "predicted": {
+              "BENIGN": 137,
+              "Heartbleed": 34,
+              "DoS Hulk": 8
+            },
+            "alerted": 41,
+            "alerted_share": 0.22905027932960895,
+            "right_family_share": 0.0,
+            "alerted_rejected_share": 0.0,
+            "alerted_accepted_share": 0.2342857142857143,
+            "feature_medians": {
+              "duration_ms": 0.0,
+              "fwd_packets": 9.0,
+              "bwd_packets": 7.0,
+              "fwd_bytes": 698.0,
+              "bwd_bytes": 6660.0,
+              "bytes_per_s": 0.0,
+              "packets_per_s": 0.0,
+              "down_up_ratio": 9.391304347826088,
+              "fwd_pkt_len_mean": 94.28571428571429,
+              "bwd_pkt_len_mean": 1332.0,
+              "rejected": 0.0
+            },
+            "alerted_windows": 11,
+            "max_alerted_rows_in_a_window": 9,
+            "would_reach_block_threshold": true,
+            "first_alert_delay_s": 15
+          },
+          "2": {
+            "rows": 109,
+            "rows_not_attacker": 0,
+            "rejected_share": 0.03669724770642202,
+            "predicted": {
+              "BENIGN": 81,
+              "Heartbleed": 23,
+              "DoS Hulk": 5
+            },
+            "alerted": 28,
+            "alerted_share": 0.25688073394495414,
+            "right_family_share": 0.0,
+            "alerted_rejected_share": 0.0,
+            "alerted_accepted_share": 0.26666666666666666,
+            "feature_medians": {
+              "duration_ms": 0.0,
+              "fwd_packets": 9.0,
+              "bwd_packets": 7.0,
+              "fwd_bytes": 698.0,
+              "bwd_bytes": 15123.0,
+              "bytes_per_s": 0.0,
+              "packets_per_s": 0.0,
+              "down_up_ratio": 11.212121212121213,
+              "fwd_pkt_len_mean": 86.76190476190476,
+              "bwd_pkt_len_mean": 1332.0,
+              "rejected": 0.0
+            },
+            "alerted_windows": 9,
+            "max_alerted_rows_in_a_window": 5,
+            "would_reach_block_threshold": true,
+            "first_alert_delay_s": 24
+          }
+        },
+        "lab_model": {
+          "flows": 386,
+          "alerted_share": 0.08289999999999997,
+          "right_family_share": 0.9171,
+          "top_predicted": [
+            {
+              "class": "BENIGN",
+              "flows": 354,
+              "share": 0.9171
+            },
+            {
+              "class": "SSH-Patator",
+              "flows": 28,
+              "share": 0.0725
+            },
+            {
+              "class": "FTP-Patator",
+              "flows": 4,
+              "share": 0.0104
+            }
+          ]
+        }
+      }
+    },
+    "open": {
+      "portscan": {
+        "truth": "PortScan",
+        "rows": 2048,
+        "sessions": 2,
+        "rows_per_session": {
+          "1": 1024,
+          "2": 1024
+        },
+        "alerted_share": 1.0,
+        "right_family_share": 1.0,
+        "records_parsed": 4096,
+        "records_malformed": 0,
+        "repeats": {
+          "1": {
+            "rows": 1024,
+            "rows_not_attacker": 0,
+            "rejected_share": 0.0,
+            "predicted": {
+              "PortScan": 1024
+            },
+            "alerted": 1024,
+            "alerted_share": 1.0,
+            "right_family_share": 1.0,
+            "alerted_rejected_share": null,
+            "alerted_accepted_share": 1.0,
+            "feature_medians": {
+              "duration_ms": 0.0,
+              "fwd_packets": 1.0,
+              "bwd_packets": 1.0,
+              "fwd_bytes": 44.0,
+              "bwd_bytes": 40.0,
+              "bytes_per_s": 0.0,
+              "packets_per_s": 0.0,
+              "down_up_ratio": 0.9090909090909091,
+              "fwd_pkt_len_mean": 44.0,
+              "bwd_pkt_len_mean": 40.0,
+              "rejected": 0.0
+            },
+            "alerted_windows": 1,
+            "max_alerted_rows_in_a_window": 1024,
+            "would_reach_block_threshold": true,
+            "first_alert_delay_s": 46
+          },
+          "2": {
+            "rows": 1024,
+            "rows_not_attacker": 0,
+            "rejected_share": 0.0,
+            "predicted": {
+              "PortScan": 1024
+            },
+            "alerted": 1024,
+            "alerted_share": 1.0,
+            "right_family_share": 1.0,
+            "alerted_rejected_share": null,
+            "alerted_accepted_share": 1.0,
+            "feature_medians": {
+              "duration_ms": 0.0,
+              "fwd_packets": 1.0,
+              "bwd_packets": 1.0,
+              "fwd_bytes": 44.0,
+              "bwd_bytes": 40.0,
+              "bytes_per_s": 0.0,
+              "packets_per_s": 0.0,
+              "down_up_ratio": 0.9090909090909091,
+              "fwd_pkt_len_mean": 44.0,
+              "bwd_pkt_len_mean": 40.0,
+              "rejected": 0.0
+            },
+            "alerted_windows": 1,
+            "max_alerted_rows_in_a_window": 1024,
+            "would_reach_block_threshold": true,
+            "first_alert_delay_s": 50
+          }
+        },
+        "lab_model": {
+          "flows": 2048,
+          "alerted_share": 1.0,
+          "right_family_share": 1.0,
+          "top_predicted": [
+            {
+              "class": "PortScan",
+              "flows": 2048,
+              "share": 1.0
+            }
+          ]
+        }
+      },
+      "ssh_bruteforce": {
+        "truth": "SSH-Patator",
+        "rows": 114,
+        "sessions": 2,
+        "rows_per_session": {
+          "1": 57,
+          "2": 57
+        },
+        "alerted_share": 0.41228070175438597,
+        "right_family_share": 0.41228070175438597,
+        "records_parsed": 228,
+        "records_malformed": 0,
+        "repeats": {
+          "1": {
+            "rows": 57,
+            "rows_not_attacker": 0,
+            "rejected_share": 0.0,
+            "predicted": {
+              "BENIGN": 31,
+              "SSH-Patator": 26
+            },
+            "alerted": 26,
+            "alerted_share": 0.45614035087719296,
+            "right_family_share": 0.45614035087719296,
+            "alerted_rejected_share": null,
+            "alerted_accepted_share": 0.45614035087719296,
+            "feature_medians": {
+              "duration_ms": 16000.0,
+              "fwd_packets": 14.0,
+              "bwd_packets": 18.0,
+              "fwd_bytes": 2331.0,
+              "bwd_bytes": 2903.0,
+              "bytes_per_s": 322.77777777777777,
+              "packets_per_s": 2.1666666666666665,
+              "down_up_ratio": 1.2598210812913264,
+              "fwd_pkt_len_mean": 151.23529411764707,
+              "bwd_pkt_len_mean": 147.22727272727272,
+              "rejected": 0.0
+            },
+            "alerted_windows": 4,
+            "max_alerted_rows_in_a_window": 8,
+            "would_reach_block_threshold": true,
+            "first_alert_delay_s": 34
+          },
+          "2": {
+            "rows": 57,
+            "rows_not_attacker": 0,
+            "rejected_share": 0.0,
+            "predicted": {
+              "BENIGN": 36,
+              "SSH-Patator": 21
+            },
+            "alerted": 21,
+            "alerted_share": 0.3684210526315789,
+            "right_family_share": 0.3684210526315789,
+            "alerted_rejected_share": null,
+            "alerted_accepted_share": 0.3684210526315789,
+            "feature_medians": {
+              "duration_ms": 14000.0,
+              "fwd_packets": 15.0,
+              "bwd_packets": 20.0,
+              "fwd_bytes": 2467.0,
+              "bwd_bytes": 3239.0,
+              "bytes_per_s": 363.125,
+              "packets_per_s": 2.4375,
+              "down_up_ratio": 1.2598210812913264,
+              "fwd_pkt_len_mean": 151.23529411764707,
+              "bwd_pkt_len_mean": 147.22727272727272,
+              "rejected": 0.0
+            },
+            "alerted_windows": 4,
+            "max_alerted_rows_in_a_window": 8,
+            "would_reach_block_threshold": true,
+            "first_alert_delay_s": 43
+          }
+        },
+        "lab_model": {
+          "flows": 90,
+          "alerted_share": 0.9889,
+          "right_family_share": 0.9889,
+          "top_predicted": [
+            {
+              "class": "SSH-Patator",
+              "flows": 89,
+              "share": 0.9889
+            },
+            {
+              "class": "BENIGN",
+              "flows": 1,
+              "share": 0.0111
+            }
+          ]
+        }
+      },
+      "syn_flood": {
+        "truth": "DoS SYN flood",
+        "rows": 57526,
+        "sessions": 2,
+        "rows_per_session": {
+          "1": 28549,
+          "2": 28977
+        },
+        "alerted_share": 0.9999826165559921,
+        "right_family_share": 0.0,
+        "records_parsed": 115052,
+        "records_malformed": 0,
+        "repeats": {
+          "1": {
+            "rows": 28549,
+            "rows_not_attacker": 0,
+            "rejected_share": 0.0,
+            "predicted": {
+              "PortScan": 28549
+            },
+            "alerted": 28549,
+            "alerted_share": 1.0,
+            "right_family_share": 0.0,
+            "alerted_rejected_share": null,
+            "alerted_accepted_share": 1.0,
+            "feature_medians": {
+              "duration_ms": 0.0,
+              "fwd_packets": 2.0,
+              "bwd_packets": 1.0,
+              "fwd_bytes": 80.0,
+              "bwd_bytes": 44.0,
+              "bytes_per_s": 0.0,
+              "packets_per_s": 0.0,
+              "down_up_ratio": 0.55,
+              "fwd_pkt_len_mean": 40.0,
+              "bwd_pkt_len_mean": 44.0,
+              "rejected": 0.0
+            },
+            "alerted_windows": 1,
+            "max_alerted_rows_in_a_window": 28549,
+            "would_reach_block_threshold": true,
+            "first_alert_delay_s": 20
+          },
+          "2": {
+            "rows": 28977,
+            "rows_not_attacker": 0,
+            "rejected_share": 0.0,
+            "predicted": {
+              "PortScan": 28976,
+              "BENIGN": 1
+            },
+            "alerted": 28976,
+            "alerted_share": 0.9999654898712772,
+            "right_family_share": 0.0,
+            "alerted_rejected_share": null,
+            "alerted_accepted_share": 0.9999654898712772,
+            "feature_medians": {
+              "duration_ms": 0.0,
+              "fwd_packets": 2.0,
+              "bwd_packets": 1.0,
+              "fwd_bytes": 80.0,
+              "bwd_bytes": 44.0,
+              "bytes_per_s": 0.0,
+              "packets_per_s": 0.0,
+              "down_up_ratio": 0.55,
+              "fwd_pkt_len_mean": 40.0,
+              "bwd_pkt_len_mean": 44.0,
+              "rejected": 0.0
+            },
+            "alerted_windows": 1,
+            "max_alerted_rows_in_a_window": 28976,
+            "would_reach_block_threshold": true,
+            "first_alert_delay_s": 29
+          }
+        },
+        "lab_model": {
+          "flows": 53742,
+          "alerted_share": 1.0,
+          "right_family_share": 0.0,
+          "top_predicted": [
+            {
+              "class": "PortScan",
+              "flows": 53741,
+              "share": 1.0
+            },
+            {
+              "class": "BENIGN",
+              "flows": 1,
+              "share": 0.0
+            }
+          ]
+        }
+      },
+      "slow_dos": {
+        "truth": "DoS slowloris",
+        "rows": 2046,
+        "sessions": 2,
+        "rows_per_session": {
+          "1": 1023,
+          "2": 1023
+        },
+        "alerted_share": 0.036656891495601175,
+        "right_family_share": 0.0,
+        "records_parsed": 4092,
+        "records_malformed": 0,
+        "repeats": {
+          "1": {
+            "rows": 1023,
+            "rows_not_attacker": 0,
+            "rejected_share": 0.0,
+            "predicted": {
+              "BENIGN": 1014,
+              "FTP-Patator": 9
+            },
+            "alerted": 7,
+            "alerted_share": 0.006842619745845552,
+            "right_family_share": 0.0,
+            "alerted_rejected_share": null,
+            "alerted_accepted_share": 0.006842619745845552,
+            "feature_medians": {
+              "duration_ms": 16000.0,
+              "fwd_packets": 6.0,
+              "bwd_packets": 4.0,
+              "fwd_bytes": 493.0,
+              "bwd_bytes": 320.0,
+              "bytes_per_s": 28.0,
+              "packets_per_s": 0.38235294117647056,
+              "down_up_ratio": 0.8387096774193549,
+              "fwd_pkt_len_mean": 82.16666666666667,
+              "bwd_pkt_len_mean": 53.333333333333336,
+              "rejected": 0.0
+            },
+            "alerted_windows": 1,
+            "max_alerted_rows_in_a_window": 7,
+            "would_reach_block_threshold": true,
+            "first_alert_delay_s": 110
+          },
+          "2": {
+            "rows": 1023,
+            "rows_not_attacker": 0,
+            "rejected_share": 0.0,
+            "predicted": {
+              "BENIGN": 949,
+              "FTP-Patator": 74
+            },
+            "alerted": 68,
+            "alerted_share": 0.06647116324535679,
+            "right_family_share": 0.0,
+            "alerted_rejected_share": null,
+            "alerted_accepted_share": 0.06647116324535679,
+            "feature_medians": {
+              "duration_ms": 6000.0,
+              "fwd_packets": 6.0,
+              "bwd_packets": 4.0,
+              "fwd_bytes": 641.0,
+              "bwd_bytes": 372.0,
+              "bytes_per_s": 27.88888888888889,
+              "packets_per_s": 0.3333333333333333,
+              "down_up_ratio": 0.8813559322033898,
+              "fwd_pkt_len_mean": 105.875,
+              "bwd_pkt_len_mean": 53.142857142857146,
+              "rejected": 0.0
+            },
+            "alerted_windows": 1,
+            "max_alerted_rows_in_a_window": 68,
+            "would_reach_block_threshold": true,
+            "first_alert_delay_s": 120
+          }
+        },
+        "lab_model": {
+          "flows": 1046,
+          "alerted_share": 0.0,
+          "right_family_share": 0.0,
+          "top_predicted": [
+            {
+              "class": "BENIGN",
+              "flows": 1046,
+              "share": 1.0
+            }
+          ]
+        }
+      },
+      "web_sqli": {
+        "truth": "Web Attack - Sql Injection",
+        "rows": 18,
+        "sessions": 2,
+        "rows_per_session": {
+          "1": 9,
+          "2": 9
+        },
+        "alerted_share": 0.3333333333333333,
+        "right_family_share": 0.3333333333333333,
+        "records_parsed": 36,
+        "records_malformed": 0,
+        "repeats": {
+          "1": {
+            "rows": 9,
+            "rows_not_attacker": 0,
+            "rejected_share": 0.0,
+            "predicted": {
+              "BENIGN": 6,
+              "Web Attack - XSS": 2,
+              "Web Attack - Brute Force": 1
+            },
+            "alerted": 3,
+            "alerted_share": 0.3333333333333333,
+            "right_family_share": 0.3333333333333333,
+            "alerted_rejected_share": null,
+            "alerted_accepted_share": 0.3333333333333333,
+            "feature_medians": {
+              "duration_ms": 0.0,
+              "fwd_packets": 6.0,
+              "bwd_packets": 4.0,
+              "fwd_bytes": 463.0,
+              "bwd_bytes": 498.0,
+              "bytes_per_s": 0.0,
+              "packets_per_s": 0.0,
+              "down_up_ratio": 0.8137254901960784,
+              "fwd_pkt_len_mean": 77.16666666666667,
+              "bwd_pkt_len_mean": 124.5,
+              "rejected": 0.0
+            },
+            "alerted_windows": 1,
+            "max_alerted_rows_in_a_window": 3,
+            "would_reach_block_threshold": false,
+            "first_alert_delay_s": 37
+          },
+          "2": {
+            "rows": 9,
+            "rows_not_attacker": 0,
+            "rejected_share": 0.0,
+            "predicted": {
+              "BENIGN": 6,
+              "Web Attack - Brute Force": 3
+            },
+            "alerted": 3,
+            "alerted_share": 0.3333333333333333,
+            "right_family_share": 0.3333333333333333,
+            "alerted_rejected_share": null,
+            "alerted_accepted_share": 0.3333333333333333,
+            "feature_medians": {
+              "duration_ms": 1000.0,
+              "fwd_packets": 6.0,
+              "bwd_packets": 4.0,
+              "fwd_bytes": 463.0,
+              "bwd_bytes": 498.0,
+              "bytes_per_s": 34.54545454545455,
+              "packets_per_s": 0.6363636363636364,
+              "down_up_ratio": 0.8137254901960784,
+              "fwd_pkt_len_mean": 77.16666666666667,
+              "bwd_pkt_len_mean": 124.5,
+              "rejected": 0.0
+            },
+            "alerted_windows": 1,
+            "max_alerted_rows_in_a_window": 3,
+            "would_reach_block_threshold": false,
+            "first_alert_delay_s": 48
+          }
+        },
+        "lab_model": {
+          "flows": 8,
+          "alerted_share": 0.0,
+          "right_family_share": 0.0,
+          "top_predicted": [
+            {
+              "class": "BENIGN",
+              "flows": 8,
+              "share": 1.0
+            }
+          ]
+        }
+      },
+      "benign": {
+        "truth": "BENIGN",
+        "rows": 288,
+        "sessions": 2,
+        "rows_per_session": {
+          "1": 179,
+          "2": 109
+        },
+        "alerted_share": 0.25,
+        "right_family_share": 0.0,
+        "records_parsed": 576,
+        "records_malformed": 0,
+        "repeats": {
+          "1": {
+            "rows": 179,
+            "rows_not_attacker": 0,
+            "rejected_share": 0.0,
+            "predicted": {
+              "BENIGN": 135,
+              "Heartbleed": 34,
+              "DoS Hulk": 8,
+              "Bot": 2
+            },
+            "alerted": 43,
+            "alerted_share": 0.24022346368715083,
+            "right_family_share": 0.0,
+            "alerted_rejected_share": null,
+            "alerted_accepted_share": 0.24022346368715083,
+            "feature_medians": {
+              "duration_ms": 0.0,
+              "fwd_packets": 9.0,
+              "bwd_packets": 7.0,
+              "fwd_bytes": 698.0,
+              "bwd_bytes": 6660.0,
+              "bytes_per_s": 0.0,
+              "packets_per_s": 0.0,
+              "down_up_ratio": 9.391304347826088,
+              "fwd_pkt_len_mean": 94.28571428571429,
+              "bwd_pkt_len_mean": 1332.0,
+              "rejected": 0.0
+            },
+            "alerted_windows": 11,
+            "max_alerted_rows_in_a_window": 9,
+            "would_reach_block_threshold": true,
+            "first_alert_delay_s": 15
+          },
+          "2": {
+            "rows": 109,
+            "rows_not_attacker": 0,
+            "rejected_share": 0.0,
+            "predicted": {
+              "BENIGN": 80,
+              "Heartbleed": 23,
+              "DoS Hulk": 5,
+              "Bot": 1
+            },
+            "alerted": 29,
+            "alerted_share": 0.26605504587155965,
+            "right_family_share": 0.0,
+            "alerted_rejected_share": null,
+            "alerted_accepted_share": 0.26605504587155965,
+            "feature_medians": {
+              "duration_ms": 0.0,
+              "fwd_packets": 9.0,
+              "bwd_packets": 7.0,
+              "fwd_bytes": 698.0,
+              "bwd_bytes": 15123.0,
+              "bytes_per_s": 0.0,
+              "packets_per_s": 0.0,
+              "down_up_ratio": 11.212121212121213,
+              "fwd_pkt_len_mean": 86.76190476190476,
+              "bwd_pkt_len_mean": 1332.0,
+              "rejected": 0.0
+            },
+            "alerted_windows": 10,
+            "max_alerted_rows_in_a_window": 5,
+            "would_reach_block_threshold": true,
+            "first_alert_delay_s": 24
+          }
+        },
+        "lab_model": {
+          "flows": 386,
+          "alerted_share": 0.08289999999999997,
+          "right_family_share": 0.9171,
+          "top_predicted": [
+            {
+              "class": "BENIGN",
+              "flows": 354,
+              "share": 0.9171
+            },
+            {
+              "class": "SSH-Patator",
+              "flows": 28,
+              "share": 0.0725
+            },
+            {
+              "class": "FTP-Patator",
+              "flows": 4,
+              "share": 0.0104
+            }
+          ]
+        }
+      }
+    }
+  }
+}

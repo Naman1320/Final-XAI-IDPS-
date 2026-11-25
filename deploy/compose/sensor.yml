@@ -1,0 +1,54 @@
+# The sensor host: live capture on the host's network. Run through `deploy/install.sh sensor`,
+# which copies the enrolment bundle and the model into deploy/sensor-data/ and writes
+# deploy/.env.sensor.
+name: ${IDPS_SENSOR_PROJECT:-idps-sensor}
+
+services:
+  sensor:
+    image: idps-sensor:${IDPS_TAG:?run deploy/install.sh sensor (it writes deploy/.env.sensor)}
+    restart: unless-stopped
+    network_mode: host
+    # Only what capture and blocking need. (No DAC_READ_SEARCH: with it a container can read any
+    # file of the host through open_by_handle_at. The enrolment bundle lives in a Docker volume
+    # that install.sh fills, so root in the container owns it and needs no override.)
+    cap_drop: [ALL]
+    cap_add: [NET_ADMIN, NET_RAW]
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp
+    environment:
+      IDPS_SOC_URL: ${IDPS_SOC_URL:?}
+      IDPS_INTERFACE: ${IDPS_INTERFACE:?}
+      IDPS_MODEL_FILE: ${IDPS_MODEL_FILE:?}
+    # Optional extra IDPS_* settings (IDPS_ALLOWLIST, IDPS_LIVE_..., IDPS_RULES_...).
+    env_file:
+      - path: ../sensor.extra.env
+        required: false
+    volumes:
+      - sensor_enrol:/enrol:ro
+      - ../sensor-data/models:/models:ro
+      - sensor_state:/var/lib/idps-sensor
+    deploy:
+      resources:
+        limits:
+          memory: 2g
+
+  # Loads the enrolment bundle (tar on stdin) into the sensor_enrol volume. Not started by `up`.
+  sensor-load:
+    image: idps-sensor:${IDPS_TAG:?}
+    profiles: [tools]
+    network_mode: none
+    user: "0:0"
+    read_only: true
+    cap_drop: [ALL]
+    security_opt:
+      - no-new-privileges:true
+    entrypoint: ["sh", "-c", "umask 077 && tar -x --no-same-owner --warning=no-unknown-keyword -f - -C /enrol"]
+    volumes:
+      - sensor_enrol:/enrol
+
+volumes:
+  sensor_enrol:
+  sensor_state:

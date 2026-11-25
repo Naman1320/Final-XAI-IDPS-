@@ -1,0 +1,755 @@
+{
+  "generated": "2026-11-14T16:46:11+00:00",
+  "sample": {
+    "path": "data/processed/bench_sample.pcap",
+    "size_bytes": 226404912,
+    "packets": 1301052,
+    "sha256": "a366ef40327fb25642788cf2c776b8921a107fdfdd259074b5ba02822dcb0b9a",
+    "windows_utc": [
+      [
+        "2017-07-07 17:52:00",
+        "2017-07-07 17:56:00"
+      ],
+      [
+        "2017-07-07 18:56:00",
+        "2017-07-07 19:12:00"
+      ]
+    ],
+    "offline_flows": 191362
+  },
+  "notes": "capture_ratio = live flows / offline flows of the same sample (NFStream, 120 s timeouts); the sensor does not expose NFStream's own drop counter, so interface_delta (rx_packets, rx_dropped, rx_errors, softnet_dropped deltas of lab_attack during the replay) is reported next to it.",
+  "rates": [
+    {
+      "target_mbit_s": 10.0,
+      "replay": {
+        "packets_sent": 1301052,
+        "bytes_sent": 205588056,
+        "seconds": 164.47,
+        "mbps": 9.99,
+        "pps": 7910.55,
+        "failed_packets": 0
+      },
+      "flows": 178419,
+      "flows_per_s_mean": 374.3,
+      "flows_per_s_peak": 1054.8,
+      "alerts": 126126,
+      "alerts_sent": 126126,
+      "dropped": {
+        "explanations": 24618,
+        "alerts": 0,
+        "alerts_rejected_by_soc": 0,
+        "blocks": 0,
+        "blocks_rejected_by_soc": 0
+      },
+      "errors": {
+        "explain": 0,
+        "response": 0,
+        "batch": 0,
+        "soc_config": 0
+      },
+      "latency_p50_s": 326.518,
+      "latency_p95_s": 327.378,
+      "shap_p50_ms": 0.196,
+      "shap_p95_ms": 0.319,
+      "stats_source": "cgroup",
+      "cpu_mean_pct": 9.4,
+      "cpu_max_pct": 130.1,
+      "mem_max_mib": 959.4,
+      "offline_flows": 191362,
+      "capture_ratio": 0.9324,
+      "interface_delta": {
+        "rx_packets": 1301219,
+        "rx_dropped": 0,
+        "rx_errors": 0,
+        "softnet_dropped": 0
+      },
+      "drained": true,
+      "sensor_duration_s": 881,
+      "flows_timeline": [
+        [
+          10.2,
+          0
+        ],
+        [
+          20.4,
+          0
+        ],
+        [
+          30.4,
+          0
+        ],
+        [
+          40.5,
+          0
+        ],
+        [
+          50.5,
+          0
+        ],
+        [
+          60.5,
+          0
+        ],
+        [
+          70.5,
+          0
+        ],
+        [
+          80.6,
+          0
+        ],
+        [
+          90.6,
+          0
+        ],
+        [
+          100.7,
+          0
+        ],
+        [
+          110.7,
+          0
+        ],
+        [
+          120.7,
+          0
+        ],
+        [
+          130.7,
+          0
+        ],
+        [
+          140.7,
+          0
+        ],
+        [
+          150.9,
+          77
+        ],
+        [
+          161.0,
+          422
+        ],
+        [
+          171.0,
+          457
+        ],
+        [
+          181.1,
+          6161
+        ],
+        [
+          191.2,
+          6201
+        ],
+        [
+          201.3,
+          6201
+        ],
+        [
+          211.5,
+          6201
+        ],
+        [
+          221.6,
+          6201
+        ],
+        [
+          231.8,
+          6201
+        ],
+        [
+          241.9,
+          6201
+        ],
+        [
+          251.9,
+          9233
+        ],
+        [
+          262.0,
+          14249
+        ],
+        [
+          272.1,
+          24233
+        ],
+        [
+          282.1,
+          34217
+        ],
+        [
+          292.2,
+          44265
+        ],
+        [
+          302.2,
+          54377
+        ],
+        [
+          312.2,
+          64361
+        ],
+        [
+          322.2,
+          74409
+        ],
+        [
+          332.2,
+          84393
+        ],
+        [
+          342.2,
+          94505
+        ],
+        [
+          352.3,
+          104489
+        ],
+        [
+          362.4,
+          113385
+        ],
+        [
+          372.4,
+          123944
+        ],
+        [
+          382.6,
+          134248
+        ],
+        [
+          392.6,
+          144232
+        ],
+        [
+          402.8,
+          154216
+        ],
+        [
+          413.0,
+          164200
+        ],
+        [
+          423.1,
+          174248
+        ],
+        [
+          433.1,
+          178419
+        ],
+        [
+          443.3,
+          178419
+        ],
+        [
+          453.5,
+          178419
+        ],
+        [
+          463.7,
+          178419
+        ],
+        [
+          473.8,
+          178419
+        ],
+        [
+          476.7,
+          178419
+        ]
+      ]
+    },
+    {
+      "target_mbit_s": 50.0,
+      "replay": {
+        "packets_sent": 1301052,
+        "bytes_sent": 205588056,
+        "seconds": 33.92,
+        "mbps": 48.48,
+        "pps": 38350.39,
+        "failed_packets": 0
+      },
+      "flows": 55253,
+      "flows_per_s_mean": 200.8,
+      "flows_per_s_peak": 1017.4,
+      "alerts": 8900,
+      "alerts_sent": 8900,
+      "dropped": {
+        "explanations": 1682,
+        "alerts": 0,
+        "alerts_rejected_by_soc": 0,
+        "blocks": 0,
+        "blocks_rejected_by_soc": 0
+      },
+      "errors": {
+        "explain": 0,
+        "response": 0,
+        "batch": 0,
+        "soc_config": 0
+      },
+      "latency_p50_s": 155.851,
+      "latency_p95_s": 156.772,
+      "shap_p50_ms": 0.175,
+      "shap_p95_ms": 0.234,
+      "stats_source": "cgroup",
+      "cpu_mean_pct": 61.7,
+      "cpu_max_pct": 131.7,
+      "mem_max_mib": 544.4,
+      "offline_flows": 191362,
+      "capture_ratio": 0.2887,
+      "interface_delta": {
+        "rx_packets": 1301079,
+        "rx_dropped": 0,
+        "rx_errors": 0,
+        "softnet_dropped": 0
+      },
+      "drained": true,
+      "sensor_duration_s": 700,
+      "flows_timeline": [
+        [
+          10.2,
+          0
+        ],
+        [
+          20.3,
+          0
+        ],
+        [
+          30.4,
+          0
+        ],
+        [
+          40.5,
+          0
+        ],
+        [
+          50.5,
+          0
+        ],
+        [
+          60.7,
+          0
+        ],
+        [
+          70.8,
+          0
+        ],
+        [
+          80.9,
+          0
+        ],
+        [
+          91.1,
+          0
+        ],
+        [
+          101.2,
+          0
+        ],
+        [
+          111.3,
+          0
+        ],
+        [
+          121.5,
+          0
+        ],
+        [
+          131.6,
+          0
+        ],
+        [
+          141.8,
+          0
+        ],
+        [
+          151.8,
+          19
+        ],
+        [
+          161.9,
+          19
+        ],
+        [
+          172.0,
+          1683
+        ],
+        [
+          182.1,
+          11987
+        ],
+        [
+          192.2,
+          21011
+        ],
+        [
+          202.2,
+          30995
+        ],
+        [
+          212.2,
+          40979
+        ],
+        [
+          222.3,
+          51027
+        ],
+        [
+          232.3,
+          55253
+        ],
+        [
+          242.4,
+          55253
+        ],
+        [
+          252.4,
+          55253
+        ],
+        [
+          262.6,
+          55253
+        ],
+        [
+          272.7,
+          55253
+        ],
+        [
+          275.2,
+          55253
+        ]
+      ]
+    },
+    {
+      "target_mbit_s": 100.0,
+      "replay": {
+        "packets_sent": 1301052,
+        "bytes_sent": 205588056,
+        "seconds": 16.44,
+        "mbps": 100.0,
+        "pps": 79105.52,
+        "failed_packets": 0
+      },
+      "flows": 110753,
+      "flows_per_s_mean": 349.9,
+      "flows_per_s_peak": 1037.0,
+      "alerts": 59690,
+      "alerts_sent": 59690,
+      "dropped": {
+        "explanations": 10365,
+        "alerts": 0,
+        "alerts_rejected_by_soc": 0,
+        "blocks": 0,
+        "blocks_rejected_by_soc": 0
+      },
+      "errors": {
+        "explain": 0,
+        "response": 0,
+        "batch": 0,
+        "soc_config": 0
+      },
+      "latency_p50_s": 193.474,
+      "latency_p95_s": 194.41,
+      "shap_p50_ms": 0.212,
+      "shap_p95_ms": 0.571,
+      "stats_source": "cgroup",
+      "cpu_mean_pct": 35.7,
+      "cpu_max_pct": 104.4,
+      "mem_max_mib": 732.1,
+      "offline_flows": 191362,
+      "capture_ratio": 0.5788,
+      "interface_delta": {
+        "rx_packets": 1301071,
+        "rx_dropped": 0,
+        "rx_errors": 0,
+        "softnet_dropped": 0
+      },
+      "drained": true,
+      "sensor_duration_s": 677,
+      "flows_timeline": [
+        [
+          10.4,
+          0
+        ],
+        [
+          20.5,
+          0
+        ],
+        [
+          30.6,
+          0
+        ],
+        [
+          40.6,
+          0
+        ],
+        [
+          50.8,
+          0
+        ],
+        [
+          60.9,
+          0
+        ],
+        [
+          71.1,
+          0
+        ],
+        [
+          81.3,
+          0
+        ],
+        [
+          91.5,
+          0
+        ],
+        [
+          101.3,
+          0
+        ],
+        [
+          111.5,
+          0
+        ],
+        [
+          121.6,
+          0
+        ],
+        [
+          131.7,
+          0
+        ],
+        [
+          141.9,
+          0
+        ],
+        [
+          152.1,
+          19
+        ],
+        [
+          162.1,
+          5523
+        ],
+        [
+          172.2,
+          16019
+        ],
+        [
+          182.3,
+          26003
+        ],
+        [
+          192.4,
+          36051
+        ],
+        [
+          202.4,
+          46099
+        ],
+        [
+          212.4,
+          56147
+        ],
+        [
+          222.4,
+          66131
+        ],
+        [
+          232.4,
+          76371
+        ],
+        [
+          242.4,
+          85203
+        ],
+        [
+          252.4,
+          95378
+        ],
+        [
+          262.4,
+          105426
+        ],
+        [
+          272.6,
+          110753
+        ],
+        [
+          282.8,
+          110753
+        ],
+        [
+          292.9,
+          110753
+        ],
+        [
+          303.1,
+          110753
+        ],
+        [
+          313.3,
+          110753
+        ],
+        [
+          316.5,
+          110753
+        ]
+      ]
+    },
+    {
+      "target_mbit_s": 200.0,
+      "replay": {
+        "packets_sent": 1301052,
+        "bytes_sent": 205588056,
+        "seconds": 13.98,
+        "mbps": 117.62,
+        "pps": 93049.38,
+        "failed_packets": 0
+      },
+      "flows": 59701,
+      "flows_per_s_mean": 233.4,
+      "flows_per_s_peak": 1010.7,
+      "alerts": 19737,
+      "alerts_sent": 19737,
+      "dropped": {
+        "explanations": 2824,
+        "alerts": 0,
+        "alerts_rejected_by_soc": 0,
+        "blocks": 0,
+        "blocks_rejected_by_soc": 0
+      },
+      "errors": {
+        "explain": 0,
+        "response": 0,
+        "batch": 0,
+        "soc_config": 0
+      },
+      "latency_p50_s": 141.863,
+      "latency_p95_s": 142.723,
+      "shap_p50_ms": 0.188,
+      "shap_p95_ms": 0.504,
+      "stats_source": "cgroup",
+      "cpu_mean_pct": 55.3,
+      "cpu_max_pct": 133.1,
+      "mem_max_mib": 558.6,
+      "offline_flows": 191362,
+      "capture_ratio": 0.312,
+      "interface_delta": {
+        "rx_packets": 1300884,
+        "rx_dropped": 0,
+        "rx_errors": 0,
+        "softnet_dropped": 0
+      },
+      "drained": true,
+      "sensor_duration_s": 666,
+      "flows_timeline": [
+        [
+          10.3,
+          0
+        ],
+        [
+          20.3,
+          0
+        ],
+        [
+          30.4,
+          0
+        ],
+        [
+          40.5,
+          0
+        ],
+        [
+          50.6,
+          0
+        ],
+        [
+          60.8,
+          0
+        ],
+        [
+          70.9,
+          0
+        ],
+        [
+          81.1,
+          0
+        ],
+        [
+          91.3,
+          0
+        ],
+        [
+          101.4,
+          0
+        ],
+        [
+          111.6,
+          0
+        ],
+        [
+          121.7,
+          0
+        ],
+        [
+          131.8,
+          0
+        ],
+        [
+          141.9,
+          0
+        ],
+        [
+          152.1,
+          5011
+        ],
+        [
+          162.1,
+          14995
+        ],
+        [
+          172.2,
+          24979
+        ],
+        [
+          182.3,
+          35027
+        ],
+        [
+          192.3,
+          45139
+        ],
+        [
+          202.3,
+          55187
+        ],
+        [
+          212.3,
+          59701
+        ],
+        [
+          222.5,
+          59701
+        ],
+        [
+          232.7,
+          59701
+        ],
+        [
+          242.8,
+          59701
+        ],
+        [
+          252.9,
+          59701
+        ],
+        [
+          255.8,
+          59701
+        ]
+      ]
+    }
+  ]
+}

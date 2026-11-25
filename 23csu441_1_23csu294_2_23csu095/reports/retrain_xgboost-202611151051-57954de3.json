@@ -1,0 +1,77 @@
+{
+  "base_test": {
+    "current": {
+      "accuracy": 0.9837054018905846,
+      "benign_false_positive_rate": 0.01137229879670463,
+      "macro_f1": 0.6619774713201023,
+      "n": 194543
+    },
+    "new": {
+      "accuracy": 0.9836488591211198,
+      "benign_false_positive_rate": 0.011332772435444982,
+      "macro_f1": 0.662684852946733,
+      "n": 194543
+    }
+  },
+  "created_at": "2026-11-15T10:51:52.723967+00:00",
+  "criteria": {
+    "holdout_accuracy_ok": true,
+    "holdout_size_ok": true,
+    "macro_f1_ok": true,
+    "min_holdout": 5,
+    "min_macro_f1": 0.6569774713201023
+  },
+  "current": {
+    "model": "xgboost",
+    "sha256": "4a59a3564377573e404cfa1cdb88b90463b829e9b7de83e351f8b7e316ce7189",
+    "version": "xgboost-4a59a356"
+  },
+  "data": {
+    "base_override": false,
+    "base_reproduces_current": true,
+    "base_test_rows": 194543,
+    "base_train_rows": 601974,
+    "feedback_duplicates_dropped": 0,
+    "feedback_holdout_rows": 7,
+    "feedback_labels": {
+      "BENIGN": 24
+    },
+    "feedback_rows": 24,
+    "feedback_train_rows": 17,
+    "holdout_labels": {
+      "BENIGN": 7
+    },
+    "new_classes": [],
+    "new_classes_note": null
+  },
+  "decision": {
+    "keep": true,
+    "reasons": []
+  },
+  "feedback_holdout": {
+    "current": {
+      "accuracy": 0.0,
+      "benign_false_positive_rate": 1.0,
+      "macro_f1": 0.0,
+      "n": 7
+    },
+    "new": {
+      "accuracy": 1.0,
+      "benign_false_positive_rate": 0.0,
+      "macro_f1": 1.0,
+      "n": 7
+    }
+  },
+  "new": {
+    "model": "xgboost",
+    "output": "models/week_xgboost_fb1.joblib",
+    "version": "xgboost-202611151051-57954de3"
+  },
+  "settings": {
+    "feedback_weight": 5.0,
+    "seed": 42,
+    "split_mode": "class-time",
+    "tolerance": 0.005
+  },
+  "written": true
+}

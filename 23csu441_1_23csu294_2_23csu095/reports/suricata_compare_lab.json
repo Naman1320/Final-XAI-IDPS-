@@ -1,0 +1,1057 @@
+{
+  "generated": "2026-11-15T09:39:49+00:00",
+  "include_engine": false,
+  "datasets": {
+    "lab": {
+      "flows": 60995,
+      "include_engine": false,
+      "per_label": {
+        "DoS SYN flood": {
+          "flows": 57526,
+          "suricata_recall": 0.0,
+          "suricata_recall_security": 0.0,
+          "suricata_recall_attack_only": 0.0,
+          "suricata_recall_with_engine": 1.0,
+          "engine_only_flows": 57525,
+          "ml_recall_floor": 1.0,
+          "ml_recall_no_floor": 1.0,
+          "ml_family_recall_floor": 0.0,
+          "ml_family_recall_no_floor": 0.0,
+          "union_recall_floor": 1.0,
+          "union_recall_no_floor": 1.0,
+          "suricata_only_flows_no_floor": 0,
+          "ml_only_flows_no_floor": 57524,
+          "any_alert": {
+            "suricata": false,
+            "suricata_security": false,
+            "ml_floor": true,
+            "ml_no_floor": true,
+            "suricata_flows_alerted": 0
+          },
+          "top_signatures": [],
+          "ml_top_predicted": [
+            {
+              "class": "PortScan",
+              "flows": 57524,
+              "share": 1.0
+            },
+            {
+              "class": "BENIGN",
+              "flows": 2,
+              "share": 0.0
+            }
+          ]
+        },
+        "DoS slowloris": {
+          "flows": 1046,
+          "suricata_recall": 0.0,
+          "suricata_recall_security": 0.0,
+          "suricata_recall_attack_only": 0.0,
+          "suricata_recall_with_engine": 1.0,
+          "engine_only_flows": 1046,
+          "ml_recall_floor": 0.0,
+          "ml_recall_no_floor": 0.0,
+          "ml_family_recall_floor": 0.0,
+          "ml_family_recall_no_floor": 0.0,
+          "union_recall_floor": 0.0,
+          "union_recall_no_floor": 0.0,
+          "suricata_only_flows_no_floor": 0,
+          "ml_only_flows_no_floor": 0,
+          "any_alert": {
+            "suricata": false,
+            "suricata_security": false,
+            "ml_floor": false,
+            "ml_no_floor": false,
+            "suricata_flows_alerted": 0
+          },
+          "top_signatures": [],
+          "ml_top_predicted": [
+            {
+              "class": "BENIGN",
+              "flows": 1046,
+              "share": 1.0
+            }
+          ]
+        },
+        "PortScan": {
+          "flows": 2048,
+          "suricata_recall": 0.0,
+          "suricata_recall_security": 0.0,
+          "suricata_recall_attack_only": 0.0,
+          "suricata_recall_with_engine": 0.002,
+          "engine_only_flows": 4,
+          "ml_recall_floor": 1.0,
+          "ml_recall_no_floor": 1.0,
+          "ml_family_recall_floor": 1.0,
+          "ml_family_recall_no_floor": 1.0,
+          "union_recall_floor": 1.0,
+          "union_recall_no_floor": 1.0,
+          "suricata_only_flows_no_floor": 0,
+          "ml_only_flows_no_floor": 2048,
+          "any_alert": {
+            "suricata": false,
+            "suricata_security": false,
+            "ml_floor": true,
+            "ml_no_floor": true,
+            "suricata_flows_alerted": 0
+          },
+          "top_signatures": [],
+          "ml_top_predicted": [
+            {
+              "class": "PortScan",
+              "flows": 2048,
+              "share": 1.0
+            }
+          ]
+        },
+        "SSH-Patator": {
+          "flows": 90,
+          "suricata_recall": 0.1,
+          "suricata_recall_security": 0.1,
+          "suricata_recall_attack_only": 0.1,
+          "suricata_recall_with_engine": 1.0,
+          "engine_only_flows": 81,
+          "ml_recall_floor": 1.0,
+          "ml_recall_no_floor": 1.0,
+          "ml_family_recall_floor": 1.0,
+          "ml_family_recall_no_floor": 1.0,
+          "union_recall_floor": 1.0,
+          "union_recall_no_floor": 1.0,
+          "suricata_only_flows_no_floor": 0,
+          "ml_only_flows_no_floor": 81,
+          "any_alert": {
+            "suricata": true,
+            "suricata_security": true,
+            "ml_floor": true,
+            "ml_no_floor": true,
+            "suricata_flows_alerted": 9
+          },
+          "top_signatures": [
+            {
+              "signature": "ET SCAN LibSSH Based Frequent SSH Connections Likely BruteForce Attack",
+              "flows": 6
+            },
+            {
+              "signature": "ET SCAN Potential SSH Scan",
+              "flows": 4
+            }
+          ],
+          "ml_top_predicted": [
+            {
+              "class": "SSH-Patator",
+              "flows": 90,
+              "share": 1.0
+            }
+          ]
+        },
+        "Web Attack - Sql Injection": {
+          "flows": 8,
+          "suricata_recall": 0.25,
+          "suricata_recall_security": 0.25,
+          "suricata_recall_attack_only": 0.25,
+          "suricata_recall_with_engine": 1.0,
+          "engine_only_flows": 6,
+          "ml_recall_floor": 0.0,
+          "ml_recall_no_floor": 0.0,
+          "ml_family_recall_floor": 0.0,
+          "ml_family_recall_no_floor": 0.0,
+          "union_recall_floor": 0.25,
+          "union_recall_no_floor": 0.25,
+          "suricata_only_flows_no_floor": 2,
+          "ml_only_flows_no_floor": 0,
+          "any_alert": {
+            "suricata": true,
+            "suricata_security": true,
+            "ml_floor": false,
+            "ml_no_floor": false,
+            "suricata_flows_alerted": 2
+          },
+          "top_signatures": [
+            {
+              "signature": "ET SCAN Sqlmap SQL Injection Scan",
+              "flows": 2
+            },
+            {
+              "signature": "ET WEB_SERVER Possible SQL Injection Attempt UNION SELECT in HTTP URI",
+              "flows": 2
+            },
+            {
+              "signature": "ET WEB_SERVER Script tag in URI Possible Cross Site Scripting Attempt",
+              "flows": 2
+            },
+            {
+              "signature": "ET WEB_SERVER Attempt To Access MSSQL xp_cmdshell Stored Procedure Via URI",
+              "flows": 2
+            },
+            {
+              "signature": "ET WEB_SERVER Possible MySQL SQLi Attempt Information Schema Access",
+              "flows": 2
+            }
+          ],
+          "ml_top_predicted": [
+            {
+              "class": "BENIGN",
+              "flows": 8,
+              "share": 1.0
+            }
+          ]
+        }
+      },
+      "benign": {
+        "flows": 277,
+        "suricata_false_positive_rate": 0.0469,
+        "suricata_fpr_security": 0.0289,
+        "suricata_fpr_attack_only": 0.0469,
+        "suricata_fpr_with_engine": 1.0,
+        "suricata_false_positives": 13,
+        "ml_fpr_floor": 0.1516,
+        "ml_fpr_no_floor": 0.1516,
+        "ml_false_positives_floor": 42,
+        "ml_false_positives_no_floor": 42,
+        "suricata_top_attack_signatures": [
+          {
+            "signature": "GPL ICMP PING *NIX",
+            "flows": 5
+          },
+          {
+            "signature": "ET WEB_SERVER WEB-PHP phpinfo access",
+            "flows": 4
+          },
+          {
+            "signature": "ET SCAN Potential SSH Scan",
+            "flows": 4
+          }
+        ],
+        "suricata_top_engine_signatures": [
+          {
+            "signature": "SURICATA TCPv4 invalid checksum",
+            "flows": 272
+          },
+          {
+            "signature": "SURICATA STREAM excessive retransmissions",
+            "flows": 2
+          },
+          {
+            "signature": "SURICATA STREAM ESTABLISHED invalid ack",
+            "flows": 1
+          },
+          {
+            "signature": "SURICATA STREAM Packet with invalid ack",
+            "flows": 1
+          },
+          {
+            "signature": "SURICATA STREAM ESTABLISHED packet out of window",
+            "flows": 1
+          },
+          {
+            "signature": "SURICATA STREAM FIN invalid ack",
+            "flows": 1
+          },
+          {
+            "signature": "SURICATA STREAM FIN out of window",
+            "flows": 1
+          }
+        ]
+      },
+      "sessions": [
+        {
+          "session": "benign",
+          "repeat": 1,
+          "label": "BENIGN",
+          "flows": 175,
+          "attack_alerts": 16,
+          "security_alerts": 4,
+          "engine_alerts": 12328
+        },
+        {
+          "session": "benign",
+          "repeat": 2,
+          "label": "BENIGN",
+          "flows": 102,
+          "attack_alerts": 18,
+          "security_alerts": 4,
+          "engine_alerts": 13800
+        },
+        {
+          "session": "portscan",
+          "repeat": 1,
+          "label": "PortScan",
+          "flows": 1024,
+          "suricata_detected": false,
+          "suricata_detected_security": false,
+          "suricata_attack_alerts": 0,
+          "suricata_security_alerts": 0,
+          "suricata_engine_alerts": 2,
+          "suricata_signatures": [],
+          "ml_detected_floor": true,
+          "ml_flows_flagged_floor": 1024,
+          "ml_detected_no_floor": true,
+          "ml_flows_flagged_no_floor": 1024
+        },
+        {
+          "session": "portscan",
+          "repeat": 2,
+          "label": "PortScan",
+          "flows": 1024,
+          "suricata_detected": false,
+          "suricata_detected_security": false,
+          "suricata_attack_alerts": 0,
+          "suricata_security_alerts": 0,
+          "suricata_engine_alerts": 2,
+          "suricata_signatures": [],
+          "ml_detected_floor": true,
+          "ml_flows_flagged_floor": 1024,
+          "ml_detected_no_floor": true,
+          "ml_flows_flagged_no_floor": 1024
+        },
+        {
+          "session": "slow_dos",
+          "repeat": 1,
+          "label": "DoS slowloris",
+          "flows": 523,
+          "suricata_detected": false,
+          "suricata_detected_security": false,
+          "suricata_attack_alerts": 0,
+          "suricata_security_alerts": 0,
+          "suricata_engine_alerts": 10230,
+          "suricata_signatures": [],
+          "ml_detected_floor": false,
+          "ml_flows_flagged_floor": 0,
+          "ml_detected_no_floor": false,
+          "ml_flows_flagged_no_floor": 0
+        },
+        {
+          "session": "slow_dos",
+          "repeat": 2,
+          "label": "DoS slowloris",
+          "flows": 523,
+          "suricata_detected": false,
+          "suricata_detected_security": false,
+          "suricata_attack_alerts": 0,
+          "suricata_security_alerts": 0,
+          "suricata_engine_alerts": 10230,
+          "suricata_signatures": [],
+          "ml_detected_floor": false,
+          "ml_flows_flagged_floor": 0,
+          "ml_detected_no_floor": false,
+          "ml_flows_flagged_no_floor": 0
+        },
+        {
+          "session": "ssh_bruteforce",
+          "repeat": 1,
+          "label": "SSH-Patator",
+          "flows": 45,
+          "suricata_detected": true,
+          "suricata_detected_security": true,
+          "suricata_attack_alerts": 4,
+          "suricata_security_alerts": 4,
+          "suricata_engine_alerts": 1709,
+          "suricata_signatures": [
+            {
+              "signature": "ET SCAN Potential SSH Scan",
+              "alerts": 2
+            },
+            {
+              "signature": "ET SCAN LibSSH Based Frequent SSH Connections Likely BruteForce Attack",
+              "alerts": 2
+            }
+          ],
+          "ml_detected_floor": true,
+          "ml_flows_flagged_floor": 45,
+          "ml_detected_no_floor": true,
+          "ml_flows_flagged_no_floor": 45
+        },
+        {
+          "session": "ssh_bruteforce",
+          "repeat": 2,
+          "label": "SSH-Patator",
+          "flows": 45,
+          "suricata_detected": true,
+          "suricata_detected_security": true,
+          "suricata_attack_alerts": 6,
+          "suricata_security_alerts": 6,
+          "suricata_engine_alerts": 1699,
+          "suricata_signatures": [
+            {
+              "signature": "ET SCAN LibSSH Based Frequent SSH Connections Likely BruteForce Attack",
+              "alerts": 4
+            },
+            {
+              "signature": "ET SCAN Potential SSH Scan",
+              "alerts": 2
+            }
+          ],
+          "ml_detected_floor": true,
+          "ml_flows_flagged_floor": 45,
+          "ml_detected_no_floor": true,
+          "ml_flows_flagged_no_floor": 45
+        },
+        {
+          "session": "syn_flood",
+          "repeat": 1,
+          "label": "DoS SYN flood",
+          "flows": 28549,
+          "suricata_detected": false,
+          "suricata_detected_security": false,
+          "suricata_attack_alerts": 0,
+          "suricata_security_alerts": 0,
+          "suricata_engine_alerts": 28548,
+          "suricata_signatures": [],
+          "ml_detected_floor": true,
+          "ml_flows_flagged_floor": 28548,
+          "ml_detected_no_floor": true,
+          "ml_flows_flagged_no_floor": 28548
+        },
+        {
+          "session": "syn_flood",
+          "repeat": 2,
+          "label": "DoS SYN flood",
+          "flows": 28977,
+          "suricata_detected": false,
+          "suricata_detected_security": false,
+          "suricata_attack_alerts": 0,
+          "suricata_security_alerts": 0,
+          "suricata_engine_alerts": 28977,
+          "suricata_signatures": [],
+          "ml_detected_floor": true,
+          "ml_flows_flagged_floor": 28976,
+          "ml_detected_no_floor": true,
+          "ml_flows_flagged_no_floor": 28976
+        },
+        {
+          "session": "web_sqli",
+          "repeat": 1,
+          "label": "Web Attack - Sql Injection",
+          "flows": 4,
+          "suricata_detected": true,
+          "suricata_detected_security": true,
+          "suricata_attack_alerts": 41,
+          "suricata_security_alerts": 41,
+          "suricata_engine_alerts": 281,
+          "suricata_signatures": [
+            {
+              "signature": "ET WEB_SERVER SQL Errors in HTTP 200 Response (error in your SQL syntax)",
+              "alerts": 18
+            },
+            {
+              "signature": "ET WEB_SERVER SQL Injection Select Sleep Time Delay",
+              "alerts": 7
+            },
+            {
+              "signature": "ET WEB_SERVER Possible MySQL SQLi Attempt Information Schema Access",
+              "alerts": 4
+            },
+            {
+              "signature": "ET WEB_SERVER Possible SQL Injection SELECT CAST in HTTP URI",
+              "alerts": 3
+            },
+            {
+              "signature": "ET SCAN Sqlmap SQL Injection Scan",
+              "alerts": 2
+            }
+          ],
+          "ml_detected_floor": false,
+          "ml_flows_flagged_floor": 0,
+          "ml_detected_no_floor": false,
+          "ml_flows_flagged_no_floor": 0
+        },
+        {
+          "session": "web_sqli",
+          "repeat": 2,
+          "label": "Web Attack - Sql Injection",
+          "flows": 4,
+          "suricata_detected": true,
+          "suricata_detected_security": true,
+          "suricata_attack_alerts": 41,
+          "suricata_security_alerts": 41,
+          "suricata_engine_alerts": 280,
+          "suricata_signatures": [
+            {
+              "signature": "ET WEB_SERVER SQL Errors in HTTP 200 Response (error in your SQL syntax)",
+              "alerts": 18
+            },
+            {
+              "signature": "ET WEB_SERVER SQL Injection Select Sleep Time Delay",
+              "alerts": 7
+            },
+            {
+              "signature": "ET WEB_SERVER Possible MySQL SQLi Attempt Information Schema Access",
+              "alerts": 4
+            },
+            {
+              "signature": "ET WEB_SERVER Possible SQL Injection SELECT CAST in HTTP URI",
+              "alerts": 3
+            },
+            {
+              "signature": "ET SCAN Sqlmap SQL Injection Scan",
+              "alerts": 2
+            }
+          ],
+          "ml_detected_floor": false,
+          "ml_flows_flagged_floor": 0,
+          "ml_detected_no_floor": false,
+          "ml_flows_flagged_no_floor": 0
+        }
+      ],
+      "missing_alert_files": [],
+      "errors": {},
+      "data": "data/processed/lab_labelled_suricata.parquet",
+      "alerts": {
+        "total": 108212,
+        "attack": 126,
+        "security": 100,
+        "informational": 26,
+        "engine": 108086,
+        "attack_signatures": 15,
+        "top_attack": [
+          {
+            "signature": "ET WEB_SERVER SQL Errors in HTTP 200 Response (error in your SQL syntax)",
+            "alerts": 36
+          },
+          {
+            "signature": "GPL ICMP PING *NIX",
+            "alerts": 26
+          },
+          {
+            "signature": "ET WEB_SERVER SQL Injection Select Sleep Time Delay",
+            "alerts": 14
+          },
+          {
+            "signature": "ET SCAN Potential SSH Scan",
+            "alerts": 8
+          },
+          {
+            "signature": "ET WEB_SERVER Possible MySQL SQLi Attempt Information Schema Access",
+            "alerts": 8
+          },
+          {
+            "signature": "ET SCAN LibSSH Based Frequent SSH Connections Likely BruteForce Attack",
+            "alerts": 6
+          },
+          {
+            "signature": "ET WEB_SERVER Possible SQL Injection SELECT CAST in HTTP URI",
+            "alerts": 6
+          },
+          {
+            "signature": "ET WEB_SERVER WEB-PHP phpinfo access",
+            "alerts": 4
+          },
+          {
+            "signature": "ET SCAN Sqlmap SQL Injection Scan",
+            "alerts": 4
+          },
+          {
+            "signature": "ET WEB_SERVER MYSQL Benchmark Command in URI to Consume Server Resources",
+            "alerts": 4
+          }
+        ],
+        "top_engine": [
+          {
+            "signature": "SURICATA TCPv4 invalid checksum",
+            "alerts": 107983
+          },
+          {
+            "signature": "SURICATA STREAM ESTABLISHED packet out of window",
+            "alerts": 42
+          },
+          {
+            "signature": "SURICATA STREAM Packet with invalid ack",
+            "alerts": 29
+          },
+          {
+            "signature": "SURICATA STREAM ESTABLISHED invalid ack",
+            "alerts": 28
+          },
+          {
+            "signature": "SURICATA STREAM excessive retransmissions",
+            "alerts": 2
+          },
+          {
+            "signature": "SURICATA STREAM FIN invalid ack",
+            "alerts": 1
+          },
+          {
+            "signature": "SURICATA STREAM FIN out of window",
+            "alerts": 1
+          }
+        ]
+      },
+      "model_sha256": "4a59a3564377573e404cfa1cdb88b90463b829e9b7de83e351f8b7e316ce7189",
+      "model_classes": [
+        "BENIGN",
+        "Bot",
+        "DDoS",
+        "DoS GoldenEye",
+        "DoS Hulk",
+        "DoS Slowhttptest",
+        "DoS slowloris",
+        "FTP-Patator",
+        "Heartbleed",
+        "Infiltration",
+        "PortScan",
+        "SSH-Patator",
+        "Web Attack - Brute Force",
+        "Web Attack - XSS"
+      ]
+    }
+  },
+  "notes": "Suricata 7 with the ET Open rules, run offline on each pcap with HOME_NET set to the victim network (lab 10.10.2.0/24, CIC-IDS2017 192.168.10.0/24) and EXTERNAL_NET any. A flow counts as detected by Suricata when an attack signature (message not starting 'SURICATA ') matched it: same protocol and 5-tuple (either direction; ICMP: same two addresses) with the alert time within 1 s of the flow; each alert is credited to one flow only (the one containing it, else the nearest). Engine events are reported separately. Informational signatures (message starting ET INFO, ET POLICY, GPL ICMP_INFO, GPL INFO or GPL POLICY, or category Not Suspicious Traffic, Misc activity or Potential Corporate Privacy Violation) are counted in 'all attack signatures' and left out of the '_security' figures. The ML model detects a flow when its predicted class is not BENIGN (any attack class, so SYN flood and SQL injection, which are not model classes, can still count); ml_family_recall_* is the stricter same-family measure. 'floor' is the sensor's 0.5 alert floor, 'no_floor' plain argmax. Either = Suricata or ML. Flow-level recall is unfair to Suricata: many ET rules are thresholded (one alert per source per period) and fire on one packet of a scan or flood, so a scan of 1,000 flows can raise a handful of alerts that match only a few flows. 'any_alert' (at least one flow of the label alerted) and the per-session attack-level table are the fairer view of whether the attack was noticed at all. Friday: ML and Suricata are scored only on Friday rows of the week model's test split; the ML side is in-distribution (same day and attack tools as training, and part of the test rows have a feature vector that also occurs in train, see split.friday_identical_to_train), so its recall is optimistic; the lab flows were never in training. Lab: the flows are the attacker's flows only (attack sessions) or all flows (benign session), so the BENIGN rates come from the benign sessions; the repeats of one session are not independent. Suricata sees payloads, the ML model only flow statistics.",
+  "suricata_runs": {
+    "benign_1": {
+      "name": "benign_1",
+      "dataset": "lab",
+      "pcap": "data/raw/lab_pcaps/benign_1.pcap",
+      "pcap_bytes": 148757411,
+      "pcap_mtime_ns": 1794734457000000000,
+      "image": "jasonish/suricata:7.0.10",
+      "home_net": [
+        "10.10.2.0/24"
+      ],
+      "external_net": "any",
+      "rules_volume": "idps-suricata",
+      "rules_file": "/var/lib/suricata/rules/suricata.rules",
+      "suricata_version": "This is Suricata version 7.0.10 RELEASE",
+      "rules_updated_at": "2026_11_13",
+      "rules_sha256": "38b0c17026e882fb450af367b7c69c91f7bf6335481451313d42513f9917556b",
+      "rules_enabled": 53510,
+      "rules_loaded": 53510,
+      "packets_read": 12259,
+      "log_errors": [],
+      "alert_only_eve": true,
+      "out_kb": "8024",
+      "alert_events": 12344,
+      "duration_s": 22.3,
+      "generated": "2026-11-15T09:37:20+00:00",
+      "log_tail": [
+        "Info: logopenfile: stats output device (regular) initialized: stats.log",
+        "Info: threshold-config: Threshold config parsed: 0 rule(s) found",
+        "Info: detect: 53515 signatures processed. 1259 are IP-only rules, 4533 are inspecting packet payload, 47489 inspect application layer, 109 are decoder event only",
+        "Info: pcap: Starting file run for /dev/stdin",
+        "Notice: threads: Threads created -> RX: 1 W: 8 FM: 1 FR: 1   Engine started.",
+        "Info: checksum: No packets with invalid checksum, assuming checksum offloading is NOT used",
+        "Info: pcap: pcap file /dev/stdin end of file reached (pcap err code 0)",
+        "Notice: suricata: Signal Received.  Stopping engine.",
+        "Info: suricata: time elapsed 2.221s",
+        "Info: counters: Alerts: 12344"
+      ]
+    },
+    "benign_2": {
+      "name": "benign_2",
+      "dataset": "lab",
+      "pcap": "data/raw/lab_pcaps/benign_2.pcap",
+      "pcap_bytes": 71099498,
+      "pcap_mtime_ns": 1794735395000000000,
+      "image": "jasonish/suricata:7.0.10",
+      "home_net": [
+        "10.10.2.0/24"
+      ],
+      "external_net": "any",
+      "rules_volume": "idps-suricata",
+      "rules_file": "/var/lib/suricata/rules/suricata.rules",
+      "suricata_version": "This is Suricata version 7.0.10 RELEASE",
+      "rules_updated_at": "2026_11_13",
+      "rules_sha256": "38b0c17026e882fb450af367b7c69c91f7bf6335481451313d42513f9917556b",
+      "rules_enabled": 53510,
+      "rules_loaded": 53510,
+      "packets_read": 13839,
+      "log_errors": [],
+      "alert_only_eve": true,
+      "out_kb": "8916",
+      "alert_events": 13818,
+      "duration_s": 14.5,
+      "generated": "2026-11-15T09:37:34+00:00",
+      "log_tail": [
+        "Info: logopenfile: stats output device (regular) initialized: stats.log",
+        "Info: threshold-config: Threshold config parsed: 0 rule(s) found",
+        "Info: detect: 53515 signatures processed. 1259 are IP-only rules, 4533 are inspecting packet payload, 47489 inspect application layer, 109 are decoder event only",
+        "Info: pcap: Starting file run for /dev/stdin",
+        "Notice: threads: Threads created -> RX: 1 W: 8 FM: 1 FR: 1   Engine started.",
+        "Info: checksum: No packets with invalid checksum, assuming checksum offloading is NOT used",
+        "Info: pcap: pcap file /dev/stdin end of file reached (pcap err code 0)",
+        "Notice: suricata: Signal Received.  Stopping engine.",
+        "Info: suricata: time elapsed 0.712s",
+        "Info: counters: Alerts: 13818"
+      ]
+    },
+    "portscan_1": {
+      "name": "portscan_1",
+      "dataset": "lab",
+      "pcap": "data/raw/lab_pcaps/portscan_1.pcap",
+      "pcap_bytes": 147628,
+      "pcap_mtime_ns": 1794733515000000000,
+      "image": "jasonish/suricata:7.0.10",
+      "home_net": [
+        "10.10.2.0/24"
+      ],
+      "external_net": "any",
+      "rules_volume": "idps-suricata",
+      "rules_file": "/var/lib/suricata/rules/suricata.rules",
+      "suricata_version": "This is Suricata version 7.0.10 RELEASE",
+      "rules_updated_at": "2026_11_13",
+      "rules_sha256": "38b0c17026e882fb450af367b7c69c91f7bf6335481451313d42513f9917556b",
+      "rules_enabled": 53510,
+      "rules_loaded": 53510,
+      "packets_read": 2050,
+      "log_errors": [],
+      "alert_only_eve": true,
+      "out_kb": "16",
+      "alert_events": 2,
+      "duration_s": 15.8,
+      "generated": "2026-11-15T09:37:50+00:00",
+      "log_tail": [
+        "Info: logopenfile: stats output device (regular) initialized: stats.log",
+        "Info: threshold-config: Threshold config parsed: 0 rule(s) found",
+        "Info: detect: 53515 signatures processed. 1259 are IP-only rules, 4533 are inspecting packet payload, 47489 inspect application layer, 109 are decoder event only",
+        "Info: pcap: Starting file run for /dev/stdin",
+        "Notice: threads: Threads created -> RX: 1 W: 8 FM: 1 FR: 1   Engine started.",
+        "Info: checksum: No packets with invalid checksum, assuming checksum offloading is NOT used",
+        "Info: pcap: pcap file /dev/stdin end of file reached (pcap err code 0)",
+        "Notice: suricata: Signal Received.  Stopping engine.",
+        "Info: suricata: time elapsed 0.262s",
+        "Info: counters: Alerts: 2"
+      ]
+    },
+    "portscan_2": {
+      "name": "portscan_2",
+      "dataset": "lab",
+      "pcap": "data/raw/lab_pcaps/portscan_2.pcap",
+      "pcap_bytes": 147628,
+      "pcap_mtime_ns": 1794734470000000000,
+      "image": "jasonish/suricata:7.0.10",
+      "home_net": [
+        "10.10.2.0/24"
+      ],
+      "external_net": "any",
+      "rules_volume": "idps-suricata",
+      "rules_file": "/var/lib/suricata/rules/suricata.rules",
+      "suricata_version": "This is Suricata version 7.0.10 RELEASE",
+      "rules_updated_at": "2026_11_13",
+      "rules_sha256": "38b0c17026e882fb450af367b7c69c91f7bf6335481451313d42513f9917556b",
+      "rules_enabled": 53510,
+      "rules_loaded": 53510,
+      "packets_read": 2050,
+      "log_errors": [],
+      "alert_only_eve": true,
+      "out_kb": "16",
+      "alert_events": 2,
+      "duration_s": 14.3,
+      "generated": "2026-11-15T09:38:05+00:00",
+      "log_tail": [
+        "Info: logopenfile: stats output device (regular) initialized: stats.log",
+        "Info: threshold-config: Threshold config parsed: 0 rule(s) found",
+        "Info: detect: 53515 signatures processed. 1259 are IP-only rules, 4533 are inspecting packet payload, 47489 inspect application layer, 109 are decoder event only",
+        "Info: pcap: Starting file run for /dev/stdin",
+        "Notice: threads: Threads created -> RX: 1 W: 8 FM: 1 FR: 1   Engine started.",
+        "Info: checksum: No packets with invalid checksum, assuming checksum offloading is NOT used",
+        "Info: pcap: pcap file /dev/stdin end of file reached (pcap err code 0)",
+        "Notice: suricata: Signal Received.  Stopping engine.",
+        "Info: suricata: time elapsed 0.168s",
+        "Info: counters: Alerts: 2"
+      ]
+    },
+    "slow_dos_1": {
+      "name": "slow_dos_1",
+      "dataset": "lab",
+      "pcap": "data/raw/lab_pcaps/slow_dos_1.pcap",
+      "pcap_bytes": 1044389,
+      "pcap_mtime_ns": 1794733816000000000,
+      "image": "jasonish/suricata:7.0.10",
+      "home_net": [
+        "10.10.2.0/24"
+      ],
+      "external_net": "any",
+      "rules_volume": "idps-suricata",
+      "rules_file": "/var/lib/suricata/rules/suricata.rules",
+      "suricata_version": "This is Suricata version 7.0.10 RELEASE",
+      "rules_updated_at": "2026_11_13",
+      "rules_sha256": "38b0c17026e882fb450af367b7c69c91f7bf6335481451313d42513f9917556b",
+      "rules_enabled": 53510,
+      "rules_loaded": 53510,
+      "packets_read": 10240,
+      "log_errors": [],
+      "alert_only_eve": true,
+      "out_kb": "6420",
+      "alert_events": 10230,
+      "duration_s": 13.4,
+      "generated": "2026-11-15T09:38:18+00:00",
+      "log_tail": [
+        "Info: logopenfile: stats output device (regular) initialized: stats.log",
+        "Info: threshold-config: Threshold config parsed: 0 rule(s) found",
+        "Info: detect: 53515 signatures processed. 1259 are IP-only rules, 4533 are inspecting packet payload, 47489 inspect application layer, 109 are decoder event only",
+        "Info: pcap: Starting file run for /dev/stdin",
+        "Notice: threads: Threads created -> RX: 1 W: 8 FM: 1 FR: 1   Engine started.",
+        "Info: checksum: No packets with invalid checksum, assuming checksum offloading is NOT used",
+        "Info: pcap: pcap file /dev/stdin end of file reached (pcap err code 0)",
+        "Notice: suricata: Signal Received.  Stopping engine.",
+        "Info: suricata: time elapsed 0.187s",
+        "Info: counters: Alerts: 10230"
+      ]
+    },
+    "slow_dos_2": {
+      "name": "slow_dos_2",
+      "dataset": "lab",
+      "pcap": "data/raw/lab_pcaps/slow_dos_2.pcap",
+      "pcap_bytes": 1123003,
+      "pcap_mtime_ns": 1794734766000000000,
+      "image": "jasonish/suricata:7.0.10",
+      "home_net": [
+        "10.10.2.0/24"
+      ],
+      "external_net": "any",
+      "rules_volume": "idps-suricata",
+      "rules_file": "/var/lib/suricata/rules/suricata.rules",
+      "suricata_version": "This is Suricata version 7.0.10 RELEASE",
+      "rules_updated_at": "2026_11_13",
+      "rules_sha256": "38b0c17026e882fb450af367b7c69c91f7bf6335481451313d42513f9917556b",
+      "rules_enabled": 53510,
+      "rules_loaded": 53510,
+      "packets_read": 10246,
+      "log_errors": [],
+      "alert_only_eve": true,
+      "out_kb": "6424",
+      "alert_events": 10230,
+      "duration_s": 13.1,
+      "generated": "2026-11-15T09:38:31+00:00",
+      "log_tail": [
+        "Info: logopenfile: stats output device (regular) initialized: stats.log",
+        "Info: threshold-config: Threshold config parsed: 0 rule(s) found",
+        "Info: detect: 53515 signatures processed. 1259 are IP-only rules, 4533 are inspecting packet payload, 47489 inspect application layer, 109 are decoder event only",
+        "Info: pcap: Starting file run for /dev/stdin",
+        "Notice: threads: Threads created -> RX: 1 W: 8 FM: 1 FR: 1   Engine started.",
+        "Info: checksum: No packets with invalid checksum, assuming checksum offloading is NOT used",
+        "Info: pcap: pcap file /dev/stdin end of file reached (pcap err code 0)",
+        "Notice: suricata: Signal Received.  Stopping engine.",
+        "Info: suricata: time elapsed 0.188s",
+        "Info: counters: Alerts: 10230"
+      ]
+    },
+    "ssh_bruteforce_1": {
+      "name": "ssh_bruteforce_1",
+      "dataset": "lab",
+      "pcap": "data/raw/lab_pcaps/ssh_bruteforce_1.pcap",
+      "pcap_bytes": 307564,
+      "pcap_mtime_ns": 1794733711000000000,
+      "image": "jasonish/suricata:7.0.10",
+      "home_net": [
+        "10.10.2.0/24"
+      ],
+      "external_net": "any",
+      "rules_volume": "idps-suricata",
+      "rules_file": "/var/lib/suricata/rules/suricata.rules",
+      "suricata_version": "This is Suricata version 7.0.10 RELEASE",
+      "rules_updated_at": "2026_11_13",
+      "rules_sha256": "38b0c17026e882fb450af367b7c69c91f7bf6335481451313d42513f9917556b",
+      "rules_enabled": 53510,
+      "rules_loaded": 53510,
+      "packets_read": 1709,
+      "log_errors": [],
+      "alert_only_eve": true,
+      "out_kb": "1092",
+      "alert_events": 1713,
+      "duration_s": 12.2,
+      "generated": "2026-11-15T09:38:43+00:00",
+      "log_tail": [
+        "Info: logopenfile: stats output device (regular) initialized: stats.log",
+        "Info: threshold-config: Threshold config parsed: 0 rule(s) found",
+        "Info: detect: 53515 signatures processed. 1259 are IP-only rules, 4533 are inspecting packet payload, 47489 inspect application layer, 109 are decoder event only",
+        "Info: pcap: Starting file run for /dev/stdin",
+        "Notice: threads: Threads created -> RX: 1 W: 8 FM: 1 FR: 1   Engine started.",
+        "Info: checksum: No packets with invalid checksum, assuming checksum offloading is NOT used",
+        "Info: pcap: pcap file /dev/stdin end of file reached (pcap err code 0)",
+        "Notice: suricata: Signal Received.  Stopping engine.",
+        "Info: suricata: time elapsed 0.121s",
+        "Info: counters: Alerts: 1713"
+      ]
+    },
+    "ssh_bruteforce_2": {
+      "name": "ssh_bruteforce_2",
+      "dataset": "lab",
+      "pcap": "data/raw/lab_pcaps/ssh_bruteforce_2.pcap",
+      "pcap_bytes": 307442,
+      "pcap_mtime_ns": 1794734664000000000,
+      "image": "jasonish/suricata:7.0.10",
+      "home_net": [
+        "10.10.2.0/24"
+      ],
+      "external_net": "any",
+      "rules_volume": "idps-suricata",
+      "rules_file": "/var/lib/suricata/rules/suricata.rules",
+      "suricata_version": "This is Suricata version 7.0.10 RELEASE",
+      "rules_updated_at": "2026_11_13",
+      "rules_sha256": "38b0c17026e882fb450af367b7c69c91f7bf6335481451313d42513f9917556b",
+      "rules_enabled": 53510,
+      "rules_loaded": 53510,
+      "packets_read": 1700,
+      "log_errors": [],
+      "alert_only_eve": true,
+      "out_kb": "1088",
+      "alert_events": 1705,
+      "duration_s": 12.7,
+      "generated": "2026-11-15T09:38:56+00:00",
+      "log_tail": [
+        "Info: logopenfile: stats output device (regular) initialized: stats.log",
+        "Info: threshold-config: Threshold config parsed: 0 rule(s) found",
+        "Info: detect: 53515 signatures processed. 1259 are IP-only rules, 4533 are inspecting packet payload, 47489 inspect application layer, 109 are decoder event only",
+        "Info: pcap: Starting file run for /dev/stdin",
+        "Notice: threads: Threads created -> RX: 1 W: 8 FM: 1 FR: 1   Engine started.",
+        "Info: checksum: No packets with invalid checksum, assuming checksum offloading is NOT used",
+        "Info: pcap: pcap file /dev/stdin end of file reached (pcap err code 0)",
+        "Notice: suricata: Signal Received.  Stopping engine.",
+        "Info: suricata: time elapsed 0.131s",
+        "Info: counters: Alerts: 1705"
+      ]
+    },
+    "syn_flood_1": {
+      "name": "syn_flood_1",
+      "dataset": "lab",
+      "pcap": "data/raw/lab_pcaps/syn_flood_1.pcap",
+      "pcap_bytes": 6109742,
+      "pcap_mtime_ns": 1794733741000000000,
+      "image": "jasonish/suricata:7.0.10",
+      "home_net": [
+        "10.10.2.0/24"
+      ],
+      "external_net": "any",
+      "rules_volume": "idps-suricata",
+      "rules_file": "/var/lib/suricata/rules/suricata.rules",
+      "suricata_version": "This is Suricata version 7.0.10 RELEASE",
+      "rules_updated_at": "2026_11_13",
+      "rules_sha256": "38b0c17026e882fb450af367b7c69c91f7bf6335481451313d42513f9917556b",
+      "rules_enabled": 53510,
+      "rules_loaded": 53510,
+      "packets_read": 85651,
+      "log_errors": [],
+      "alert_only_eve": true,
+      "out_kb": "17428",
+      "alert_events": 28548,
+      "duration_s": 12.9,
+      "generated": "2026-11-15T09:39:09+00:00",
+      "log_tail": [
+        "Info: logopenfile: stats output device (regular) initialized: stats.log",
+        "Info: threshold-config: Threshold config parsed: 0 rule(s) found",
+        "Info: detect: 53515 signatures processed. 1259 are IP-only rules, 4533 are inspecting packet payload, 47489 inspect application layer, 109 are decoder event only",
+        "Info: pcap: Starting file run for /dev/stdin",
+        "Notice: threads: Threads created -> RX: 1 W: 8 FM: 1 FR: 1   Engine started.",
+        "Info: checksum: No packets with invalid checksum, assuming checksum offloading is NOT used",
+        "Info: pcap: pcap file /dev/stdin end of file reached (pcap err code 0)",
+        "Notice: suricata: Signal Received.  Stopping engine.",
+        "Info: suricata: time elapsed 0.465s",
+        "Info: counters: Alerts: 28548"
+      ]
+    },
+    "syn_flood_2": {
+      "name": "syn_flood_2",
+      "dataset": "lab",
+      "pcap": "data/raw/lab_pcaps/syn_flood_2.pcap",
+      "pcap_bytes": 6201102,
+      "pcap_mtime_ns": 1794734691000000000,
+      "image": "jasonish/suricata:7.0.10",
+      "home_net": [
+        "10.10.2.0/24"
+      ],
+      "external_net": "any",
+      "rules_volume": "idps-suricata",
+      "rules_file": "/var/lib/suricata/rules/suricata.rules",
+      "suricata_version": "This is Suricata version 7.0.10 RELEASE",
+      "rules_updated_at": "2026_11_13",
+      "rules_sha256": "38b0c17026e882fb450af367b7c69c91f7bf6335481451313d42513f9917556b",
+      "rules_enabled": 53510,
+      "rules_loaded": 53510,
+      "packets_read": 86931,
+      "log_errors": [],
+      "alert_only_eve": true,
+      "out_kb": "17692",
+      "alert_events": 28977,
+      "duration_s": 13.4,
+      "generated": "2026-11-15T09:39:23+00:00",
+      "log_tail": [
+        "Info: logopenfile: stats output device (regular) initialized: stats.log",
+        "Info: threshold-config: Threshold config parsed: 0 rule(s) found",
+        "Info: detect: 53515 signatures processed. 1259 are IP-only rules, 4533 are inspecting packet payload, 47489 inspect application layer, 109 are decoder event only",
+        "Info: pcap: Starting file run for /dev/stdin",
+        "Info: checksum: No packets with invalid checksum, assuming checksum offloading is NOT used",
+        "Notice: threads: Threads created -> RX: 1 W: 8 FM: 1 FR: 1   Engine started.",
+        "Info: pcap: pcap file /dev/stdin end of file reached (pcap err code 0)",
+        "Notice: suricata: Signal Received.  Stopping engine.",
+        "Info: suricata: time elapsed 0.673s",
+        "Info: counters: Alerts: 28977"
+      ]
+    },
+    "web_sqli_1": {
+      "name": "web_sqli_1",
+      "dataset": "lab",
+      "pcap": "data/raw/lab_pcaps/web_sqli_1.pcap",
+      "pcap_bytes": 167484,
+      "pcap_mtime_ns": 1794733838000000000,
+      "image": "jasonish/suricata:7.0.10",
+      "home_net": [
+        "10.10.2.0/24"
+      ],
+      "external_net": "any",
+      "rules_volume": "idps-suricata",
+      "rules_file": "/var/lib/suricata/rules/suricata.rules",
+      "suricata_version": "This is Suricata version 7.0.10 RELEASE",
+      "rules_updated_at": "2026_11_13",
+      "rules_sha256": "38b0c17026e882fb450af367b7c69c91f7bf6335481451313d42513f9917556b",
+      "rules_enabled": 53510,
+      "rules_loaded": 53510,
+      "packets_read": 282,
+      "log_errors": [],
+      "alert_only_eve": true,
+      "out_kb": "244",
+      "alert_events": 322,
+      "duration_s": 12.6,
+      "generated": "2026-11-15T09:39:35+00:00",
+      "log_tail": [
+        "Info: logopenfile: eve-log output device (regular) initialized: eve.json",
+        "Info: logopenfile: stats output device (regular) initialized: stats.log",
+        "Info: threshold-config: Threshold config parsed: 0 rule(s) found",
+        "Info: detect: 53515 signatures processed. 1259 are IP-only rules, 4533 are inspecting packet payload, 47489 inspect application layer, 109 are decoder event only",
+        "Info: pcap: Starting file run for /dev/stdin",
+        "Notice: threads: Threads created -> RX: 1 W: 8 FM: 1 FR: 1   Engine started.",
+        "Info: pcap: pcap file /dev/stdin end of file reached (pcap err code 0)",
+        "Notice: suricata: Signal Received.  Stopping engine.",
+        "Info: suricata: time elapsed 0.109s",
+        "Info: counters: Alerts: 322"
+      ]
+    },
+    "web_sqli_2": {
+      "name": "web_sqli_2",
+      "dataset": "lab",
+      "pcap": "data/raw/lab_pcaps/web_sqli_2.pcap",
+      "pcap_bytes": 167559,
+      "pcap_mtime_ns": 1794734786000000000,
+      "image": "jasonish/suricata:7.0.10",
+      "home_net": [
+        "10.10.2.0/24"
+      ],
+      "external_net": "any",
+      "rules_volume": "idps-suricata",
+      "rules_file": "/var/lib/suricata/rules/suricata.rules",
+      "suricata_version": "This is Suricata version 7.0.10 RELEASE",
+      "rules_updated_at": "2026_11_13",
+      "rules_sha256": "38b0c17026e882fb450af367b7c69c91f7bf6335481451313d42513f9917556b",
+      "rules_enabled": 53510,
+      "rules_loaded": 53510,
+      "packets_read": 283,
+      "log_errors": [],
+      "alert_only_eve": true,
+      "out_kb": "244",
+      "alert_events": 321,
+      "duration_s": 13.3,
+      "generated": "2026-11-15T09:39:49+00:00",
+      "log_tail": [
+        "Info: logopenfile: eve-log output device (regular) initialized: eve.json",
+        "Info: logopenfile: stats output device (regular) initialized: stats.log",
+        "Info: threshold-config: Threshold config parsed: 0 rule(s) found",
+        "Info: detect: 53515 signatures processed. 1259 are IP-only rules, 4533 are inspecting packet payload, 47489 inspect application layer, 109 are decoder event only",
+        "Info: pcap: Starting file run for /dev/stdin",
+        "Notice: threads: Threads created -> RX: 1 W: 8 FM: 1 FR: 1   Engine started.",
+        "Info: pcap: pcap file /dev/stdin end of file reached (pcap err code 0)",
+        "Notice: suricata: Signal Received.  Stopping engine.",
+        "Info: suricata: time elapsed 0.135s",
+        "Info: counters: Alerts: 321"
+      ]
+    }
+  }
+}

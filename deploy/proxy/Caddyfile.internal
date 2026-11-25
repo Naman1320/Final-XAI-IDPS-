@@ -1,0 +1,58 @@
+{
+	admin off
+	# Redirects are written below (they must keep a non-standard HTTPS port).
+	auto_https disable_redirects
+	# Only TCP is published, so do not advertise HTTP/3.
+	servers {
+		protocols h1 h2
+	}
+}
+
+(site) {
+	encode zstd gzip
+	# Largest body any endpoint accepts (/ingest/alerts, 10 MiB: soc/api/limits.py) plus margin.
+	request_body {
+		max_size 11MiB
+	}
+	header {
+		-Server
+		X-Content-Type-Options nosniff
+		X-Frame-Options DENY
+		Referrer-Policy no-referrer
+		Permissions-Policy "geolocation=(), camera=(), microphone=()"
+		# The dashboard is one same-origin app: its scripts and styles are files, the maps are
+		# drawn from data inside the bundle, the MFA QR code is a data: image, the live feed is a
+		# same-origin WebSocket. style-src needs unsafe-inline for the style="" attributes React sets.
+		Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
+	}
+	# /api/* goes to the SOC with the /api prefix removed (WebSockets are proxied as well).
+	handle_path /api/* {
+		reverse_proxy {$IDPS_UPSTREAM:soc:8000}
+	}
+	handle {
+		root * /srv
+		@assets path /assets/*
+		header @assets Cache-Control "public, max-age=31536000, immutable"
+		@shell not path /assets/*
+		header @shell Cache-Control "no-cache"
+		try_files {path} /index.html
+		file_server
+	}
+}
+
+# Plain HTTP: a health check for the container, and everything else goes to HTTPS.
+http:// {
+	handle /healthz {
+		respond "ok" 200
+	}
+	handle {
+		redir https://{$IDPS_SITE}{$IDPS_REDIR_PORT:}{uri} permanent
+	}
+}
+
+# No public CA can issue for a bare address or a private name: Caddy's own CA signs the
+# certificate. Trust it on the machines that open the dashboard (docs/deploy.md).
+https://{$IDPS_SITE} {
+	tls internal
+	import site
+}

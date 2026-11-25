@@ -1,0 +1,8 @@
+# Holds the emulator's network namespace (see netguard.sh). Built without network, from the lab
+# SOC's netns image (alpine + iproute2 + nftables):
+#   docker build -f lab/cloud/Dockerfile.net -t idps-cloud-moto-net:latest lab/cloud
+FROM idps-lab-soc-net:latest
+COPY netguard.sh /cloudguard/netguard.sh
+RUN chmod 0555 /cloudguard/netguard.sh
+HEALTHCHECK --interval=2s --timeout=2s --retries=15 CMD test -f /tmp/ready
+ENTRYPOINT ["/bin/sh", "/cloudguard/netguard.sh"]

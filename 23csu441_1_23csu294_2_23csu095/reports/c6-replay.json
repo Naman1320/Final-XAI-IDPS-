@@ -1,0 +1,45 @@
+{
+  "id": "c3787cb5-b0aa-490f-a2e5-92030ade01a3",
+  "mode": "replay",
+  "status": "verified",
+  "started_at": "2026-11-19T06:26:02.157420Z",
+  "ended_at": "2026-11-19T06:26:09.232943Z",
+  "live_demo_id": null,
+  "events": [
+    {
+      "stage": "capture",
+      "at": "2026-11-19T06:26:03.622599Z",
+      "evidence": "Reading ssh_bruteforce_1.pcap offline, 307564 bytes, SHA-256 ed74edc2643c9fd80e4a4ffe5966598d6c5c00a10374533f2e67328520504cd6"
+    },
+    {
+      "stage": "lab_alert",
+      "at": "2026-11-19T06:26:06.494132Z",
+      "evidence": "Signed lab model, confidence ≥0.9 from 10.10.1.10: {'SSH-Patator': 41}"
+    },
+    {
+      "stage": "lab_block",
+      "at": "2026-11-19T06:26:06.500026Z",
+      "evidence": "Sensor read-back: 10.10.1.10 absent before, present in inet idps blocked4 after."
+    },
+    {
+      "stage": "baseline",
+      "at": "2026-11-19T06:26:08.318602Z",
+      "evidence": "Moto acl-7d542ee276c33a6a1: no matching managed deny for 10.10.1.10/32 before scoring."
+    },
+    {
+      "stage": "cloud_alert",
+      "at": "2026-11-19T06:26:08.581526Z",
+      "evidence": "57 replay alerts for 10.10.1.10; first class SSH-Patator; 4 S3 objects, 57 flows."
+    },
+    {
+      "stage": "response",
+      "at": "2026-11-19T06:26:08.604356Z",
+      "evidence": "Collector recorded 1 block decision(s); acl-7d542ee276c33a6a1 now has [('egress', 1), ('ingress', 1)]."
+    },
+    {
+      "stage": "acl",
+      "at": "2026-11-19T06:26:09.232898Z",
+      "evidence": "aws ec2 describe-network-acls --network-acl-ids acl-7d542ee276c33a6a1 --region eu-west-1 --endpoint-url http://127.0.0.1:4566 --output json returned 10.10.1.10/32 deny, protocol -1: [('egress', 1), ('ingress', 1)]. Replay resources released after read-back."
+    }
+  ]
+}

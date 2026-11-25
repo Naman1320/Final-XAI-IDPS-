@@ -1,0 +1,59 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+build/
+dist/
+soc/web/dist-unified/
+soc/web/dist-iphone/
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+.ipynb_checkpoints/
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+models/*
+!models/.gitkeep
+node_modules/
+.DS_Store
+*.pcap
+*.pcapng
+# Terraform / cloud secrets
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+!*.tfvars.example
+*.pem
+*.key
+# Terraform plans and crash logs (plans can contain secrets); .terraform.lock.hcl is committed
+*.tfplan
+tfplan
+crash.log
+crash.*.log
+# Cloud collector local state (checkpoint, block state, unsent alerts)
+cloud_state/
+
+# MaxMind GeoLite2 database (licence forbids redistribution)
+data/geoip/
+*.mmdb
+
+# Deployment (deploy/install.sh): secrets, enrolment bundles and the generated environment
+deploy/.env
+deploy/.env.sensor
+deploy/secrets/
+deploy/sensors/
+deploy/sensor-data/
+deploy/soc.env
+deploy/sensor.extra.env
+deploy/caddy-root.crt
+
+# Local assistant config
+CLAUDE.md
+.claude/
+~$*

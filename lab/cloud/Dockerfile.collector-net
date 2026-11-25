@@ -1,0 +1,9 @@
+# Holds the collector's network namespace (see netguard_collector.sh). Built without network, from
+# the lab SOC's netns image (alpine + iproute2 + nftables):
+#   lab/cloud/build_collector.sh        (or: docker build -f lab/cloud/Dockerfile.collector-net \
+#                                          -t idps-cloud-collector-net:latest lab/cloud)
+FROM idps-lab-soc-net:latest
+COPY netguard_collector.sh /cloudguard/netguard_collector.sh
+RUN chmod 0555 /cloudguard/netguard_collector.sh
+HEALTHCHECK --interval=2s --timeout=2s --retries=15 CMD test -f /tmp/ready
+ENTRYPOINT ["/bin/sh", "/cloudguard/netguard_collector.sh"]

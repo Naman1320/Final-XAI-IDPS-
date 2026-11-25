@@ -1,0 +1,5 @@
+# Context for the attacker image (lab/).
+**/.env
+**/.env.*
+**/*.pcap
+**/*.pcapng

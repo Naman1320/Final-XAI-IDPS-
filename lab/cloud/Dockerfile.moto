@@ -1,0 +1,15 @@
+# Emulated AWS for the cloud plan (docs/cloud-plan.md, step C1). Built without network:
+# the wheels come from a local folder (build context), downloaded once with pip download.
+#   docker build -f lab/cloud/Dockerfile.moto -t idps-lab-moto:5.1.22 ~/Library/Caches/idps-lab/wheels-moto
+# Base: the project's own SOC image (Python 3.12, non-root user idps). Moto lives in its own
+# venv so it can't clash with the SOC's packages.
+FROM idps-soc:0.2.0
+USER root
+COPY *.whl /tmp/wheels/
+RUN python -m venv /opt/moto \
+ && /opt/moto/bin/pip install --no-index --find-links /tmp/wheels 'moto[server,ec2,s3,iam,ssm,kms,sts]==5.1.22' \
+ && rm -rf /tmp/wheels
+USER idps
+ENV PATH=/opt/moto/bin:$PATH
+EXPOSE 4566
+ENTRYPOINT ["moto_server", "-H", "0.0.0.0", "-p", "4566"]

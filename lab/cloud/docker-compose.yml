@@ -1,0 +1,350 @@
+# Emulated AWS (Moto server) for the cloud plan, docs/cloud-plan.md step C1.
+# No AWS account, no card, no billing: nothing here talks to real AWS.
+#   docker compose -f lab/cloud/docker-compose.yml up -d
+#   source lab/cloud/env.sh && .venv/bin/python lab/cloud/guard.py
+# - Own network (cloud_net), apart from the attack lab's networks. Later steps (C3 exporter,
+#   C4 collector) join it and reach the emulator at 10.10.4.10:4566.
+# - moto-net holds the network namespace (lab/cloud/netguard.sh): no default route, inbound TCP
+#   4566 from cloud_net only, outbound replies only. Moto itself has no capabilities.
+# - Port published on 127.0.0.1 only. Read-only root filesystem, non-root user.
+# - Emulator state is in memory: a restart starts from an empty account (then delete the
+#   Terraform state in ~/Library/Caches/idps-lab/cloud-tf and apply again).
+name: idps-cloud
+
+networks:
+  cloud_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.10.4.0/24
+  # C4: the lab's management network (lab/docker-compose.yml, project idps-lab), joined ONLY by
+  # collector-net, at the fixed address 10.10.3.3. Needs the lab running (`docker compose up` in
+  # lab/); only the `collector` profile uses it.
+  mgmt_net:
+    external: true
+    name: idps-lab_mgmt_net
+
+volumes:
+  flowlog_out: {}    # C3: window files, written by flowlog-writer, read-only in flowlog-shipper
+  flowlog_state: {}  # C3: what the shipper has shipped (survives restarts)
+  collector_state: {}    # C4: checkpoint, outbox and network-ACL state of the collector
+  collector_secrets: {}  # C4: the collector's SOC token, certificate and key (lab/cloud/collector_provision.sh)
+
+services:
+  moto-net:
+    build:
+      context: .
+      dockerfile: Dockerfile.net
+    image: idps-cloud-moto-net:latest
+    container_name: idps-cloud-moto-net
+    cap_drop: [ALL]
+    cap_add: [NET_ADMIN]
+    read_only: true
+    tmpfs:
+      - /tmp
+    pids_limit: 32
+    networks:
+      cloud_net:
+        ipv4_address: 10.10.4.10
+    ports:
+      - "127.0.0.1:4566:4566"
+    healthcheck:
+      test: ["CMD", "test", "-f", "/tmp/ready"]
+      interval: 2s
+      timeout: 2s
+      retries: 15
+    restart: unless-stopped
+
+  moto:
+    image: idps-lab-moto:5.1.22
+    container_name: idps-cloud-moto
+    network_mode: "service:moto-net"
+    depends_on:
+      moto-net:
+        condition: service_healthy
+    environment:
+      MOTO_ACCOUNT_ID: "000000000000"
+      AWS_DEFAULT_REGION: eu-west-1
+      # infra/ attaches AmazonSSMManagedInstanceCore; Moto only knows AWS managed policies
+      # when told to load them.
+      MOTO_IAM_LOAD_MANAGED_POLICIES: "true"
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    mem_limit: 1g
+    cpus: 1.0
+    pids_limit: 128
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request;urllib.request.urlopen('http://127.0.0.1:4566/moto-api/')"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+    restart: unless-stopped
+
+  # --- C3: the live flow-log exporter (docs/cloud-plan.md; lab/cloud/README.md) ---------------
+  # Not started by a plain `up` (profile `flowlog`):
+  #   lab/cloud/build_flowlog.sh
+  #   docker compose -f lab/cloud/docker-compose.yml --profile flowlog up -d flowlog-writer flowlog-shipper
+  # Two containers, joined only by a folder: the WRITER sees the lab and no cloud, the SHIPPER
+  # sees the emulator and no lab.
+
+  flowlog-writer:
+    # Joins the SENSOR's network namespace like the Suricata sidecar (network_mode container:, not
+    # service:, because the sensor lives in the lab's compose project; lab/docker-compose.yml is
+    # not touched). It has no network of its own and opens no connection: it reads packets on
+    # lab_attack (AF_PACKET) and writes plain files. Recreate it after recreating the sensor.
+    # Hardening: all capabilities dropped except NET_RAW (the capture socket) and SETUID/SETGID
+    # (to give up root the moment the socket is open); no NET_ADMIN, so it cannot change the
+    # sensor's interfaces, routes or firewall; read-only root, memory and process limits.
+    profiles: ["flowlog"]
+    image: idps-lab-flowlog:latest
+    container_name: idps-flowlog-writer
+    network_mode: "container:idps-sensor"
+    command: ["export", "writer"]
+    # No `init: true`: tini (as root) cannot signal the process that gave up root without CAP_KILL;
+    # the writer is PID 1 and handles SIGTERM itself (it writes the partial minute, then exits).
+    cap_drop: [ALL]
+    cap_add: [NET_RAW, SETUID, SETGID]
+    security_opt: ["no-new-privileges:true"]
+    read_only: true
+    tmpfs:
+      - /tmp:size=4m
+    mem_limit: 256m
+    cpus: 0.5
+    pids_limit: 32
+    environment:
+      IDPS_FLOWLOG_INTERFACE: lab_attack
+      # The hosts behind the emulated ENI (lab/docker-compose.yml: victim .10 and dvwa .11); the
+      # sensor (.2) and the gateway (.1) are not victims, so a sweep makes no records for them.
+      IDPS_FLOWLOG_VICTIM_HOSTS: ${LAB_FLOWLOG_VICTIM_HOSTS:-10.10.2.10 10.10.2.11}
+      # The victim ports the emulated security group allows (infra/ default attacker_ports);
+      # everything else toward the victim is recorded REJECT.
+      IDPS_FLOWLOG_ALLOW_PORTS: ${LAB_FLOWLOG_ALLOW_PORTS:-22 80}
+      # Most records per 60 s window (memory bound; the excess is counted, logged, noted in a
+      # .loss.json sidecar). Lower it (e.g. 50) to see the loss reporting.
+      IDPS_FLOWLOG_MAX_RECORDS: ${LAB_FLOWLOG_MAX_RECORDS:-50000}
+      IDPS_CLOUD_ACCOUNT: "000000000000"
+      IDPS_CLOUD_REGION: eu-west-1
+    volumes:
+      - flowlog_out:/var/lib/flowlog-out
+    healthcheck:
+      test: ["CMD", "python", "-c", "import os,sys,time; sys.exit(0 if time.time()-os.stat('/tmp/alive').st_mtime < 30 else 1)"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    # on-failure: a crash is restarted. After the SENSOR is recreated the writer must be recreated
+    # too (docker compose ... up -d --force-recreate flowlog-writer): its old namespace is gone.
+    restart: on-failure
+
+  flowlog-shipper-net:
+    # Holds the shipper's namespace (netguard_shipper.sh): no default route; outbound only TCP 4566
+    # to the emulator at 10.10.4.10 and replies. Not on any lab network.
+    profiles: ["flowlog"]
+    build:
+      context: .
+      dockerfile: Dockerfile.shipper-net
+    image: idps-cloud-shipper-net:latest
+    container_name: idps-flowlog-shipper-net
+    cap_drop: [ALL]
+    cap_add: [NET_ADMIN]
+    read_only: true
+    tmpfs:
+      - /tmp
+    pids_limit: 32
+    networks:
+      cloud_net:
+        ipv4_address: 10.10.4.20
+    healthcheck:
+      test: ["CMD", "test", "-f", "/tmp/ready"]
+      interval: 2s
+      timeout: 2s
+      retries: 15
+    restart: unless-stopped
+
+  flowlog-shipper:
+    # Reads the writer's folder READ-ONLY, runs the billing guard, then gzips and PUTs each window
+    # to the emulated bucket (never creates it). Fake credentials, endpoint pinned to the emulator.
+    profiles: ["flowlog"]
+    image: idps-lab-flowlog:latest
+    container_name: idps-flowlog-shipper
+    network_mode: "service:flowlog-shipper-net"
+    command: ["export", "ship"]
+    user: "65534:65534"
+    init: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    read_only: true
+    tmpfs:
+      - /tmp:size=4m
+    mem_limit: 128m
+    cpus: 0.25
+    pids_limit: 32
+    environment:
+      AWS_ACCESS_KEY_ID: test
+      AWS_SECRET_ACCESS_KEY: test
+      AWS_REGION: eu-west-1
+      AWS_DEFAULT_REGION: eu-west-1
+      AWS_ENDPOINT_URL: http://10.10.4.10:4566
+      AWS_CONFIG_FILE: /dev/null
+      AWS_SHARED_CREDENTIALS_FILE: /dev/null
+      AWS_EC2_METADATA_DISABLED: "true"
+      IDPS_EMULATOR_ACCOUNT: "000000000000"
+      IDPS_CLOUD_ACCOUNT: "000000000000"
+      IDPS_CLOUD_REGION: eu-west-1
+      IDPS_FLOWLOG_ALIVE_FILE: /tmp/alive   # touched after every cycle without a failure
+    volumes:
+      - flowlog_out:/var/lib/flowlog-out:ro
+      - flowlog_state:/var/lib/flowlog-state
+    depends_on:
+      flowlog-shipper-net:
+        condition: service_healthy
+      flowlog-writer:
+        condition: service_started
+      moto:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import os,sys,time; sys.exit(0 if time.time()-os.stat('/tmp/alive').st_mtime < 60 else 1)"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    # on-failure: if the emulator was restarted (bucket gone) the shipper exits 3 and is retried
+    # with Docker's growing delay until `lab/cloud/tf.sh apply` has made the bucket again; at
+    # start it re-sends every window the bucket no longer holds.
+    restart: on-failure
+
+  # --- C4: the cloud collector, live against the emulator and the lab SOC ----------------------
+  # Not started by a plain `up` (profile `collector`). Use lab/cloud/start_collector.sh, which
+  # checks the lab, provisions the SOC credentials once and passes the emulated ACL's id:
+  #   lab/cloud/build_collector.sh && lab/cloud/start_collector.sh
+  # It reads the flow-log objects the shipper PUT into the emulated bucket, scores them with the
+  # signed cloud model, sends alerts to the lab SOC as the sensor "cloud" (mutual TLS, port 8444)
+  # and adds DENY /32 entries to the EMULATED network ACL of the target VPC. Those entries are
+  # only recorded by Moto: they stop no packets (the lab sensor does the real blocking).
+  # The collector sends ALERTS only to the SOC: the SOC never shows the NACL deny entries or block
+  # events (they are in the collector's log and in the emulated ACL). Benign traffic from the
+  # attacker's address will raise false alerts (the cloud model has 8.5 to 17 % false positives and
+  # the alert threshold is 0.5).
+
+  collector-net:
+    # Holds the collector's namespace (netguard_collector.sh): two legs, no default route,
+    # outbound only TCP 4566 to Moto and TCP 8444 to the SOC, replies only inbound, no forwarding
+    # between the legs. The cloud_net leg is already allowed by moto-net's rule (10.10.4.0/24);
+    # the mgmt_net leg is allowed on the SOC's side by LAB_SOC_EXTRA_SENSOR_ADDRS=10.10.3.3.
+    profiles: ["collector"]
+    build:
+      context: .
+      dockerfile: Dockerfile.collector-net
+    image: idps-cloud-collector-net:latest
+    container_name: idps-collector-net
+    cap_drop: [ALL]
+    cap_add: [NET_ADMIN]
+    read_only: true
+    tmpfs:
+      - /tmp
+    pids_limit: 32
+    sysctls:
+      net.ipv4.ip_forward: "0"
+    networks:
+      cloud_net:
+        ipv4_address: 10.10.4.30
+      mgmt_net:
+        ipv4_address: 10.10.3.3
+    healthcheck:
+      test: ["CMD", "test", "-f", "/tmp/ready"]
+      interval: 2s
+      timeout: 2s
+      retries: 15
+    restart: unless-stopped
+
+  collector:
+    profiles: ["collector"]
+    image: idps-lab-collector:latest
+    container_name: idps-collector
+    network_mode: "service:collector-net"
+    # python -m idps.cloud collect --interval 60 (the image's entrypoint and default command)
+    command: ["collect", "--interval", "60"]
+    user: "65534:65534"
+    init: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    read_only: true
+    tmpfs:
+      - /tmp:size=32m
+    # pandas + xgboost are heavy: about 230 MB idle (measured), so 256m was at the edge. Objects are
+    # scored in chunks of 2,000 rows with a cap of IDPS_CLOUD_MAX_ROWS per object (lab/cloud/README.md
+    # has the measurements). memswap_limit equal to mem_limit = no swap (the Docker VM's swap is scarce).
+    mem_limit: 512m
+    memswap_limit: 512m
+    cpus: 0.5
+    pids_limit: 64
+    environment:
+      # The emulated AWS only: fake keys, endpoint pinned to Moto. lab/cloud/guard.py (baked into
+      # the image, unchanged) runs at start and every 5 minutes; if it refuses, the collector exits.
+      AWS_ACCESS_KEY_ID: test
+      AWS_SECRET_ACCESS_KEY: test
+      AWS_REGION: eu-west-1
+      AWS_DEFAULT_REGION: eu-west-1
+      AWS_ENDPOINT_URL: http://10.10.4.10:4566
+      AWS_CONFIG_FILE: /dev/null
+      AWS_SHARED_CREDENTIALS_FILE: /dev/null
+      AWS_EC2_METADATA_DISABLED: "true"
+      IDPS_EMULATOR_ACCOUNT: "000000000000"
+      IDPS_CLOUD_EMULATOR: "true"
+      IDPS_CLOUD_BUCKET: idps-fyp-flowlogs-000000000000
+      IDPS_CLOUD_PREFIX: AWSLogs/000000000000/vpcflowlogs/eu-west-1/
+      IDPS_CLOUD_REGION: eu-west-1
+      # The emulated network ACL of the target VPC: `lab/cloud/tf.sh output -raw target_nacl_id`
+      # (start_collector.sh passes it). Blank: the collector refuses to start (real blocking needs it).
+      IDPS_CLOUD_NACL_ID: ${LAB_CLOUD_NACL_ID:-}
+      IDPS_CLOUD_STATE_DIR: /var/lib/collector
+      IDPS_CLOUD_ALIVE_FILE: /tmp/alive
+      IDPS_CLOUD_MODEL: /opt/idps/cloud-model/cloud_xgboost.joblib
+      IDPS_MODEL_PUBLIC_KEY: /opt/idps/cloud-keys/model-signing.pub   # a missing/invalid .sig = no start
+      # The emulator delivers an object seconds after its window; the real default is 300 s.
+      IDPS_CLOUD_SETTLE_SECONDS: ${LAB_CLOUD_SETTLE_SECONDS:-30}
+      IDPS_CLOUD_LOOKBACK_HOURS: "1"
+      # Rows scored per flow-log object; the excess is skipped and counted (log line `rows_skipped`).
+      # The exporter's live cap is 50,000 records per window; set 0 for no cap.
+      IDPS_CLOUD_MAX_ROWS: ${LAB_CLOUD_MAX_ROWS:-20000}
+      # Exit (so `restart: on-failure` joins the new namespace) if collector-net was restarted
+      # and this process holds a dead namespace with only lo.
+      IDPS_CLOUD_REQUIRE_NETWORK: "true"
+      IDPS_CLOUD_MIN_FLOWS: ${LAB_CLOUD_MIN_FLOWS:-5}
+      IDPS_CLOUD_MIN_ALERT_CONFIDENCE: ${LAB_CLOUD_MIN_ALERT_CONFIDENCE:-0.5}
+      # The lab SOC as the sensor "cloud": mutual TLS on 8444, verified against the SOC's CA.
+      IDPS_SOC_URL: https://10.10.3.10:8444
+      IDPS_SOC_CA_FILE: /run/collector-secrets/soc-ca.pem
+      IDPS_SOC_CLIENT_CERT: /run/collector-secrets/client.pem
+      IDPS_SOC_CLIENT_KEY: /run/collector-secrets/client.key
+      IDPS_SOC_SENSOR_TOKEN_FILE: /run/collector-secrets/sensor_token
+      # Response engine: deny entries are really created in the EMULATED ACL (dry-run off).
+      # Never blocked: the lab gateway and sensor (10.10.1.1/.2), the victim network (a flow's
+      # source can be a victim's reply), mgmt_net (SOC, sensor, collector) and cloud_net. The
+      # attacker 10.10.1.10 is not on the list and the code does not refuse private addresses,
+      # so it can be denied. Dry-run off with an empty allowlist is refused by the settings.
+      IDPS_DRY_RUN: ${LAB_CLOUD_DRY_RUN:-false}
+      IDPS_ALLOWLIST: ${LAB_CLOUD_ALLOWLIST:-10.10.1.1,10.10.1.2,10.10.2.0/24,10.10.3.0/24,10.10.4.0/24}
+      IDPS_CONFIDENCE_THRESHOLD: ${LAB_CLOUD_CONFIDENCE:-0.9}
+      IDPS_BLOCK_TTL_SECONDS: ${LAB_CLOUD_BLOCK_TTL:-300}
+    volumes:
+      - collector_state:/var/lib/collector
+      - collector_secrets:/run/collector-secrets:ro
+    depends_on:
+      collector-net:
+        condition: service_healthy
+      moto:
+        condition: service_healthy
+    healthcheck:
+      # /tmp/alive is touched after every cycle that did not fail (a cycle is 60 s plus the work).
+      test: ["CMD", "python", "-c", "import os,sys,time; sys.exit(0 if time.time()-os.stat('/tmp/alive').st_mtime < 180 else 1)"]
+      interval: 20s
+      timeout: 5s
+      retries: 3
+      start_period: 120s
+    # on-failure: a guard refusal, a bad model signature or a bucket error ends the process with
+    # a message and Docker retries with a growing delay.
+    restart: on-failure

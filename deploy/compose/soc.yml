@@ -1,0 +1,157 @@
+# The SOC host: PostgreSQL, the SOC API, and the proxy that serves the dashboard.
+# Run through deploy/install.sh (it writes deploy/.env and deploy/secrets/*), e.g.
+#   docker compose --env-file deploy/.env -f deploy/compose/soc.yml -p idps up -d
+name: ${IDPS_PROJECT:-idps}
+
+services:
+  db:
+    # install.sh pulls this image when it is missing (offline: docker load it first)
+    image: ${IDPS_DB_IMAGE:-postgres:16-alpine}
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: idps
+      POSTGRES_USER: idps
+      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
+    secrets:
+      - db_password
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    # Not published: only the soc service reaches it, on this project's network.
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U idps -d idps"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+    deploy:
+      resources:
+        limits:
+          memory: 1g
+
+  soc:
+    image: idps-soc:${IDPS_TAG:?run deploy/install.sh (it writes deploy/.env)}
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    # Starts as root only to read the secret files; the entrypoint then runs the API as uid 10001.
+    user: "0:0"
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop: [ALL]
+    cap_add: [SETUID, SETGID, DAC_READ_SEARCH]
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      # Mutual TLS on the sensor port is required: sensor endpoints on the main port are refused.
+      IDPS_SOC_SENSOR_MTLS_REQUIRED: ${IDPS_SOC_SENSOR_MTLS_REQUIRED:-true}
+      IDPS_SOC_PUBLIC_URL: ${IDPS_PUBLIC_URL:-}
+      IDPS_SOC_AUTO_MIGRATE: ${IDPS_SOC_AUTO_MIGRATE:-true}
+      # Only the proxy (fixed address, below) may set the client address with X-Forwarded-For.
+      IDPS_FORWARDED_ALLOW_IPS: ${IDPS_PROXY_IP:-172.28.77.200}
+    # More settings (retention, block allowlist, ...): IDPS_SOC_* lines in deploy/soc.env (not for
+    # secrets: see docs/deploy.md, "Integration secrets").
+    env_file:
+      - path: ../soc.env
+        required: false
+    secrets:
+      - jwt_secret
+      - mfa_key
+      - db_password
+    volumes:
+      # Read-only here: the CA keys can only be written by `install.sh` (the soc-admin service).
+      - pki:/var/lib/idps-pki:ro
+    ports:
+      # The sensor port, with the SOC's own server certificate and a required client certificate.
+      # The main port 8000 is NOT published: only the proxy reaches it.
+      - "${IDPS_SENSOR_BIND:-0.0.0.0}:${IDPS_SENSOR_PORT:-8444}:8444"
+    expose:
+      - "8000"
+    deploy:
+      resources:
+        limits:
+          memory: 1g
+
+  # One-off commands (install.sh: certificates, admin user, sensors, backups, migrations).
+  # Never started by `up`.
+  soc-admin:
+    image: idps-soc:${IDPS_TAG:?run deploy/install.sh (it writes deploy/.env)}
+    profiles: [tools]
+    user: "0:0"
+    read_only: true
+    tmpfs:
+      - /tmp   # the first admin's password passes through here, never the container's disk
+    cap_drop: [ALL]
+    cap_add: [SETUID, SETGID, DAC_READ_SEARCH]
+    security_opt:
+      - no-new-privileges:true
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file:
+      - path: ../soc.env
+        required: false
+    secrets:
+      - jwt_secret
+      - mfa_key
+      - db_password
+    volumes:
+      - pki:/var/lib/idps-pki
+      - cakeys:/var/lib/idps-cakeys   # the CA private keys: this service only, never the API
+      - backups:/var/lib/idps-backups
+
+  proxy:
+    image: idps-proxy:${IDPS_TAG:?run deploy/install.sh (it writes deploy/.env)}
+    restart: unless-stopped
+    depends_on:
+      soc:
+        condition: service_healthy
+    environment:
+      IDPS_SITE: ${IDPS_SITE:?run deploy/install.sh (it writes deploy/.env)}
+      IDPS_TLS_MODE: ${IDPS_TLS_MODE:-internal}
+      IDPS_REDIR_PORT: ${IDPS_REDIR_PORT:-}
+    ports:
+      - "${IDPS_HTTP_PORT:-80}:80"
+      - "${IDPS_HTTPS_PORT:-443}:443"
+    networks:
+      default:
+        ipv4_address: ${IDPS_PROXY_IP:-172.28.77.200}
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop: [ALL]
+    cap_add: [NET_BIND_SERVICE]
+    security_opt:
+      - no-new-privileges:true
+    deploy:
+      resources:
+        limits:
+          memory: 256m
+
+secrets:
+  db_password:
+    file: ../secrets/db_password
+  jwt_secret:
+    file: ../secrets/jwt_secret
+  mfa_key:
+    file: ../secrets/mfa_key
+
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: ${IDPS_SUBNET:-172.28.77.0/24}
+          # other containers get addresses from this lower part, so the proxy's fixed address
+          # (outside it) is always free
+          ip_range: ${IDPS_IP_RANGE:-172.28.77.0/25}
+
+volumes:
+  pgdata:
+  pki:
+  cakeys:
+  backups:
+  caddy_data:
+  caddy_config:

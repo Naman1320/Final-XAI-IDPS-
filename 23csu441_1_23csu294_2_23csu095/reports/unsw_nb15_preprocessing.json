@@ -1,0 +1,1788 @@
+{
+  "categorical_columns": [
+    "proto",
+    "state",
+    "service"
+  ],
+  "categorical_encoding": {
+    "categories": {
+      "proto": {
+        "3pc": 22,
+        "any": 7,
+        "arp": 4,
+        "bbn-rcc": 23,
+        "chaos": 24,
+        "emcon": 17,
+        "ggp": 25,
+        "gre": 10,
+        "hmp": 26,
+        "icmp": 9,
+        "idpr-cmtp": 27,
+        "ipnip": 28,
+        "ipv6": 14,
+        "kryptolan": 29,
+        "leaf-1": 30,
+        "mobile": 15,
+        "nvp": 18,
+        "ospf": 5,
+        "pim": 11,
+        "rsvp": 8,
+        "sctp": 6,
+        "secure-vmtp": 20,
+        "sep": 16,
+        "snp": 19,
+        "sun-nd": 12,
+        "swipe": 13,
+        "tcp": 1,
+        "udp": 2,
+        "unas": 3,
+        "vmtp": 21
+      },
+      "service": {
+        "-": 1,
+        "dhcp": 11,
+        "dns": 2,
+        "ftp": 6,
+        "ftp-data": 4,
+        "http": 3,
+        "irc": 12,
+        "pop3": 8,
+        "radius": 13,
+        "smtp": 5,
+        "snmp": 10,
+        "ssh": 7,
+        "ssl": 9
+      },
+      "state": {
+        "ACC": 10,
+        "CLO": 6,
+        "CON": 2,
+        "ECO": 7,
+        "ECR": 11,
+        "FIN": 1,
+        "INT": 3,
+        "MAS": 12,
+        "PAR": 9,
+        "REQ": 4,
+        "RST": 5,
+        "TXD": 13,
+        "URH": 8,
+        "no": 14
+      }
+    },
+    "fitted_on_rows": 329222,
+    "max_categories_per_column": 30,
+    "other_code": 0,
+    "scheme": "ordinal code by training-set frequency; 0 = other / unseen in training",
+    "share_other_by_split": {
+      "test": {
+        "proto": 0.006178024657905433,
+        "service": 0.0,
+        "state": 0.0
+      },
+      "train": {
+        "proto": 0.008942294257370406,
+        "service": 0.0,
+        "state": 0.0
+      },
+      "validation": {
+        "proto": 0.006423415667836567,
+        "service": 0.0,
+        "state": 0.0
+      }
+    },
+    "values_coded_other_by_split": {
+      "test": {
+        "proto": [
+          "a/n",
+          "aes-sp3-d",
+          "argus",
+          "aris",
+          "ax.25",
+          "bna",
+          "br-sat-mon",
+          "cbt",
+          "cftp",
+          "compaq-peer",
+          "cphb",
+          "cpnx",
+          "crtp",
+          "crudp",
+          "dcn",
+          "ddp",
+          "ddx",
+          "dgp",
+          "egp",
+          "eigrp",
+          "encap",
+          "etherip",
+          "fc",
+          "fire",
+          "gmtp",
+          "i-nlsp",
+          "iatp",
+          "ib",
+          "idpr",
+          "idrp",
+          "ifmp",
+          "igmp",
+          "igp",
+          "il",
+          "ip",
+          "ipcomp",
+          "ipcv",
+          "ipip",
+          "iplt",
+          "ippc",
+          "ipv6-frag",
+          "ipv6-no",
+          "ipv6-opts",
+          "ipv6-route",
+          "ipx-n-ip",
+          "irtp",
+          "isis",
+          "iso-ip",
+          "iso-tp4",
+          "l2tp",
+          "larp",
+          "leaf-2",
+          "merit-inp",
+          "mfe-nsp",
+          "mhrp",
+          "micp",
+          "mtp",
+          "mux",
+          "narp",
+          "netblt",
+          "nsfnet-igp",
+          "pgm",
+          "pipe",
+          "pnni",
+          "pri-enc",
+          "prm",
+          "ptp",
+          "pup",
+          "pvp",
+          "qnx",
+          "rdp",
+          "rvd",
+          "sat-expak",
+          "sat-mon",
+          "sccopmce",
+          "scps",
+          "sdrp",
+          "skip",
+          "sm",
+          "smp",
+          "sprite-rpc",
+          "sps",
+          "srp",
+          "st2",
+          "stp",
+          "tcf",
+          "tlsp",
+          "tp++",
+          "trunk-1",
+          "trunk-2",
+          "ttp",
+          "uti",
+          "vines",
+          "visa",
+          "vrrp",
+          "wb-expak",
+          "wb-mon",
+          "wsn",
+          "xnet",
+          "xns-idp",
+          "xtp",
+          "zero"
+        ],
+        "service": [],
+        "state": []
+      },
+      "validation": {
+        "proto": [
+          "a/n",
+          "aes-sp3-d",
+          "argus",
+          "aris",
+          "ax.25",
+          "bna",
+          "br-sat-mon",
+          "cbt",
+          "cftp",
+          "compaq-peer",
+          "cphb",
+          "cpnx",
+          "crtp",
+          "crudp",
+          "dcn",
+          "ddp",
+          "ddx",
+          "dgp",
+          "egp",
+          "eigrp",
+          "encap",
+          "etherip",
+          "fc",
+          "fire",
+          "gmtp",
+          "i-nlsp",
+          "iatp",
+          "ib",
+          "idpr",
+          "idrp",
+          "ifmp",
+          "igmp",
+          "igp",
+          "il",
+          "ip",
+          "ipcomp",
+          "ipcv",
+          "ipip",
+          "iplt",
+          "ippc",
+          "ipv6-frag",
+          "ipv6-no",
+          "ipv6-opts",
+          "ipv6-route",
+          "ipx-n-ip",
+          "irtp",
+          "isis",
+          "iso-ip",
+          "iso-tp4",
+          "l2tp",
+          "larp",
+          "leaf-2",
+          "merit-inp",
+          "mfe-nsp",
+          "mhrp",
+          "micp",
+          "mtp",
+          "mux",
+          "narp",
+          "netblt",
+          "nsfnet-igp",
+          "pgm",
+          "pipe",
+          "pnni",
+          "pri-enc",
+          "prm",
+          "ptp",
+          "pup",
+          "pvp",
+          "qnx",
+          "rdp",
+          "rvd",
+          "sat-expak",
+          "sat-mon",
+          "sccopmce",
+          "scps",
+          "sdrp",
+          "skip",
+          "sm",
+          "smp",
+          "sprite-rpc",
+          "sps",
+          "srp",
+          "st2",
+          "stp",
+          "tcf",
+          "tlsp",
+          "tp++",
+          "trunk-1",
+          "trunk-2",
+          "ttp",
+          "uti",
+          "vines",
+          "visa",
+          "vrrp",
+          "wb-expak",
+          "wb-mon",
+          "wsn",
+          "xnet",
+          "xns-idp",
+          "xtp",
+          "zero"
+        ],
+        "service": [],
+        "state": []
+      }
+    }
+  },
+  "class_counts_by_step": {
+    "after_duplicates": {
+      "test": {
+        "Analysis": 447,
+        "BENIGN": 91271,
+        "Backdoor": 379,
+        "DoS": 1264,
+        "Exploits": 6129,
+        "Fuzzers": 4329,
+        "Generic": 3915,
+        "Reconnaissance": 2654,
+        "Shellcode": 295,
+        "Worms": 32
+      },
+      "train": {
+        "Analysis": 1111,
+        "BENIGN": 275099,
+        "Backdoor": 1143,
+        "DoS": 3175,
+        "Exploits": 15514,
+        "Fuzzers": 12610,
+        "Generic": 11774,
+        "Reconnaissance": 7797,
+        "Shellcode": 896,
+        "Worms": 103
+      },
+      "validation": {
+        "Analysis": 328,
+        "BENIGN": 88311,
+        "Backdoor": 364,
+        "DoS": 905,
+        "Exploits": 5108,
+        "Fuzzers": 4237,
+        "Generic": 3579,
+        "Reconnaissance": 2558,
+        "Shellcode": 286,
+        "Worms": 31
+      }
+    },
+    "after_file_overlap": {
+      "Analysis": 2677,
+      "BENIGN": 2218761,
+      "Backdoor": 2329,
+      "DoS": 16353,
+      "Exploits": 44525,
+      "Fuzzers": 24246,
+      "Generic": 215481,
+      "Reconnaissance": 13987,
+      "Shellcode": 1511,
+      "Worms": 174
+    },
+    "after_gap_before_duplicates": {
+      "test": {
+        "Analysis": 515,
+        "BENIGN": 98565,
+        "Backdoor": 456,
+        "DoS": 3215,
+        "Exploits": 8700,
+        "Fuzzers": 4699,
+        "Generic": 30436,
+        "Reconnaissance": 2756,
+        "Shellcode": 295,
+        "Worms": 32
+      },
+      "train": {
+        "Analysis": 1499,
+        "BENIGN": 298157,
+        "Backdoor": 1380,
+        "DoS": 9118,
+        "Exploits": 25218,
+        "Fuzzers": 14112,
+        "Generic": 92424,
+        "Reconnaissance": 8338,
+        "Shellcode": 896,
+        "Worms": 104
+      },
+      "validation": {
+        "Analysis": 404,
+        "BENIGN": 96536,
+        "Backdoor": 440,
+        "DoS": 2414,
+        "Exploits": 8015,
+        "Fuzzers": 4655,
+        "Generic": 28174,
+        "Reconnaissance": 2641,
+        "Shellcode": 286,
+        "Worms": 33
+      }
+    },
+    "finite": {
+      "Analysis": 2677,
+      "BENIGN": 500000,
+      "Backdoor": 2329,
+      "DoS": 16353,
+      "Exploits": 44525,
+      "Fuzzers": 24246,
+      "Generic": 157522,
+      "Reconnaissance": 13987,
+      "Shellcode": 1511,
+      "Worms": 174
+    },
+    "raw": {
+      "Analysis": 2677,
+      "BENIGN": 2218764,
+      "Backdoor": 2329,
+      "DoS": 16353,
+      "Exploits": 44525,
+      "Fuzzers": 24246,
+      "Generic": 215481,
+      "Reconnaissance": 13987,
+      "Shellcode": 1511,
+      "Worms": 174
+    },
+    "sampled": {
+      "Analysis": 2677,
+      "BENIGN": 500000,
+      "Backdoor": 2329,
+      "DoS": 16353,
+      "Exploits": 44525,
+      "Fuzzers": 24246,
+      "Generic": 157522,
+      "Reconnaissance": 13987,
+      "Shellcode": 1511,
+      "Worms": 174
+    },
+    "valid_timestamp": {
+      "Analysis": 2677,
+      "BENIGN": 2218761,
+      "Backdoor": 2329,
+      "DoS": 16353,
+      "Exploits": 44525,
+      "Fuzzers": 24246,
+      "Generic": 215481,
+      "Reconnaissance": 13987,
+      "Shellcode": 1511,
+      "Worms": 174
+    }
+  },
+  "classes_missing_from_train": [],
+  "cross_test_with_cic": "not done: CICFlowMeter and Argus/Bro features share no columns, and the attack taxonomies differ; no mapping is invented",
+  "dataset": "UNSW-NB15",
+  "dropped_columns": [
+    "srcip",
+    "dstip",
+    "Stime (split only)",
+    "Ltime",
+    "attack_cat (label)",
+    "Label (check)"
+  ],
+  "features_with_port": [
+    "sport",
+    "dsport",
+    "proto",
+    "state",
+    "dur",
+    "sbytes",
+    "dbytes",
+    "sttl",
+    "dttl",
+    "sloss",
+    "dloss",
+    "service",
+    "sload",
+    "dload",
+    "spkts",
+    "dpkts",
+    "swin",
+    "dwin",
+    "stcpb",
+    "dtcpb",
+    "smeansz",
+    "dmeansz",
+    "trans_depth",
+    "res_bdy_len",
+    "sjit",
+    "djit",
+    "sintpkt",
+    "dintpkt",
+    "tcprtt",
+    "synack",
+    "ackdat",
+    "is_sm_ips_ports",
+    "ct_state_ttl",
+    "ct_flw_http_mthd",
+    "is_ftp_login",
+    "ct_ftp_cmd",
+    "ct_srv_src",
+    "ct_srv_dst",
+    "ct_dst_ltm",
+    "ct_src_ltm",
+    "ct_src_dport_ltm",
+    "ct_dst_sport_ltm",
+    "ct_dst_src_ltm"
+  ],
+  "features_without_port": [
+    "proto",
+    "state",
+    "dur",
+    "sbytes",
+    "dbytes",
+    "sttl",
+    "dttl",
+    "sloss",
+    "dloss",
+    "service",
+    "sload",
+    "dload",
+    "spkts",
+    "dpkts",
+    "swin",
+    "dwin",
+    "stcpb",
+    "dtcpb",
+    "smeansz",
+    "dmeansz",
+    "trans_depth",
+    "res_bdy_len",
+    "sjit",
+    "djit",
+    "sintpkt",
+    "dintpkt",
+    "tcprtt",
+    "synack",
+    "ackdat",
+    "is_sm_ips_ports",
+    "ct_state_ttl",
+    "ct_flw_http_mthd",
+    "is_ftp_login",
+    "ct_ftp_cmd",
+    "ct_srv_src",
+    "ct_srv_dst",
+    "ct_dst_ltm",
+    "ct_src_ltm",
+    "ct_src_dport_ltm",
+    "ct_dst_sport_ltm",
+    "ct_dst_src_ltm"
+  ],
+  "gap_loss_share_by_label": {
+    "Analysis": 0.09675009338812103,
+    "BENIGN": 0.013484,
+    "Backdoor": 0.022756547874624302,
+    "DoS": 0.09820827982633155,
+    "Exploits": 0.058214486243683326,
+    "Fuzzers": 0.03217025488740411,
+    "Generic": 0.04118789756351494,
+    "Reconnaissance": 0.018016729820547653,
+    "Shellcode": 0.022501654533421574,
+    "Worms": 0.028735632183908046
+  },
+  "label_mapping": [
+    {
+      "class": "BENIGN",
+      "unsw_attack_cat": "Normal"
+    },
+    {
+      "class": "Analysis",
+      "unsw_attack_cat": "Analysis"
+    },
+    {
+      "class": "Backdoor",
+      "unsw_attack_cat": "Backdoor"
+    },
+    {
+      "class": "Backdoor",
+      "unsw_attack_cat": "Backdoors"
+    },
+    {
+      "class": "DoS",
+      "unsw_attack_cat": "DoS"
+    },
+    {
+      "class": "Exploits",
+      "unsw_attack_cat": "Exploits"
+    },
+    {
+      "class": "Fuzzers",
+      "unsw_attack_cat": "Fuzzers"
+    },
+    {
+      "class": "Generic",
+      "unsw_attack_cat": "Generic"
+    },
+    {
+      "class": "Reconnaissance",
+      "unsw_attack_cat": "Reconnaissance"
+    },
+    {
+      "class": "Shellcode",
+      "unsw_attack_cat": "Shellcode"
+    },
+    {
+      "class": "Worms",
+      "unsw_attack_cat": "Worms"
+    }
+  ],
+  "load": {
+    "attack_cat_raw_values": {
+      "' Fuzzers '": 19195,
+      "' Fuzzers'": 5051,
+      "' Reconnaissance '": 12228,
+      "' Shellcode '": 1288,
+      "''": 2218764,
+      "'Analysis'": 2677,
+      "'Backdoor'": 1795,
+      "'Backdoors'": 534,
+      "'DoS'": 16353,
+      "'Exploits'": 44525,
+      "'Generic'": 215481,
+      "'Reconnaissance'": 1759,
+      "'Shellcode'": 223,
+      "'Worms'": 174
+    },
+    "caps": {
+      "attack": 150000,
+      "benign": 250000
+    },
+    "caps_scope": "per (capture session, attack_cat), before the unparseable-number drop",
+    "coercions": {
+      "blank_to_zero": {
+        "ct_flw_http_mthd": 456168,
+        "ct_ftp_cmd": 484653,
+        "is_ftp_login": 484653
+      },
+      "dash_or_blank_port": {
+        "dsport": 2,
+        "sport": 1
+      },
+      "flag_clipped": {
+        "is_ftp_login": 58
+      },
+      "hex_port": {
+        "dsport": 60,
+        "sport": 1
+      },
+      "nonfinite_by_column": {},
+      "rule": "blank ct_flw_http_mthd / is_ftp_login / ct_ftp_cmd -> 0; is_ftp_login > 1 -> 1; hex sport/dsport -> its value; '-' or blank port -> -1; any other unparseable, infinite or float32-overflowing cell drops the row",
+      "scope": "the sampled rows only; odd_values_all_rows counts every row read"
+    },
+    "dataset": "UNSW-NB15 (UNSW-NB15_1..4.csv, Moustafa and Slay, MilCIS 2015)",
+    "feature_names": {
+      "columns": [
+        {
+          "file_name": "srcip",
+          "name": "srcip",
+          "renamed": false,
+          "type": "nominal"
+        },
+        {
+          "file_name": "sport",
+          "name": "sport",
+          "renamed": false,
+          "type": "integer"
+        },
+        {
+          "file_name": "dstip",
+          "name": "dstip",
+          "renamed": false,
+          "type": "nominal"
+        },
+        {
+          "file_name": "dsport",
+          "name": "dsport",
+          "renamed": false,
+          "type": "integer"
+        },
+        {
+          "file_name": "proto",
+          "name": "proto",
+          "renamed": false,
+          "type": "nominal"
+        },
+        {
+          "file_name": "state",
+          "name": "state",
+          "renamed": false,
+          "type": "nominal"
+        },
+        {
+          "file_name": "dur",
+          "name": "dur",
+          "renamed": false,
+          "type": "Float"
+        },
+        {
+          "file_name": "sbytes",
+          "name": "sbytes",
+          "renamed": false,
+          "type": "Integer"
+        },
+        {
+          "file_name": "dbytes",
+          "name": "dbytes",
+          "renamed": false,
+          "type": "Integer"
+        },
+        {
+          "file_name": "sttl",
+          "name": "sttl",
+          "renamed": false,
+          "type": "Integer"
+        },
+        {
+          "file_name": "dttl",
+          "name": "dttl",
+          "renamed": false,
+          "type": "Integer"
+        },
+        {
+          "file_name": "sloss",
+          "name": "sloss",
+          "renamed": false,
+          "type": "Integer"
+        },
+        {
+          "file_name": "dloss",
+          "name": "dloss",
+          "renamed": false,
+          "type": "Integer"
+        },
+        {
+          "file_name": "service",
+          "name": "service",
+          "renamed": false,
+          "type": "nominal"
+        },
+        {
+          "file_name": "Sload",
+          "name": "sload",
+          "renamed": true,
+          "type": "Float"
+        },
+        {
+          "file_name": "Dload",
+          "name": "dload",
+          "renamed": true,
+          "type": "Float"
+        },
+        {
+          "file_name": "Spkts",
+          "name": "spkts",
+          "renamed": true,
+          "type": "integer"
+        },
+        {
+          "file_name": "Dpkts",
+          "name": "dpkts",
+          "renamed": true,
+          "type": "integer"
+        },
+        {
+          "file_name": "swin",
+          "name": "swin",
+          "renamed": false,
+          "type": "integer"
+        },
+        {
+          "file_name": "dwin",
+          "name": "dwin",
+          "renamed": false,
+          "type": "integer"
+        },
+        {
+          "file_name": "stcpb",
+          "name": "stcpb",
+          "renamed": false,
+          "type": "integer"
+        },
+        {
+          "file_name": "dtcpb",
+          "name": "dtcpb",
+          "renamed": false,
+          "type": "integer"
+        },
+        {
+          "file_name": "smeansz",
+          "name": "smeansz",
+          "renamed": false,
+          "type": "integer"
+        },
+        {
+          "file_name": "dmeansz",
+          "name": "dmeansz",
+          "renamed": false,
+          "type": "integer"
+        },
+        {
+          "file_name": "trans_depth",
+          "name": "trans_depth",
+          "renamed": false,
+          "type": "integer"
+        },
+        {
+          "file_name": "res_bdy_len",
+          "name": "res_bdy_len",
+          "renamed": false,
+          "type": "integer"
+        },
+        {
+          "file_name": "Sjit",
+          "name": "sjit",
+          "renamed": true,
+          "type": "Float"
+        },
+        {
+          "file_name": "Djit",
+          "name": "djit",
+          "renamed": true,
+          "type": "Float"
+        },
+        {
+          "file_name": "Stime",
+          "name": "stime",
+          "renamed": true,
+          "type": "Timestamp"
+        },
+        {
+          "file_name": "Ltime",
+          "name": "ltime",
+          "renamed": true,
+          "type": "Timestamp"
+        },
+        {
+          "file_name": "Sintpkt",
+          "name": "sintpkt",
+          "renamed": true,
+          "type": "Float"
+        },
+        {
+          "file_name": "Dintpkt",
+          "name": "dintpkt",
+          "renamed": true,
+          "type": "Float"
+        },
+        {
+          "file_name": "tcprtt",
+          "name": "tcprtt",
+          "renamed": false,
+          "type": "Float"
+        },
+        {
+          "file_name": "synack",
+          "name": "synack",
+          "renamed": false,
+          "type": "Float"
+        },
+        {
+          "file_name": "ackdat",
+          "name": "ackdat",
+          "renamed": false,
+          "type": "Float"
+        },
+        {
+          "file_name": "is_sm_ips_ports",
+          "name": "is_sm_ips_ports",
+          "renamed": false,
+          "type": "Binary"
+        },
+        {
+          "file_name": "ct_state_ttl",
+          "name": "ct_state_ttl",
+          "renamed": false,
+          "type": "Integer"
+        },
+        {
+          "file_name": "ct_flw_http_mthd",
+          "name": "ct_flw_http_mthd",
+          "renamed": false,
+          "type": "Integer"
+        },
+        {
+          "file_name": "is_ftp_login",
+          "name": "is_ftp_login",
+          "renamed": false,
+          "type": "Binary"
+        },
+        {
+          "file_name": "ct_ftp_cmd",
+          "name": "ct_ftp_cmd",
+          "renamed": false,
+          "type": "integer"
+        },
+        {
+          "file_name": "ct_srv_src",
+          "name": "ct_srv_src",
+          "renamed": false,
+          "type": "integer"
+        },
+        {
+          "file_name": "ct_srv_dst",
+          "name": "ct_srv_dst",
+          "renamed": false,
+          "type": "integer"
+        },
+        {
+          "file_name": "ct_dst_ltm",
+          "name": "ct_dst_ltm",
+          "renamed": false,
+          "type": "integer"
+        },
+        {
+          "file_name": "ct_src_ ltm",
+          "name": "ct_src_ltm",
+          "renamed": true,
+          "type": "integer"
+        },
+        {
+          "file_name": "ct_src_dport_ltm",
+          "name": "ct_src_dport_ltm",
+          "renamed": false,
+          "type": "integer"
+        },
+        {
+          "file_name": "ct_dst_sport_ltm",
+          "name": "ct_dst_sport_ltm",
+          "renamed": false,
+          "type": "integer"
+        },
+        {
+          "file_name": "ct_dst_src_ltm",
+          "name": "ct_dst_src_ltm",
+          "renamed": false,
+          "type": "integer"
+        },
+        {
+          "file_name": "attack_cat",
+          "name": "attack_cat",
+          "renamed": false,
+          "type": "nominal"
+        },
+        {
+          "file_name": "Label",
+          "name": "label_binary",
+          "renamed": true,
+          "type": "binary"
+        }
+      ],
+      "file": "NUSW-NB15_features.csv",
+      "n_columns": 49
+    },
+    "file_boundary_overlap": [
+      {
+        "file": "UNSW-NB15_2.csv",
+        "repeats_last_row_of": "UNSW-NB15_1.csv"
+      },
+      {
+        "file": "UNSW-NB15_3.csv",
+        "repeats_last_row_of": "UNSW-NB15_2.csv"
+      },
+      {
+        "file": "UNSW-NB15_4.csv",
+        "repeats_last_row_of": "UNSW-NB15_3.csv"
+      }
+    ],
+    "file_boundary_overlap_rows": 3,
+    "files": [
+      {
+        "bad_label": 0,
+        "bad_timestamp": 0,
+        "bom": true,
+        "file": "UNSW-NB15_1.csv",
+        "flows_longer_than_120s": 24,
+        "header_rows": 0,
+        "label_contradictions": 0,
+        "ltime_before_stime": 0,
+        "nonfinite_dropped": 0,
+        "rows_in_checksums_json": 700001,
+        "rows_kept": 181321,
+        "rows_read": 700001,
+        "rows_selected": 181321,
+        "sha256_ok": true
+      },
+      {
+        "bad_label": 0,
+        "bad_timestamp": 0,
+        "bom": false,
+        "file": "UNSW-NB15_2.csv",
+        "flows_longer_than_120s": 0,
+        "header_rows": 0,
+        "label_contradictions": 0,
+        "ltime_before_stime": 0,
+        "nonfinite_dropped": 0,
+        "rows_in_checksums_json": 700001,
+        "rows_kept": 192221,
+        "rows_read": 700001,
+        "rows_selected": 192221,
+        "sha256_ok": true
+      },
+      {
+        "bad_label": 0,
+        "bad_timestamp": 0,
+        "bom": false,
+        "file": "UNSW-NB15_3.csv",
+        "flows_longer_than_120s": 0,
+        "header_rows": 0,
+        "label_contradictions": 0,
+        "ltime_before_stime": 0,
+        "nonfinite_dropped": 0,
+        "rows_in_checksums_json": 700001,
+        "rows_kept": 242048,
+        "rows_read": 700001,
+        "rows_selected": 242048,
+        "sha256_ok": true
+      },
+      {
+        "bad_label": 0,
+        "bad_timestamp": 0,
+        "bom": false,
+        "file": "UNSW-NB15_4.csv",
+        "flows_longer_than_120s": 0,
+        "header_rows": 0,
+        "label_contradictions": 0,
+        "ltime_before_stime": 0,
+        "nonfinite_dropped": 0,
+        "rows_in_checksums_json": 440044,
+        "rows_kept": 147734,
+        "rows_read": 440044,
+        "rows_selected": 147734,
+        "sha256_ok": true
+      }
+    ],
+    "groups": [
+      {
+        "available": 1153774,
+        "cap": 250000,
+        "label": "BENIGN",
+        "label_original": "Normal",
+        "sampled": 250000,
+        "session": 1
+      },
+      {
+        "available": 1064987,
+        "cap": 250000,
+        "label": "BENIGN",
+        "label_original": "Normal",
+        "sampled": 250000,
+        "session": 0
+      },
+      {
+        "available": 207959,
+        "cap": 150000,
+        "label": "Generic",
+        "label_original": "Generic",
+        "sampled": 150000,
+        "session": 1
+      },
+      {
+        "available": 39116,
+        "cap": 150000,
+        "label": "Exploits",
+        "label_original": "Exploits",
+        "sampled": 39116,
+        "session": 1
+      },
+      {
+        "available": 19195,
+        "cap": 150000,
+        "label": "Fuzzers",
+        "label_original": "Fuzzers",
+        "sampled": 19195,
+        "session": 1
+      },
+      {
+        "available": 15186,
+        "cap": 150000,
+        "label": "DoS",
+        "label_original": "DoS",
+        "sampled": 15186,
+        "session": 1
+      },
+      {
+        "available": 12228,
+        "cap": 150000,
+        "label": "Reconnaissance",
+        "label_original": "Reconnaissance",
+        "sampled": 12228,
+        "session": 1
+      },
+      {
+        "available": 7522,
+        "cap": 150000,
+        "label": "Generic",
+        "label_original": "Generic",
+        "sampled": 7522,
+        "session": 0
+      },
+      {
+        "available": 5409,
+        "cap": 150000,
+        "label": "Exploits",
+        "label_original": "Exploits",
+        "sampled": 5409,
+        "session": 0
+      },
+      {
+        "available": 5051,
+        "cap": 150000,
+        "label": "Fuzzers",
+        "label_original": "Fuzzers",
+        "sampled": 5051,
+        "session": 0
+      },
+      {
+        "available": 2151,
+        "cap": 150000,
+        "label": "Analysis",
+        "label_original": "Analysis",
+        "sampled": 2151,
+        "session": 1
+      },
+      {
+        "available": 1795,
+        "cap": 150000,
+        "label": "Backdoor",
+        "label_original": "Backdoor",
+        "sampled": 1795,
+        "session": 1
+      },
+      {
+        "available": 1759,
+        "cap": 150000,
+        "label": "Reconnaissance",
+        "label_original": "Reconnaissance",
+        "sampled": 1759,
+        "session": 0
+      },
+      {
+        "available": 1288,
+        "cap": 150000,
+        "label": "Shellcode",
+        "label_original": "Shellcode",
+        "sampled": 1288,
+        "session": 1
+      },
+      {
+        "available": 1167,
+        "cap": 150000,
+        "label": "DoS",
+        "label_original": "DoS",
+        "sampled": 1167,
+        "session": 0
+      },
+      {
+        "available": 534,
+        "cap": 150000,
+        "label": "Backdoor",
+        "label_original": "Backdoors",
+        "sampled": 534,
+        "session": 0
+      },
+      {
+        "available": 526,
+        "cap": 150000,
+        "label": "Analysis",
+        "label_original": "Analysis",
+        "sampled": 526,
+        "session": 0
+      },
+      {
+        "available": 223,
+        "cap": 150000,
+        "label": "Shellcode",
+        "label_original": "Shellcode",
+        "sampled": 223,
+        "session": 0
+      },
+      {
+        "available": 150,
+        "cap": 150000,
+        "label": "Worms",
+        "label_original": "Worms",
+        "sampled": 150,
+        "session": 1
+      },
+      {
+        "available": 24,
+        "cap": 150000,
+        "label": "Worms",
+        "label_original": "Worms",
+        "sampled": 24,
+        "session": 0
+      }
+    ],
+    "max_rows_per_file": null,
+    "n_features": 43,
+    "odd_values_all_rows": {
+      "ct_flw_http_mthd_blank": 1348145,
+      "ct_ftp_cmd_blank": 1429879,
+      "dsport_dash_or_blank": 7,
+      "dsport_hex": 297,
+      "dsport_unparseable": 0,
+      "is_ftp_login_blank": 1429879,
+      "is_ftp_login_over_1": 186,
+      "sport_dash_or_blank": 2,
+      "sport_hex": 6,
+      "sport_unparseable": 0
+    },
+    "rows_total": 763324,
+    "seed": 42,
+    "sessions": [
+      {
+        "first_stime": "2015-01-22T11:49:37",
+        "last_stime": "2015-01-23T00:25:24",
+        "rows": 1087202,
+        "session": 0
+      },
+      {
+        "first_stime": "2015-02-18T00:23:28",
+        "last_stime": "2015-02-18T12:21:08",
+        "rows": 1452842,
+        "session": 1
+      }
+    ],
+    "sessions_note": "capture sessions: a gap of more than 86400 s without any flow starts a new one (the day key of the split and of the caps)",
+    "steps": {
+      "after_file_overlap": {
+        "Analysis": 2677,
+        "BENIGN": 2218761,
+        "Backdoor": 2329,
+        "DoS": 16353,
+        "Exploits": 44525,
+        "Fuzzers": 24246,
+        "Generic": 215481,
+        "Reconnaissance": 13987,
+        "Shellcode": 1511,
+        "Worms": 174
+      },
+      "finite": {
+        "Analysis": 2677,
+        "BENIGN": 500000,
+        "Backdoor": 2329,
+        "DoS": 16353,
+        "Exploits": 44525,
+        "Fuzzers": 24246,
+        "Generic": 157522,
+        "Reconnaissance": 13987,
+        "Shellcode": 1511,
+        "Worms": 174
+      },
+      "raw": {
+        "Analysis": 2677,
+        "BENIGN": 2218764,
+        "Backdoor": 2329,
+        "DoS": 16353,
+        "Exploits": 44525,
+        "Fuzzers": 24246,
+        "Generic": 215481,
+        "Reconnaissance": 13987,
+        "Shellcode": 1511,
+        "Worms": 174
+      },
+      "sampled": {
+        "Analysis": 2677,
+        "BENIGN": 500000,
+        "Backdoor": 2329,
+        "DoS": 16353,
+        "Exploits": 44525,
+        "Fuzzers": 24246,
+        "Generic": 157522,
+        "Reconnaissance": 13987,
+        "Shellcode": 1511,
+        "Worms": 174
+      },
+      "valid_timestamp": {
+        "Analysis": 2677,
+        "BENIGN": 2218761,
+        "Backdoor": 2329,
+        "DoS": 16353,
+        "Exploits": 44525,
+        "Fuzzers": 24246,
+        "Generic": 215481,
+        "Reconnaissance": 13987,
+        "Shellcode": 1511,
+        "Worms": 174
+      }
+    },
+    "timestamp_note": "Stime = epoch seconds (1 s resolution), as published; start_ms = Stime x 1000 read as UTC. The rows are ordered by Ltime, not Stime."
+  },
+  "split": {
+    "allow_unseen_test_classes": true,
+    "categorical_encoding": {
+      "categories": {
+        "proto": {
+          "3pc": 22,
+          "any": 7,
+          "arp": 4,
+          "bbn-rcc": 23,
+          "chaos": 24,
+          "emcon": 17,
+          "ggp": 25,
+          "gre": 10,
+          "hmp": 26,
+          "icmp": 9,
+          "idpr-cmtp": 27,
+          "ipnip": 28,
+          "ipv6": 14,
+          "kryptolan": 29,
+          "leaf-1": 30,
+          "mobile": 15,
+          "nvp": 18,
+          "ospf": 5,
+          "pim": 11,
+          "rsvp": 8,
+          "sctp": 6,
+          "secure-vmtp": 20,
+          "sep": 16,
+          "snp": 19,
+          "sun-nd": 12,
+          "swipe": 13,
+          "tcp": 1,
+          "udp": 2,
+          "unas": 3,
+          "vmtp": 21
+        },
+        "service": {
+          "-": 1,
+          "dhcp": 11,
+          "dns": 2,
+          "ftp": 6,
+          "ftp-data": 4,
+          "http": 3,
+          "irc": 12,
+          "pop3": 8,
+          "radius": 13,
+          "smtp": 5,
+          "snmp": 10,
+          "ssh": 7,
+          "ssl": 9
+        },
+        "state": {
+          "ACC": 10,
+          "CLO": 6,
+          "CON": 2,
+          "ECO": 7,
+          "ECR": 11,
+          "FIN": 1,
+          "INT": 3,
+          "MAS": 12,
+          "PAR": 9,
+          "REQ": 4,
+          "RST": 5,
+          "TXD": 13,
+          "URH": 8,
+          "no": 14
+        }
+      },
+      "fitted_on_rows": 329222,
+      "max_categories_per_column": 30,
+      "other_code": 0,
+      "scheme": "ordinal code by training-set frequency; 0 = other / unseen in training",
+      "share_other_by_split": {
+        "test": {
+          "proto": 0.006178024657905433,
+          "service": 0.0,
+          "state": 0.0
+        },
+        "train": {
+          "proto": 0.008942294257370406,
+          "service": 0.0,
+          "state": 0.0
+        },
+        "validation": {
+          "proto": 0.006423415667836567,
+          "service": 0.0,
+          "state": 0.0
+        }
+      },
+      "values_coded_other_by_split": {
+        "test": {
+          "proto": [
+            "a/n",
+            "aes-sp3-d",
+            "argus",
+            "aris",
+            "ax.25",
+            "bna",
+            "br-sat-mon",
+            "cbt",
+            "cftp",
+            "compaq-peer",
+            "cphb",
+            "cpnx",
+            "crtp",
+            "crudp",
+            "dcn",
+            "ddp",
+            "ddx",
+            "dgp",
+            "egp",
+            "eigrp",
+            "encap",
+            "etherip",
+            "fc",
+            "fire",
+            "gmtp",
+            "i-nlsp",
+            "iatp",
+            "ib",
+            "idpr",
+            "idrp",
+            "ifmp",
+            "igmp",
+            "igp",
+            "il",
+            "ip",
+            "ipcomp",
+            "ipcv",
+            "ipip",
+            "iplt",
+            "ippc",
+            "ipv6-frag",
+            "ipv6-no",
+            "ipv6-opts",
+            "ipv6-route",
+            "ipx-n-ip",
+            "irtp",
+            "isis",
+            "iso-ip",
+            "iso-tp4",
+            "l2tp",
+            "larp",
+            "leaf-2",
+            "merit-inp",
+            "mfe-nsp",
+            "mhrp",
+            "micp",
+            "mtp",
+            "mux",
+            "narp",
+            "netblt",
+            "nsfnet-igp",
+            "pgm",
+            "pipe",
+            "pnni",
+            "pri-enc",
+            "prm",
+            "ptp",
+            "pup",
+            "pvp",
+            "qnx",
+            "rdp",
+            "rvd",
+            "sat-expak",
+            "sat-mon",
+            "sccopmce",
+            "scps",
+            "sdrp",
+            "skip",
+            "sm",
+            "smp",
+            "sprite-rpc",
+            "sps",
+            "srp",
+            "st2",
+            "stp",
+            "tcf",
+            "tlsp",
+            "tp++",
+            "trunk-1",
+            "trunk-2",
+            "ttp",
+            "uti",
+            "vines",
+            "visa",
+            "vrrp",
+            "wb-expak",
+            "wb-mon",
+            "wsn",
+            "xnet",
+            "xns-idp",
+            "xtp",
+            "zero"
+          ],
+          "service": [],
+          "state": []
+        },
+        "validation": {
+          "proto": [
+            "a/n",
+            "aes-sp3-d",
+            "argus",
+            "aris",
+            "ax.25",
+            "bna",
+            "br-sat-mon",
+            "cbt",
+            "cftp",
+            "compaq-peer",
+            "cphb",
+            "cpnx",
+            "crtp",
+            "crudp",
+            "dcn",
+            "ddp",
+            "ddx",
+            "dgp",
+            "egp",
+            "eigrp",
+            "encap",
+            "etherip",
+            "fc",
+            "fire",
+            "gmtp",
+            "i-nlsp",
+            "iatp",
+            "ib",
+            "idpr",
+            "idrp",
+            "ifmp",
+            "igmp",
+            "igp",
+            "il",
+            "ip",
+            "ipcomp",
+            "ipcv",
+            "ipip",
+            "iplt",
+            "ippc",
+            "ipv6-frag",
+            "ipv6-no",
+            "ipv6-opts",
+            "ipv6-route",
+            "ipx-n-ip",
+            "irtp",
+            "isis",
+            "iso-ip",
+            "iso-tp4",
+            "l2tp",
+            "larp",
+            "leaf-2",
+            "merit-inp",
+            "mfe-nsp",
+            "mhrp",
+            "micp",
+            "mtp",
+            "mux",
+            "narp",
+            "netblt",
+            "nsfnet-igp",
+            "pgm",
+            "pipe",
+            "pnni",
+            "pri-enc",
+            "prm",
+            "ptp",
+            "pup",
+            "pvp",
+            "qnx",
+            "rdp",
+            "rvd",
+            "sat-expak",
+            "sat-mon",
+            "sccopmce",
+            "scps",
+            "sdrp",
+            "skip",
+            "sm",
+            "smp",
+            "sprite-rpc",
+            "sps",
+            "srp",
+            "st2",
+            "stp",
+            "tcf",
+            "tlsp",
+            "tp++",
+            "trunk-1",
+            "trunk-2",
+            "ttp",
+            "uti",
+            "vines",
+            "visa",
+            "vrrp",
+            "wb-expak",
+            "wb-mon",
+            "wsn",
+            "xnet",
+            "xns-idp",
+            "xtp",
+            "zero"
+          ],
+          "service": [],
+          "state": []
+        }
+      }
+    },
+    "class_counts_before_duplicates": {
+      "test": {
+        "Analysis": 515,
+        "BENIGN": 98565,
+        "Backdoor": 456,
+        "DoS": 3215,
+        "Exploits": 8700,
+        "Fuzzers": 4699,
+        "Generic": 30436,
+        "Reconnaissance": 2756,
+        "Shellcode": 295,
+        "Worms": 32
+      },
+      "train": {
+        "Analysis": 1499,
+        "BENIGN": 298157,
+        "Backdoor": 1380,
+        "DoS": 9118,
+        "Exploits": 25218,
+        "Fuzzers": 14112,
+        "Generic": 92424,
+        "Reconnaissance": 8338,
+        "Shellcode": 896,
+        "Worms": 104
+      },
+      "validation": {
+        "Analysis": 404,
+        "BENIGN": 96536,
+        "Backdoor": 440,
+        "DoS": 2414,
+        "Exploits": 8015,
+        "Fuzzers": 4655,
+        "Generic": 28174,
+        "Reconnaissance": 2641,
+        "Shellcode": 286,
+        "Worms": 33
+      }
+    },
+    "day_key": "capture session (UNSW-NB15 has two captures, 26 days apart)",
+    "dropped_by_gap": {
+      "per_class": {
+        "Analysis": 259,
+        "BENIGN": 6742,
+        "Backdoor": 53,
+        "DoS": 1606,
+        "Exploits": 2592,
+        "Fuzzers": 780,
+        "Generic": 6488,
+        "Reconnaissance": 252,
+        "Shellcode": 34,
+        "Worms": 5
+      },
+      "total": 18811
+    },
+    "duplicates_dropped": {
+      "test": 38954,
+      "train": 122024,
+      "validation": 37891
+    },
+    "effective_gap_ms": {
+      "Analysis": 6000.0,
+      "Backdoor": 4000.0,
+      "DoS": 17000.0,
+      "Fuzzers": 76000.0,
+      "Generic": 64000.0,
+      "Worms": 23000.0
+    },
+    "gap_ms": 120000,
+    "identical_to_train": {
+      "test": {
+        "rows": 1347,
+        "share": 0.012166373120173418
+      },
+      "validation": {
+        "rows": 1599,
+        "share": 0.01512671819274031
+      }
+    },
+    "identical_to_train_note": "shared-split figure on the numeric features plus raw category ids; every variant's own train overlap (on the encoded vector it trains on, after its own deduplication) is metrics.<part>.train_overlap in that variant's report",
+    "max_drop_share": 0.1,
+    "mode": "class-time",
+    "parts": {
+      "test": {
+        "class_counts": {
+          "Analysis": 447,
+          "BENIGN": 91271,
+          "Backdoor": 379,
+          "DoS": 1264,
+          "Exploits": 6129,
+          "Fuzzers": 4329,
+          "Generic": 3915,
+          "Reconnaissance": 2654,
+          "Shellcode": 295,
+          "Worms": 32
+        },
+        "first_start": "2015-01-22T12:46:11+00:00",
+        "first_start_ms": 1421930771000,
+        "last_start": "2015-02-18T12:21:08+00:00",
+        "last_start_ms": 1424262068000,
+        "rows": 110715
+      },
+      "train": {
+        "class_counts": {
+          "Analysis": 1111,
+          "BENIGN": 275099,
+          "Backdoor": 1143,
+          "DoS": 3175,
+          "Exploits": 15514,
+          "Fuzzers": 12610,
+          "Generic": 11774,
+          "Reconnaissance": 7797,
+          "Shellcode": 896,
+          "Worms": 103
+        },
+        "first_start": "2015-01-22T11:49:37+00:00",
+        "first_start_ms": 1421927377000,
+        "last_start": "2015-02-18T07:59:30+00:00",
+        "last_start_ms": 1424246370000,
+        "rows": 329222
+      },
+      "validation": {
+        "class_counts": {
+          "Analysis": 328,
+          "BENIGN": 88311,
+          "Backdoor": 364,
+          "DoS": 905,
+          "Exploits": 5108,
+          "Fuzzers": 4237,
+          "Generic": 3579,
+          "Reconnaissance": 2558,
+          "Shellcode": 286,
+          "Worms": 31
+        },
+        "first_start": "2015-01-22T12:45:37+00:00",
+        "first_start_ms": 1421930737000,
+        "last_start": "2015-02-18T10:12:22+00:00",
+        "last_start_ms": 1424254342000,
+        "rows": 105707
+      }
+    },
+    "split_features_note": "duplicates and train overlap are decided on the numeric features plus the raw proto/state/service strings (as ids); the model sees the train-fitted codes",
+    "test_frac": 0.2,
+    "train_frac": 0.6000000000000001,
+    "train_overlap_features": [
+      "sport",
+      "dsport",
+      "dur",
+      "sbytes",
+      "dbytes",
+      "sttl",
+      "dttl",
+      "sloss",
+      "dloss",
+      "sload",
+      "dload",
+      "spkts",
+      "dpkts",
+      "swin",
+      "dwin",
+      "stcpb",
+      "dtcpb",
+      "smeansz",
+      "dmeansz",
+      "trans_depth",
+      "res_bdy_len",
+      "sjit",
+      "djit",
+      "sintpkt",
+      "dintpkt",
+      "tcprtt",
+      "synack",
+      "ackdat",
+      "is_sm_ips_ports",
+      "ct_state_ttl",
+      "ct_flw_http_mthd",
+      "is_ftp_login",
+      "ct_ftp_cmd",
+      "ct_srv_src",
+      "ct_srv_dst",
+      "ct_dst_ltm",
+      "ct_src_ltm",
+      "ct_src_dport_ltm",
+      "ct_dst_sport_ltm",
+      "ct_dst_src_ltm",
+      "proto",
+      "state",
+      "service"
+    ],
+    "val_frac": 0.2
+  }
+}

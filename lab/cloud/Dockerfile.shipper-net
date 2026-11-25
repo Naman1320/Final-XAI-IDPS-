@@ -1,0 +1,8 @@
+# Holds the shipper's network namespace (see netguard_shipper.sh). Built without network, from the
+# lab SOC's netns image (alpine + iproute2 + nftables):
+#   docker build -f lab/cloud/Dockerfile.shipper-net -t idps-cloud-shipper-net:latest lab/cloud
+FROM idps-lab-soc-net:latest
+COPY netguard_shipper.sh /cloudguard/netguard_shipper.sh
+RUN chmod 0555 /cloudguard/netguard_shipper.sh
+HEALTHCHECK --interval=2s --timeout=2s --retries=15 CMD test -f /tmp/ready
+ENTRYPOINT ["/bin/sh", "/cloudguard/netguard_shipper.sh"]

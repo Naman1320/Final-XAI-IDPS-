@@ -1,0 +1,721 @@
+{
+  "flows": 57320,
+  "flows_by_session": {
+    "benign#1": 198,
+    "benign#2": 188,
+    "portscan#1": 1024,
+    "portscan#2": 1024,
+    "slow_dos#1": 523,
+    "slow_dos#2": 523,
+    "ssh_bruteforce#1": 45,
+    "ssh_bruteforce#2": 45,
+    "syn_flood#1": 27740,
+    "syn_flood#2": 26002,
+    "web_sqli#1": 4,
+    "web_sqli#2": 4
+  },
+  "with_floor": {
+    "per_label": {
+      "BENIGN": {
+        "family": "BENIGN",
+        "flows": 386,
+        "is_model_class": true,
+        "exact_recall": 0.9171,
+        "family_recall": 0.9171,
+        "top_predicted": [
+          {
+            "class": "BENIGN",
+            "flows": 354,
+            "share": 0.9171
+          },
+          {
+            "class": "SSH-Patator",
+            "flows": 28,
+            "share": 0.0725
+          },
+          {
+            "class": "FTP-Patator",
+            "flows": 4,
+            "share": 0.0104
+          }
+        ]
+      },
+      "DoS SYN flood": {
+        "family": "DoS",
+        "flows": 53742,
+        "is_model_class": false,
+        "exact_recall": null,
+        "family_recall": 0.0,
+        "top_predicted": [
+          {
+            "class": "PortScan",
+            "flows": 53741,
+            "share": 1.0
+          },
+          {
+            "class": "BENIGN",
+            "flows": 1,
+            "share": 0.0
+          }
+        ]
+      },
+      "DoS slowloris": {
+        "family": "DoS",
+        "flows": 1046,
+        "is_model_class": true,
+        "exact_recall": 0.0,
+        "family_recall": 0.0,
+        "top_predicted": [
+          {
+            "class": "BENIGN",
+            "flows": 1046,
+            "share": 1.0
+          }
+        ]
+      },
+      "PortScan": {
+        "family": "PortScan",
+        "flows": 2048,
+        "is_model_class": true,
+        "exact_recall": 1.0,
+        "family_recall": 1.0,
+        "top_predicted": [
+          {
+            "class": "PortScan",
+            "flows": 2048,
+            "share": 1.0
+          }
+        ]
+      },
+      "SSH-Patator": {
+        "family": "BruteForce",
+        "flows": 90,
+        "is_model_class": true,
+        "exact_recall": 0.9889,
+        "family_recall": 0.9889,
+        "top_predicted": [
+          {
+            "class": "SSH-Patator",
+            "flows": 89,
+            "share": 0.9889
+          },
+          {
+            "class": "BENIGN",
+            "flows": 1,
+            "share": 0.0111
+          }
+        ]
+      },
+      "Web Attack - Sql Injection": {
+        "family": "WebAttack",
+        "flows": 8,
+        "is_model_class": false,
+        "exact_recall": null,
+        "family_recall": 0.0,
+        "top_predicted": [
+          {
+            "class": "BENIGN",
+            "flows": 8,
+            "share": 1.0
+          }
+        ]
+      }
+    },
+    "benign": {
+      "flows": 386,
+      "false_positives": 32,
+      "false_positive_rate": 0.0829,
+      "by_class": {
+        "SSH-Patator": 28,
+        "FTP-Patator": 4
+      }
+    },
+    "family": {
+      "macro_f1": 0.2617,
+      "per_family": {
+        "BENIGN": {
+          "support": 386,
+          "precision": 0.2511,
+          "recall": 0.9171,
+          "f1": 0.3942
+        },
+        "BruteForce": {
+          "support": 90,
+          "precision": 0.7355,
+          "recall": 0.9889,
+          "f1": 0.8436
+        },
+        "DoS": {
+          "support": 54788,
+          "precision": null,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "PortScan": {
+          "support": 2048,
+          "precision": 0.0367,
+          "recall": 1.0,
+          "f1": 0.0708
+        },
+        "WebAttack": {
+          "support": 8,
+          "precision": null,
+          "recall": 0.0,
+          "f1": 0.0
+        }
+      }
+    },
+    "exact_class": {
+      "BENIGN": {
+        "support": 386,
+        "precision": 0.2527,
+        "recall": 0.9171,
+        "f1": 0.3962
+      },
+      "DoS slowloris": {
+        "support": 1046,
+        "precision": null,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "PortScan": {
+        "support": 2048,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "SSH-Patator": {
+        "support": 90,
+        "precision": 0.7607,
+        "recall": 0.9889,
+        "f1": 0.8599
+      }
+    },
+    "comparison": [
+      {
+        "class": "BENIGN",
+        "lab_flows": 386,
+        "lab_f1": 0.3962,
+        "lab_recall": 0.9171,
+        "test_support": 177097,
+        "test_f1": 0.9919,
+        "test_recall": 0.9886,
+        "f1_change": -0.5957
+      },
+      {
+        "class": "DoS slowloris",
+        "lab_flows": 1046,
+        "lab_f1": 0.0,
+        "lab_recall": 0.0,
+        "test_support": 275,
+        "test_f1": 0.8445,
+        "test_recall": 0.7309,
+        "f1_change": -0.8445
+      },
+      {
+        "class": "PortScan",
+        "lab_flows": 2048,
+        "lab_f1": 1.0,
+        "lab_recall": 1.0,
+        "test_support": 1660,
+        "test_f1": 0.7042,
+        "test_recall": 0.9994,
+        "f1_change": 0.2958
+      },
+      {
+        "class": "SSH-Patator",
+        "lab_flows": 90,
+        "lab_f1": 0.8599,
+        "lab_recall": 0.9889,
+        "test_support": 485,
+        "test_f1": 0.9896,
+        "test_recall": 0.9794,
+        "f1_change": -0.1297
+      }
+    ],
+    "confusion": {
+      "truth": [
+        "BENIGN",
+        "DoS SYN flood",
+        "DoS slowloris",
+        "PortScan",
+        "SSH-Patator",
+        "Web Attack - Sql Injection"
+      ],
+      "predicted": [
+        "BENIGN",
+        "FTP-Patator",
+        "PortScan",
+        "SSH-Patator"
+      ],
+      "matrix": [
+        [
+          354,
+          4,
+          0,
+          28
+        ],
+        [
+          1,
+          0,
+          53741,
+          0
+        ],
+        [
+          1046,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          2048,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          89
+        ],
+        [
+          8,
+          0,
+          0,
+          0
+        ]
+      ]
+    }
+  },
+  "no_floor": {
+    "per_label": {
+      "BENIGN": {
+        "family": "BENIGN",
+        "flows": 386,
+        "is_model_class": true,
+        "exact_recall": 0.9171,
+        "family_recall": 0.9171,
+        "top_predicted": [
+          {
+            "class": "BENIGN",
+            "flows": 354,
+            "share": 0.9171
+          },
+          {
+            "class": "SSH-Patator",
+            "flows": 28,
+            "share": 0.0725
+          },
+          {
+            "class": "FTP-Patator",
+            "flows": 4,
+            "share": 0.0104
+          }
+        ]
+      },
+      "DoS SYN flood": {
+        "family": "DoS",
+        "flows": 53742,
+        "is_model_class": false,
+        "exact_recall": null,
+        "family_recall": 0.0,
+        "top_predicted": [
+          {
+            "class": "PortScan",
+            "flows": 53741,
+            "share": 1.0
+          },
+          {
+            "class": "BENIGN",
+            "flows": 1,
+            "share": 0.0
+          }
+        ]
+      },
+      "DoS slowloris": {
+        "family": "DoS",
+        "flows": 1046,
+        "is_model_class": true,
+        "exact_recall": 0.0,
+        "family_recall": 0.0,
+        "top_predicted": [
+          {
+            "class": "BENIGN",
+            "flows": 1046,
+            "share": 1.0
+          }
+        ]
+      },
+      "PortScan": {
+        "family": "PortScan",
+        "flows": 2048,
+        "is_model_class": true,
+        "exact_recall": 1.0,
+        "family_recall": 1.0,
+        "top_predicted": [
+          {
+            "class": "PortScan",
+            "flows": 2048,
+            "share": 1.0
+          }
+        ]
+      },
+      "SSH-Patator": {
+        "family": "BruteForce",
+        "flows": 90,
+        "is_model_class": true,
+        "exact_recall": 0.9889,
+        "family_recall": 0.9889,
+        "top_predicted": [
+          {
+            "class": "SSH-Patator",
+            "flows": 89,
+            "share": 0.9889
+          },
+          {
+            "class": "BENIGN",
+            "flows": 1,
+            "share": 0.0111
+          }
+        ]
+      },
+      "Web Attack - Sql Injection": {
+        "family": "WebAttack",
+        "flows": 8,
+        "is_model_class": false,
+        "exact_recall": null,
+        "family_recall": 0.0,
+        "top_predicted": [
+          {
+            "class": "BENIGN",
+            "flows": 8,
+            "share": 1.0
+          }
+        ]
+      }
+    },
+    "benign": {
+      "flows": 386,
+      "false_positives": 32,
+      "false_positive_rate": 0.0829,
+      "by_class": {
+        "SSH-Patator": 28,
+        "FTP-Patator": 4
+      }
+    },
+    "family": {
+      "macro_f1": 0.2617,
+      "per_family": {
+        "BENIGN": {
+          "support": 386,
+          "precision": 0.2511,
+          "recall": 0.9171,
+          "f1": 0.3942
+        },
+        "BruteForce": {
+          "support": 90,
+          "precision": 0.7355,
+          "recall": 0.9889,
+          "f1": 0.8436
+        },
+        "DoS": {
+          "support": 54788,
+          "precision": null,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "PortScan": {
+          "support": 2048,
+          "precision": 0.0367,
+          "recall": 1.0,
+          "f1": 0.0708
+        },
+        "WebAttack": {
+          "support": 8,
+          "precision": null,
+          "recall": 0.0,
+          "f1": 0.0
+        }
+      }
+    },
+    "exact_class": {
+      "BENIGN": {
+        "support": 386,
+        "precision": 0.2527,
+        "recall": 0.9171,
+        "f1": 0.3962
+      },
+      "DoS slowloris": {
+        "support": 1046,
+        "precision": null,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "PortScan": {
+        "support": 2048,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "SSH-Patator": {
+        "support": 90,
+        "precision": 0.7607,
+        "recall": 0.9889,
+        "f1": 0.8599
+      }
+    },
+    "comparison": [
+      {
+        "class": "BENIGN",
+        "lab_flows": 386,
+        "lab_f1": 0.3962,
+        "lab_recall": 0.9171,
+        "test_support": 177097,
+        "test_f1": 0.9919,
+        "test_recall": 0.9886,
+        "f1_change": -0.5957
+      },
+      {
+        "class": "DoS slowloris",
+        "lab_flows": 1046,
+        "lab_f1": 0.0,
+        "lab_recall": 0.0,
+        "test_support": 275,
+        "test_f1": 0.8445,
+        "test_recall": 0.7309,
+        "f1_change": -0.8445
+      },
+      {
+        "class": "PortScan",
+        "lab_flows": 2048,
+        "lab_f1": 1.0,
+        "lab_recall": 1.0,
+        "test_support": 1660,
+        "test_f1": 0.7042,
+        "test_recall": 0.9994,
+        "f1_change": 0.2958
+      },
+      {
+        "class": "SSH-Patator",
+        "lab_flows": 90,
+        "lab_f1": 0.8599,
+        "lab_recall": 0.9889,
+        "test_support": 485,
+        "test_f1": 0.9896,
+        "test_recall": 0.9794,
+        "f1_change": -0.1297
+      }
+    ],
+    "confusion": {
+      "truth": [
+        "BENIGN",
+        "DoS SYN flood",
+        "DoS slowloris",
+        "PortScan",
+        "SSH-Patator",
+        "Web Attack - Sql Injection"
+      ],
+      "predicted": [
+        "BENIGN",
+        "FTP-Patator",
+        "PortScan",
+        "SSH-Patator"
+      ],
+      "matrix": [
+        [
+          354,
+          4,
+          0,
+          28
+        ],
+        [
+          1,
+          0,
+          53741,
+          0
+        ],
+        [
+          1046,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          2048,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          89
+        ],
+        [
+          8,
+          0,
+          0,
+          0
+        ]
+      ]
+    }
+  },
+  "generated": "2026-11-15T08:31:30+00:00",
+  "model": "models/week_xgboost.joblib",
+  "model_sha256": "4a59a3564377573e404cfa1cdb88b90463b829e9b7de83e351f8b7e316ce7189",
+  "alert_floor": 0.5,
+  "model_classes": [
+    "BENIGN",
+    "Bot",
+    "DDoS",
+    "DoS GoldenEye",
+    "DoS Hulk",
+    "DoS Slowhttptest",
+    "DoS slowloris",
+    "FTP-Patator",
+    "Heartbleed",
+    "Infiltration",
+    "PortScan",
+    "SSH-Patator",
+    "Web Attack - Brute Force",
+    "Web Attack - XSS"
+  ],
+  "data": "data/processed/lab_labelled.parquet",
+  "test_split": {
+    "macro_f1": 0.6619774713201023,
+    "benign_false_positive_rate": 0.01137229879670463,
+    "scored_without_floor": true,
+    "report": "reports/week_xgboost.json"
+  },
+  "notes": "Lab flows are labelled by address: in an attack session every flow to or from 10.10.1.10 gets the attack's label and other flows are dropped; in the benign session every flow is BENIGN. A session whose attack did not exit as expected is an error and contributes no flows. For web_sqli, flows that started before sqlmap (DVWA setup and login) are dropped using a marker webattack.sh prints. 'DoS SYN flood' and 'Web Attack - Sql Injection' are not model classes, so only their family recall is meaningful. with_floor counts a prediction below the 0.5 alert floor as BENIGN, as on the live sensor; no_floor is plain argmax, which is how the test-split scores in reports/week_xgboost.json were computed, so the comparison uses no_floor. exact_class F1 uses only flows whose truth label is a model class and depends on the class mix; recall is the fairer comparison. Family-level macro-F1 is over the families present in the lab data (BENIGN, PortScan, BruteForce, DoS, WebAttack); the test-split macro-F1 is over 14 classes, so the two are not the same measure. The lab has one client and a few services, a round-trip time of about 0.1 ms and flows cut by NFStream at the end of each recording, so timing features differ from CIC-IDS2017's; the repeats of one session are not independent. Lab traffic never entered training, but the lab's attack tools are not the 2017 tools either.",
+  "runs": [
+    {
+      "session": "portscan",
+      "repeat": 1,
+      "exit": 0,
+      "seconds": 0.2,
+      "flows_total": 1024,
+      "flows_labelled": 1024
+    },
+    {
+      "session": "ssh_bruteforce",
+      "repeat": 1,
+      "exit": 0,
+      "seconds": 194.9,
+      "flows_total": 45,
+      "flows_labelled": 45
+    },
+    {
+      "session": "syn_flood",
+      "repeat": 1,
+      "exit": 124,
+      "seconds": 20.2,
+      "flows_total": 27740,
+      "flows_labelled": 27740
+    },
+    {
+      "session": "slow_dos",
+      "repeat": 1,
+      "exit": 0,
+      "seconds": 66.4,
+      "flows_total": 523,
+      "flows_labelled": 523
+    },
+    {
+      "session": "web_sqli",
+      "repeat": 1,
+      "exit": 0,
+      "sqlmap_start_ms": 1794729954000,
+      "seconds": 14.3,
+      "flows_total": 9,
+      "flows_labelled": 4,
+      "flows_before_sqlmap": 5
+    },
+    {
+      "session": "benign",
+      "repeat": 1,
+      "exit": 0,
+      "activities": {
+        "web": 18,
+        "dvwa": 7,
+        "download": 6,
+        "ssh": 7,
+        "scp": 2,
+        "burst": 5,
+        "connreq": 6,
+        "ping": 2
+      },
+      "activity_problems": [],
+      "activity_problem_count": 0,
+      "traffic_checks": [],
+      "seconds": 605.4,
+      "flows_total": 198,
+      "flows_labelled": 198
+    },
+    {
+      "session": "portscan",
+      "repeat": 2,
+      "exit": 0,
+      "seconds": 0.4,
+      "flows_total": 1024,
+      "flows_labelled": 1024
+    },
+    {
+      "session": "ssh_bruteforce",
+      "repeat": 2,
+      "exit": 0,
+      "seconds": 159.7,
+      "flows_total": 45,
+      "flows_labelled": 45
+    },
+    {
+      "session": "syn_flood",
+      "repeat": 2,
+      "exit": 124,
+      "seconds": 20.2,
+      "flows_total": 26002,
+      "flows_labelled": 26002
+    },
+    {
+      "session": "slow_dos",
+      "repeat": 2,
+      "exit": 0,
+      "seconds": 66.8,
+      "flows_total": 523,
+      "flows_labelled": 523
+    },
+    {
+      "session": "web_sqli",
+      "repeat": 2,
+      "exit": 0,
+      "sqlmap_start_ms": 1794730863000,
+      "seconds": 14.0,
+      "flows_total": 9,
+      "flows_labelled": 4,
+      "flows_before_sqlmap": 5
+    },
+    {
+      "session": "benign",
+      "repeat": 2,
+      "exit": 0,
+      "activities": {
+        "web": 9,
+        "dvwa": 8,
+        "download": 4,
+        "ssh": 6,
+        "scp": 3,
+        "burst": 3,
+        "connreq": 7,
+        "ping": 5
+      },
+      "activity_problems": [],
+      "activity_problem_count": 0,
+      "traffic_checks": [],
+      "seconds": 602.0,
+      "flows_total": 188,
+      "flows_labelled": 188
+    }
+  ]
+}

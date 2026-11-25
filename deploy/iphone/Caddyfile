@@ -1,0 +1,29 @@
+{
+	admin off
+	auto_https off
+}
+
+:8080 {
+	bind 127.0.0.1
+	root * /srv
+	header {
+		Cache-Control "no-store"
+		X-Content-Type-Options nosniff
+		Referrer-Policy no-referrer
+		X-Frame-Options DENY
+	}
+	# Only canonical browser API paths may reach the Mac's unified proxy.
+	# Match the original URI before normalization. Queries may contain encoded filters.
+	@browser expression `{http.request.orig_uri}.matches('^/(api|lab-api)/((health|auth|alerts|actions|blocks|cases|metrics|geo|topology|assistant|reports|privacy|models|sensors|status|training|iam|cloud|ws|admin/(audit|users|sensors|retention|integrations|privacy|reports))(/[a-zA-Z0-9_:-][a-zA-Z0-9_.:-]*)*|demo|c6|admin/demo/cancel|admin/c6/run)([?].*)?$')`
+	@reserved path /api /api/* /lab-api /lab-api/*
+	@asset path /assets/* /icons/* /manifest.webmanifest
+	route {
+		reverse_proxy @browser host.docker.internal:5173 {
+			header_up Host localhost:5173
+		}
+		respond @reserved 404
+		file_server @asset
+		try_files {path} /index.html
+		file_server
+	}
+}

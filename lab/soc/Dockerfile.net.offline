@@ -1,0 +1,9 @@
+# The SOC's netns image rebuilt WITHOUT network (the normal Dockerfile.net runs `apk add`): a
+# layer on the previous image that only replaces /netguard.sh. Used by lab/cloud/build_soc_net.sh;
+# the base tag idps-lab-soc-net:pre-c4 is the image as it was before C4 (the way back).
+ARG BASE=idps-lab-soc-net:pre-c4
+FROM ${BASE}
+COPY soc/netguard.sh /netguard.sh
+RUN chmod +x /netguard.sh
+HEALTHCHECK --interval=2s --timeout=2s --retries=15 CMD test -f /tmp/ready
+ENTRYPOINT ["/netguard.sh"]

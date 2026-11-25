@@ -1,0 +1,93 @@
+{
+  "portscan_1_packet_each_way": {
+    "cic_before": {
+      "n": 157447,
+      "top_byte_pairs": [
+        {
+          "fwd_bytes": 40,
+          "bwd_bytes": 46,
+          "share": 0.5048556022026459
+        },
+        {
+          "fwd_bytes": 42,
+          "bwd_bytes": 46,
+          "share": 0.49511899242284707
+        },
+        {
+          "fwd_bytes": 40,
+          "bwd_bytes": 40,
+          "share": 2.5405374506976952e-05
+        }
+      ]
+    },
+    "cic_after": {
+      "n": 148732,
+      "top_byte_pairs": [
+        {
+          "fwd_bytes": 60,
+          "bwd_bytes": 40,
+          "share": 0.4822096119194255
+        },
+        {
+          "fwd_bytes": 44,
+          "bwd_bytes": 40,
+          "share": 0.47336820590054596
+        },
+        {
+          "fwd_bytes": 40,
+          "bwd_bytes": 60,
+          "share": 0.02292042062232741
+        },
+        {
+          "fwd_bytes": 40,
+          "bwd_bytes": 44,
+          "share": 0.021199203937283168
+        },
+        {
+          "fwd_bytes": 53,
+          "bwd_bytes": 40,
+          "share": 0.00027566360971411664
+        },
+        {
+          "fwd_bytes": 40,
+          "bwd_bytes": 53,
+          "share": 2.689401070381626e-05
+        }
+      ]
+    },
+    "lab_exporter_open_mode": {
+      "n": 2044,
+      "top_byte_pairs": [
+        {
+          "fwd_bytes": 44,
+          "bwd_bytes": 40,
+          "share": 1.0
+        }
+      ]
+    }
+  },
+  "ssh_bruteforce_medians": {
+    "cic_before_flows": {
+      "fwd_pkt_len_mean": 113.33333333333333,
+      "bwd_pkt_len_mean": 116.53846153846153
+    },
+    "cic_after_rows": {
+      "fwd_pkt_len_mean": 143.63636779785156,
+      "bwd_pkt_len_mean": 135.4242401123047
+    },
+    "lab_exporter_rows": {
+      "fwd_pkt_len_mean": 151.23529411764707,
+      "bwd_pkt_len_mean": 147.22727272727272
+    }
+  },
+  "benign_tcp_medians": {
+    "cic_after_rows": {
+      "fwd_pkt_len_mean": 92.0,
+      "bwd_pkt_len_mean": 302.1333312988281
+    },
+    "lab_exporter_rows": {
+      "fwd_pkt_len_mean": 88.5,
+      "bwd_pkt_len_mean": 1332.0
+    }
+  }
+}

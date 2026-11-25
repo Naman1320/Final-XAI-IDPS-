@@ -1,0 +1,25 @@
+# The cloud collector (docs/cloud-plan.md step C4). A local layer on idps-lab-flowlog:latest (the
+# sensor image: Python, pandas, xgboost, scikit-learn, plus boto3 from the exporter layer), built
+# WITHOUT network by lab/cloud/build_collector.sh with the repo root as build context.
+# It bakes in: the current idps/ code (PYTHONPATH=/opt/idps, site-packages holds older code), the
+# ONE billing guard, the signed cloud model and the model-signing PUBLIC key. Rebuild after a
+# new model: build_collector.sh does (and its --check fails while the image is stale).
+FROM idps-lab-flowlog:latest
+COPY 23csu441_1_23csu294_2_23csu095/idps ./idps
+COPY lab/cloud/guard.py ./lab/cloud/guard.py
+COPY --chmod=0444 models/cloud_xgboost.joblib models/cloud_xgboost.joblib.sha256 \
+     models/cloud_xgboost.joblib.sig /opt/idps/cloud-model/
+COPY --chmod=0444 lab/keys/model-signing.pub /opt/idps/cloud-keys/model-signing.pub
+# The state volume copies this folder's owner (nobody) on first use: the unprivileged collector
+# keeps its checkpoint, outbox and ACL state there. No chown at run time.
+RUN mkdir -p /var/lib/collector && chown 65534:65534 /var/lib/collector \
+    && chmod 0555 /opt/idps/cloud-model /opt/idps/cloud-keys \
+    && find /opt/idps -name __pycache__ -prune -exec rm -rf {} + \
+    && /opt/venv/bin/python -c "import boto3, pandas, xgboost, idps.cloud.collector"
+ARG MODEL_SHA256=unknown
+LABEL idps.cloud.model.sha256=$MODEL_SHA256
+# One BLAS/OpenMP thread and few malloc arenas: less resident memory, no useful speed lost at this size.
+ENV PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 MALLOC_ARENA_MAX=2
+ENTRYPOINT ["python", "-m", "idps.cloud"]
+CMD ["collect", "--interval", "60"]
+HEALTHCHECK NONE

@@ -1,0 +1,30 @@
+# Context for the sensor image (repo root). Keep data, secrets and history out.
+.git
+.claude
+**/.env
+**/.env.*
+**/.venv
+**/venv
+**/__pycache__
+**/node_modules
+**/.terraform
+**/*.tfstate*
+**/*.tfvars
+**/*.pem
+**/*.key
+data
+notebooks
+**/*.pcap
+**/*.pcapng
+# Deployment secrets and generated state never enter an image
+deploy/.env
+deploy/.env.sensor
+deploy/secrets
+deploy/sensors
+deploy/sensor-data
+deploy/soc.env
+deploy/sensor.extra.env
+deploy/caddy-root.crt
+# The proxy image builds the dashboard itself: no host build output or modules
+soc/web/dist
+**/*.jsonl.gz

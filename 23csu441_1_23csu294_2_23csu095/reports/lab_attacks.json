@@ -1,0 +1,472 @@
+{
+  "model": "models/week_xgboost.joblib",
+  "runs": [
+    {
+      "attack": "portscan",
+      "mode": "dry-run",
+      "command": "sh /attacks/portscan.sh",
+      "model": "models/week_xgboost.joblib",
+      "family": [
+        "PortScan"
+      ],
+      "probe_before": null,
+      "attack_exit": 0,
+      "attack_seconds": 0.3,
+      "drained": true,
+      "live_flows": 1024,
+      "offline": {
+        "flows": 1024,
+        "by_class": {
+          "PortScan": 1024
+        },
+        "confident_attack": 1024,
+        "attack": 1024
+      },
+      "alerts_truncated": false,
+      "live": {
+        "alerts": 1024,
+        "by_class": {
+          "PortScan": 1024
+        },
+        "right_family": 1024,
+        "right_family_share": 1.0,
+        "detection_rate": 1.0,
+        "any_attack_rate": 1.0,
+        "time_to_first_alert_s": 121.5,
+        "flow_end_to_soc_p50_s": 121.5,
+        "confidence_median": 0.9951,
+        "confident_share": 1.0,
+        "attack_ended_s": 0.3
+      },
+      "block": {
+        "would_block": 1,
+        "first_would_block_s": 121.3,
+        "summary": "would block (1)"
+      }
+    },
+    {
+      "attack": "ssh_bruteforce",
+      "mode": "dry-run",
+      "command": "sh /attacks/ssh_bruteforce.sh 200",
+      "model": "models/week_xgboost.joblib",
+      "family": [
+        "SSH-Patator"
+      ],
+      "probe_before": null,
+      "attack_exit": 0,
+      "attack_seconds": 191.0,
+      "drained": true,
+      "live_flows": 45,
+      "offline": {
+        "flows": 45,
+        "by_class": {
+          "SSH-Patator": 45
+        },
+        "confident_attack": 41,
+        "attack": 45
+      },
+      "alerts_truncated": false,
+      "live": {
+        "alerts": 45,
+        "by_class": {
+          "SSH-Patator": 45
+        },
+        "right_family": 45,
+        "right_family_share": 1.0,
+        "detection_rate": 1.0,
+        "any_attack_rate": 1.0,
+        "time_to_first_alert_s": 125.6,
+        "flow_end_to_soc_p50_s": 122.9,
+        "confidence_median": 0.9923,
+        "confident_share": 0.9111,
+        "attack_ended_s": 191.3
+      },
+      "block": {
+        "would_block": 3,
+        "first_would_block_s": 155.5,
+        "summary": "would block (3)"
+      }
+    },
+    {
+      "attack": "syn_flood",
+      "mode": "dry-run",
+      "command": "sh /attacks/dos.sh syn u500",
+      "model": "models/week_xgboost.joblib",
+      "family": [
+        "DDoS",
+        "DoS Hulk",
+        "DoS GoldenEye",
+        "DoS slowloris",
+        "DoS Slowhttptest"
+      ],
+      "probe_before": null,
+      "attack_exit": 124,
+      "attack_seconds": 20.1,
+      "drained": true,
+      "live_flows": 26606,
+      "offline": {
+        "flows": 26606,
+        "by_class": {
+          "PortScan": 26606
+        },
+        "confident_attack": 26599,
+        "attack": 26606
+      },
+      "alerts_truncated": false,
+      "live": {
+        "alerts": 26606,
+        "by_class": {
+          "PortScan": 26606
+        },
+        "right_family": 0,
+        "right_family_share": 0.0,
+        "detection_rate": 0.0,
+        "any_attack_rate": 1.0,
+        "time_to_first_alert_s": null,
+        "flow_end_to_soc_p50_s": 121.4,
+        "confidence_median": 0.9963,
+        "confident_share": 0.9997,
+        "attack_ended_s": 20.3
+      },
+      "block": {
+        "would_block": 1,
+        "first_would_block_s": 121.2,
+        "summary": "would block (1)"
+      }
+    },
+    {
+      "attack": "slow_dos",
+      "mode": "dry-run",
+      "command": "sh /attacks/dos.sh slow",
+      "model": "models/week_xgboost.joblib",
+      "family": [
+        "DoS slowloris",
+        "DoS Slowhttptest"
+      ],
+      "probe_before": null,
+      "attack_exit": 0,
+      "attack_seconds": 66.8,
+      "drained": true,
+      "live_flows": 523,
+      "offline": {
+        "flows": 523,
+        "by_class": {
+          "BENIGN": 523
+        },
+        "confident_attack": 0,
+        "attack": 0
+      },
+      "alerts_truncated": false,
+      "live": {
+        "alerts": 0,
+        "by_class": {},
+        "right_family": 0,
+        "right_family_share": null,
+        "detection_rate": 0.0,
+        "any_attack_rate": 0.0,
+        "time_to_first_alert_s": null,
+        "flow_end_to_soc_p50_s": null,
+        "confidence_median": null,
+        "confident_share": null,
+        "attack_ended_s": 67.1
+      },
+      "block": {
+        "would_block": 0,
+        "first_would_block_s": null,
+        "summary": "no would-block"
+      }
+    },
+    {
+      "attack": "web_sqli",
+      "mode": "dry-run",
+      "command": "sh /attacks/webattack.sh",
+      "model": "models/week_xgboost.joblib",
+      "family": [
+        "Web Attack - Brute Force",
+        "Web Attack - XSS",
+        "Web Attack - Sql Injection"
+      ],
+      "probe_before": null,
+      "attack_exit": 0,
+      "attack_seconds": 11.8,
+      "drained": true,
+      "live_flows": 9,
+      "offline": {
+        "flows": 9,
+        "by_class": {
+          "BENIGN": 9
+        },
+        "confident_attack": 0,
+        "attack": 0
+      },
+      "alerts_truncated": false,
+      "live": {
+        "alerts": 0,
+        "by_class": {},
+        "right_family": 0,
+        "right_family_share": null,
+        "detection_rate": 0.0,
+        "any_attack_rate": 0.0,
+        "time_to_first_alert_s": null,
+        "flow_end_to_soc_p50_s": null,
+        "confidence_median": null,
+        "confident_share": null,
+        "attack_ended_s": 11.9
+      },
+      "block": {
+        "would_block": 0,
+        "first_would_block_s": null,
+        "summary": "no would-block"
+      },
+      "note": "rerun with sqlmap --flush-session (the first run replayed sqlmap's cached session); about 77 sqlmap requests per run reached DVWA over a few keep-alive connections"
+    },
+    {
+      "attack": "portscan",
+      "mode": "blocking",
+      "command": "sh /attacks/portscan.sh",
+      "model": "models/week_xgboost.joblib",
+      "family": [
+        "PortScan"
+      ],
+      "attack_exit": 0,
+      "attack_seconds": 0.5,
+      "drained": true,
+      "block": {
+        "first_block_s": 123.1,
+        "blocked_while_attack_ran": false,
+        "probe_before": "200",
+        "probe_while_blocked": "000",
+        "probe_after_expiry": "200",
+        "expired": true,
+        "nft_errors": 0,
+        "summary": "blocked at 123 s, HTTP 200 -> 000 -> 200"
+      },
+      "live_flows": 1025,
+      "offline": {
+        "flows": 1027,
+        "by_class": {
+          "BENIGN": 3,
+          "PortScan": 1024
+        },
+        "confident_attack": 1024,
+        "attack": 1024
+      },
+      "alerts_truncated": false,
+      "live": {
+        "alerts": 1024,
+        "by_class": {
+          "PortScan": 1024
+        },
+        "right_family": 1024,
+        "right_family_share": 1.0,
+        "detection_rate": 0.9971,
+        "any_attack_rate": 0.9971,
+        "time_to_first_alert_s": 121.5,
+        "flow_end_to_soc_p50_s": 121.3,
+        "confidence_median": 0.9951,
+        "confident_share": 1.0,
+        "attack_ended_s": 0.6
+      }
+    },
+    {
+      "attack": "ssh_bruteforce",
+      "mode": "blocking",
+      "command": "sh /attacks/ssh_bruteforce.sh 200",
+      "model": "models/week_xgboost.joblib",
+      "family": [
+        "SSH-Patator"
+      ],
+      "attack_exit": 0,
+      "attack_seconds": 428.1,
+      "drained": true,
+      "block": {
+        "first_block_s": 174.7,
+        "blocked_while_attack_ran": true,
+        "probe_before": "200",
+        "probe_while_blocked": "000",
+        "probe_after_expiry": "200",
+        "expired": true,
+        "nft_errors": 0,
+        "summary": "blocked at 175 s, HTTP 200 -> 000 -> 200"
+      },
+      "live_flows": 47,
+      "offline": {
+        "flows": 52,
+        "by_class": {
+          "BENIGN": 7,
+          "SSH-Patator": 45
+        },
+        "confident_attack": 37,
+        "attack": 44
+      },
+      "alerts_truncated": false,
+      "live": {
+        "alerts": 44,
+        "by_class": {
+          "SSH-Patator": 44
+        },
+        "right_family": 44,
+        "right_family_share": 1.0,
+        "detection_rate": 0.8462,
+        "any_attack_rate": 0.8462,
+        "time_to_first_alert_s": 122.5,
+        "flow_end_to_soc_p50_s": 122.7,
+        "confidence_median": 0.9913,
+        "confident_share": 0.8409,
+        "attack_ended_s": 428.2
+      }
+    },
+    {
+      "attack": "syn_flood",
+      "mode": "blocking",
+      "command": "sh /attacks/dos.sh syn u500",
+      "model": "models/week_xgboost.joblib",
+      "family": [
+        "DDoS",
+        "DoS Hulk",
+        "DoS GoldenEye",
+        "DoS slowloris",
+        "DoS Slowhttptest"
+      ],
+      "attack_exit": 124,
+      "attack_seconds": 20.1,
+      "drained": true,
+      "block": {
+        "first_block_s": 123.1,
+        "blocked_while_attack_ran": false,
+        "probe_before": "200",
+        "probe_while_blocked": "000",
+        "probe_after_expiry": "200",
+        "expired": true,
+        "nft_errors": 0,
+        "summary": "blocked at 123 s, HTTP 200 -> 000 -> 200"
+      },
+      "live_flows": 26356,
+      "offline": {
+        "flows": 26358,
+        "by_class": {
+          "BENIGN": 4,
+          "PortScan": 26354
+        },
+        "confident_attack": 26354,
+        "attack": 26354
+      },
+      "alerts_truncated": false,
+      "live": {
+        "alerts": 26354,
+        "by_class": {
+          "PortScan": 26354
+        },
+        "right_family": 0,
+        "right_family_share": 0.0,
+        "detection_rate": 0.0,
+        "any_attack_rate": 0.9998,
+        "time_to_first_alert_s": null,
+        "flow_end_to_soc_p50_s": 121.3,
+        "confidence_median": 0.9963,
+        "confident_share": 1.0,
+        "attack_ended_s": 20.2
+      }
+    },
+    {
+      "attack": "slow_dos",
+      "mode": "blocking",
+      "command": "sh /attacks/dos.sh slow",
+      "model": "models/week_xgboost.joblib",
+      "family": [
+        "DoS slowloris",
+        "DoS Slowhttptest"
+      ],
+      "attack_exit": 0,
+      "attack_seconds": 66.5,
+      "drained": true,
+      "block": {
+        "first_block_s": null,
+        "blocked_while_attack_ran": false,
+        "probe_before": "200",
+        "probe_while_blocked": null,
+        "probe_after_expiry": "200",
+        "expired": true,
+        "nft_errors": 0,
+        "summary": "no block"
+      },
+      "live_flows": 524,
+      "offline": {
+        "flows": 525,
+        "by_class": {
+          "BENIGN": 525
+        },
+        "confident_attack": 0,
+        "attack": 0
+      },
+      "alerts_truncated": false,
+      "live": {
+        "alerts": 0,
+        "by_class": {},
+        "right_family": 0,
+        "right_family_share": null,
+        "detection_rate": 0.0,
+        "any_attack_rate": 0.0,
+        "time_to_first_alert_s": null,
+        "flow_end_to_soc_p50_s": null,
+        "confidence_median": null,
+        "confident_share": null,
+        "attack_ended_s": 66.6
+      }
+    },
+    {
+      "attack": "web_sqli",
+      "mode": "blocking",
+      "command": "sh /attacks/webattack.sh",
+      "model": "models/week_xgboost.joblib",
+      "family": [
+        "Web Attack - Brute Force",
+        "Web Attack - XSS",
+        "Web Attack - Sql Injection"
+      ],
+      "attack_exit": 0,
+      "attack_seconds": 11.6,
+      "drained": true,
+      "block": {
+        "first_block_s": null,
+        "blocked_while_attack_ran": false,
+        "probe_before": "200",
+        "probe_while_blocked": null,
+        "probe_after_expiry": "200",
+        "expired": true,
+        "nft_errors": 0,
+        "summary": "no block"
+      },
+      "live_flows": 10,
+      "offline": {
+        "flows": 11,
+        "by_class": {
+          "BENIGN": 11
+        },
+        "confident_attack": 0,
+        "attack": 0
+      },
+      "alerts_truncated": false,
+      "live": {
+        "alerts": 0,
+        "by_class": {},
+        "right_family": 0,
+        "right_family_share": null,
+        "detection_rate": 0.0,
+        "any_attack_rate": 0.0,
+        "time_to_first_alert_s": null,
+        "flow_end_to_soc_p50_s": null,
+        "confidence_median": null,
+        "confident_share": null,
+        "attack_ended_s": 11.7
+      },
+      "note": "rerun with sqlmap --flush-session (the first run replayed sqlmap's cached session); about 77 sqlmap requests per run reached DVWA over a few keep-alive connections"
+    }
+  ],
+  "date": "2026-11-15",
+  "notes": [
+    "syn_flood is rate-limited to 2,000 SYN/s for 20 s (dos.sh syn u500)",
+    "detection_rate counts alerts of the right attack family only; any_attack_rate counts every alert",
+    "blocks and would-blocks use a 60 s block time in both modes"
+  ]
+}

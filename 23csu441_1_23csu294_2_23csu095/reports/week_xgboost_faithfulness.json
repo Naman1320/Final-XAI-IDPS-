@@ -1,0 +1,53 @@
+{
+  "config": {
+    "n_flows": 551,
+    "top_k": 5,
+    "random_repeats": 20,
+    "seed": 0,
+    "model": "xgboost",
+    "model_sha256": "4a59a3564377573e404cfa1cdb88b90463b829e9b7de83e351f8b7e316ce7189",
+    "baseline": "median of background sample",
+    "background_rows": 200,
+    "lime_samples": 1000,
+    "classes_explained": {
+      "BENIGN": 295,
+      "Bot": 0,
+      "DDoS": 42,
+      "DoS GoldenEye": 0,
+      "DoS Hulk": 37,
+      "DoS Slowhttptest": 0,
+      "DoS slowloris": 26,
+      "FTP-Patator": 40,
+      "Heartbleed": 1,
+      "Infiltration": 6,
+      "PortScan": 43,
+      "SSH-Patator": 40,
+      "Web Attack - Brute Force": 21,
+      "Web Attack - XSS": 0
+    }
+  },
+  "mean_confidence_before": 0.9870380759239197,
+  "random": {
+    "mean_drop": 0.05316446588768501,
+    "std_of_mean_across_repeats": 0.006526936455284098,
+    "median_drop": 0.004261034727096558
+  },
+  "methods": {
+    "shap": {
+      "mean_drop": 0.41627585887908936,
+      "median_drop": 0.15563559532165527,
+      "mean_confidence_after": 0.5707622170448303,
+      "label_flip_rate": 0.4246823956442831,
+      "share_flows_beating_random": 0.867513611615245,
+      "ratio_to_random": 7.829964092153427
+    },
+    "lime": {
+      "mean_drop": 0.23901399970054626,
+      "median_drop": 0.0009176731109619141,
+      "mean_confidence_after": 0.748024046421051,
+      "label_flip_rate": 0.24500907441016334,
+      "share_flows_beating_random": 0.6352087114337568,
+      "ratio_to_random": 4.495747219684029
+    }
+  }
+}

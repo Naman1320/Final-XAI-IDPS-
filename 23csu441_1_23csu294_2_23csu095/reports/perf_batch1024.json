@@ -1,0 +1,208 @@
+{
+  "generated": "2026-11-14T16:53:32+00:00",
+  "sample": {
+    "path": "data/processed/bench_sample.pcap",
+    "size_bytes": 226404912,
+    "packets": 1301052,
+    "sha256": "a366ef40327fb25642788cf2c776b8921a107fdfdd259074b5ba02822dcb0b9a",
+    "windows_utc": [
+      [
+        "2017-07-07 17:52:00",
+        "2017-07-07 17:56:00"
+      ],
+      [
+        "2017-07-07 18:56:00",
+        "2017-07-07 19:12:00"
+      ]
+    ],
+    "offline_flows": 191362
+  },
+  "notes": "capture_ratio = live flows / offline flows of the same sample (NFStream, 120 s timeouts); the sensor does not expose NFStream's own drop counter, so interface_delta (rx_packets, rx_dropped, rx_errors, softnet_dropped deltas of lab_attack during the replay) is reported next to it.",
+  "sensor_args": [
+    "--batch-size",
+    "1024"
+  ],
+  "rates": [
+    {
+      "target_mbit_s": 100.0,
+      "replay": {
+        "packets_sent": 1301052,
+        "bytes_sent": 205588056,
+        "seconds": 16.44,
+        "mbps": 100.0,
+        "pps": 79105.52,
+        "failed_packets": 0
+      },
+      "flows": 120766,
+      "flows_per_s_mean": 370.4,
+      "flows_per_s_peak": 1103.9,
+      "alerts": 65943,
+      "alerts_sent": 65943,
+      "dropped": {
+        "explanations": 62084,
+        "alerts": 0,
+        "alerts_rejected_by_soc": 0,
+        "blocks": 0,
+        "blocks_rejected_by_soc": 0
+      },
+      "errors": {
+        "explain": 0,
+        "response": 0,
+        "batch": 0,
+        "soc_config": 0
+      },
+      "latency_p50_s": 202.909,
+      "latency_p95_s": 203.894,
+      "shap_p50_ms": 0.17,
+      "shap_p95_ms": 0.369,
+      "stats_source": "cgroup",
+      "cpu_mean_pct": 26.6,
+      "cpu_max_pct": 94.6,
+      "mem_max_mib": 769.6,
+      "offline_flows": 191362,
+      "capture_ratio": 0.6311,
+      "interface_delta": {
+        "rx_packets": 1301059,
+        "rx_dropped": 0,
+        "rx_errors": 0,
+        "softnet_dropped": 0
+      },
+      "drained": true,
+      "sensor_duration_s": 677,
+      "flows_timeline": [
+        [
+          10.2,
+          0
+        ],
+        [
+          20.4,
+          0
+        ],
+        [
+          30.4,
+          0
+        ],
+        [
+          40.5,
+          0
+        ],
+        [
+          50.6,
+          0
+        ],
+        [
+          60.8,
+          0
+        ],
+        [
+          70.9,
+          0
+        ],
+        [
+          81.1,
+          0
+        ],
+        [
+          91.2,
+          0
+        ],
+        [
+          101.3,
+          0
+        ],
+        [
+          111.5,
+          0
+        ],
+        [
+          121.6,
+          0
+        ],
+        [
+          131.7,
+          0
+        ],
+        [
+          141.9,
+          0
+        ],
+        [
+          152.1,
+          19
+        ],
+        [
+          162.1,
+          5139
+        ],
+        [
+          172.1,
+          15379
+        ],
+        [
+          182.1,
+          25619
+        ],
+        [
+          192.1,
+          35859
+        ],
+        [
+          202.3,
+          46099
+        ],
+        [
+          212.2,
+          55315
+        ],
+        [
+          222.2,
+          65555
+        ],
+        [
+          232.2,
+          75795
+        ],
+        [
+          242.2,
+          86034
+        ],
+        [
+          252.3,
+          96274
+        ],
+        [
+          262.3,
+          105490
+        ],
+        [
+          272.5,
+          116754
+        ],
+        [
+          282.6,
+          120766
+        ],
+        [
+          292.7,
+          120766
+        ],
+        [
+          302.9,
+          120766
+        ],
+        [
+          313.0,
+          120766
+        ],
+        [
+          323.2,
+          120766
+        ],
+        [
+          326.0,
+          120766
+        ]
+      ]
+    }
+  ]
+}

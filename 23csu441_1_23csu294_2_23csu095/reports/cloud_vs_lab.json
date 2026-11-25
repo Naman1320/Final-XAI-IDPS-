@@ -1,0 +1,536 @@
+{
+  "friday_xgboost": {
+    "caveat": "different feature sets (13 flow-log counters vs about 40 CICFlowMeter features), different splits (the lab week model: 5 days, one split; the cloud model: rows capped per day and class, windowed rows), different class sets and test sizes: indicative, not a controlled experiment",
+    "cloud_benign_fpr": 0.06537130211798832,
+    "cloud_macro_f1": 0.6813705804007278,
+    "cloud_macro_f1_ci95": [
+      0.6581644913517241,
+      0.6928490436702702
+    ],
+    "cloud_macro_f1_cluster_ci95": [
+      0.6009777339257256,
+      0.7128724529079069
+    ],
+    "cloud_macro_f1_on_common_classes": 0.6338174526539543,
+    "cloud_macro_f1_on_solid_classes": 0.6338174526539543,
+    "cloud_roc_auc_macro": 0.9936175897977206,
+    "common_classes": [
+      "BENIGN",
+      "Bot",
+      "DDoS",
+      "PortScan"
+    ],
+    "lab_benign_fpr": 0.015379443650726951,
+    "lab_macro_f1": 0.7293255893786844,
+    "lab_macro_f1_on_common_classes": 0.7293255893786844,
+    "lab_macro_f1_on_solid_classes": 0.7293255893786844,
+    "lab_model": "lab model, Friday only (4 classes)",
+    "lab_roc_auc_macro": 0.9956607996163387,
+    "per_class_f1": {
+      "BENIGN": {
+        "cloud": 0.9635327349870709,
+        "cloud_support": 133759,
+        "lab": 0.9902379241854372,
+        "lab_support": 35697
+      },
+      "Bot": {
+        "cloud": 0.0,
+        "cloud_support": 106,
+        "lab": 0.0,
+        "lab_support": 123
+      },
+      "DDoS": {
+        "cloud": 0.5889177835567113,
+        "cloud_support": 5897,
+        "lab": 0.9273657289002557,
+        "lab_support": 3646
+      },
+      "DoS GoldenEye": {
+        "cloud": 0.9062778934840822,
+        "cloud_support": 1569,
+        "lab": null,
+        "lab_support": null
+      },
+      "DoS Hulk": {
+        "cloud": 0.980993577139861,
+        "cloud_support": 19328,
+        "lab": null,
+        "lab_support": null
+      },
+      "DoS Slowhttptest": {
+        "cloud": 0.5906210392902408,
+        "cloud_support": 307,
+        "lab": null,
+        "lab_support": null
+      },
+      "DoS slowloris": {
+        "cloud": 0.7085478887744593,
+        "cloud_support": 588,
+        "lab": null,
+        "lab_support": null
+      },
+      "FTP-Patator": {
+        "cloud": 0.9866666666666667,
+        "cloud_support": 667,
+        "lab": null,
+        "lab_support": null
+      },
+      "Heartbleed": {
+        "cloud": 1.0,
+        "cloud_support": 3,
+        "lab": null,
+        "lab_support": null
+      },
+      "Infiltration": {
+        "cloud": 0.9166666666666666,
+        "cloud_support": 11,
+        "lab": null,
+        "lab_support": null
+      },
+      "PortScan": {
+        "cloud": 0.9828192920720348,
+        "cloud_support": 2443,
+        "lab": 0.9996987044290448,
+        "lab_support": 1660
+      },
+      "SSH-Patator": {
+        "cloud": 0.9943117178612059,
+        "cloud_support": 437,
+        "lab": null,
+        "lab_support": null
+      },
+      "Web Attack - Brute Force": {
+        "cloud": 0.26198083067092653,
+        "cloud_support": 100,
+        "lab": null,
+        "lab_support": null
+      },
+      "Web Attack - Sql Injection": {
+        "cloud": 0.0,
+        "cloud_support": 3,
+        "lab": null,
+        "lab_support": null
+      },
+      "Web Attack - XSS": {
+        "cloud": 0.3392226148409894,
+        "cloud_support": 62,
+        "lab": null,
+        "lab_support": null
+      }
+    },
+    "solid_classes": [
+      "BENIGN",
+      "Bot",
+      "DDoS",
+      "PortScan"
+    ],
+    "solid_classes_note": "classes with at least 100 test rows in BOTH test sets; the lab side has no interval"
+  },
+  "friday_xgboost_noport": {
+    "caveat": "different feature sets (13 flow-log counters vs about 40 CICFlowMeter features), different splits (the lab week model: 5 days, one split; the cloud model: rows capped per day and class, windowed rows), different class sets and test sizes: indicative, not a controlled experiment",
+    "cloud_benign_fpr": 0.07107608003254104,
+    "cloud_macro_f1": 0.6304531135636265,
+    "cloud_macro_f1_ci95": [
+      0.6045809325829499,
+      0.6479744893523705
+    ],
+    "cloud_macro_f1_cluster_ci95": [
+      0.5444295002023491,
+      0.6615883753163442
+    ],
+    "cloud_macro_f1_on_common_classes": 0.5461751462610304,
+    "cloud_macro_f1_on_solid_classes": 0.7282335283480404,
+    "cloud_roc_auc_macro": 0.9813588466982969,
+    "common_classes": [
+      "BENIGN",
+      "Bot",
+      "DDoS",
+      "PortScan"
+    ],
+    "lab_benign_fpr": 0.01529540297503992,
+    "lab_macro_f1": 0.7293167101908884,
+    "lab_macro_f1_on_common_classes": 0.7293167101908884,
+    "lab_macro_f1_on_solid_classes": 0.9724222802545178,
+    "lab_model": "lab model, Friday only, no dst_port",
+    "lab_roc_auc_macro": 0.9817132606726765,
+    "per_class_f1": {
+      "BENIGN": {
+        "cloud": 0.9601383457215158,
+        "cloud_support": 130297,
+        "lab": 0.9902666460073528,
+        "lab_support": 35697
+      },
+      "Bot": {
+        "cloud": 0.0,
+        "cloud_support": 7,
+        "lab": 0.0,
+        "lab_support": 123
+      },
+      "DDoS": {
+        "cloud": 0.5900240867121638,
+        "cloud_support": 5894,
+        "lab": 0.9276029675108723,
+        "lab_support": 3646
+      },
+      "DoS GoldenEye": {
+        "cloud": 0.8752166377816292,
+        "cloud_support": 1569,
+        "lab": null,
+        "lab_support": null
+      },
+      "DoS Hulk": {
+        "cloud": 0.9770948554732338,
+        "cloud_support": 19306,
+        "lab": null,
+        "lab_support": null
+      },
+      "DoS Slowhttptest": {
+        "cloud": 0.5604790419161677,
+        "cloud_support": 307,
+        "lab": null,
+        "lab_support": null
+      },
+      "DoS slowloris": {
+        "cloud": 0.6597724922440538,
+        "cloud_support": 588,
+        "lab": null,
+        "lab_support": null
+      },
+      "FTP-Patator": {
+        "cloud": 0.9778761061946902,
+        "cloud_support": 665,
+        "lab": null,
+        "lab_support": null
+      },
+      "Heartbleed": {
+        "cloud": 1.0,
+        "cloud_support": 3,
+        "lab": null,
+        "lab_support": null
+      },
+      "Infiltration": {
+        "cloud": 0.72,
+        "cloud_support": 11,
+        "lab": null,
+        "lab_support": null
+      },
+      "PortScan": {
+        "cloud": 0.6345381526104418,
+        "cloud_support": 141,
+        "lab": 0.9993972272453285,
+        "lab_support": 1660
+      },
+      "SSH-Patator": {
+        "cloud": 0.8783185840707964,
+        "cloud_support": 437,
+        "lab": null,
+        "lab_support": null
+      },
+      "Web Attack - Brute Force": {
+        "cloud": 0.27424749163879597,
+        "cloud_support": 100,
+        "lab": null,
+        "lab_support": null
+      },
+      "Web Attack - Sql Injection": {
+        "cloud": 0.0,
+        "cloud_support": 3,
+        "lab": null,
+        "lab_support": null
+      },
+      "Web Attack - XSS": {
+        "cloud": 0.3490909090909091,
+        "cloud_support": 62,
+        "lab": null,
+        "lab_support": null
+      }
+    },
+    "solid_classes": [
+      "BENIGN",
+      "DDoS",
+      "PortScan"
+    ],
+    "solid_classes_note": "classes with at least 100 test rows in BOTH test sets; the lab side has no interval"
+  },
+  "week_xgboost": {
+    "caveat": "different feature sets (13 flow-log counters vs about 40 CICFlowMeter features), different splits (the lab week model: 5 days, one split; the cloud model: rows capped per day and class, windowed rows), different class sets and test sizes: indicative, not a controlled experiment",
+    "cloud_benign_fpr": 0.06537130211798832,
+    "cloud_macro_f1": 0.6813705804007278,
+    "cloud_macro_f1_ci95": [
+      0.6581644913517241,
+      0.6928490436702702
+    ],
+    "cloud_macro_f1_cluster_ci95": [
+      0.6009777339257256,
+      0.7128724529079069
+    ],
+    "cloud_macro_f1_on_common_classes": 0.7164831394251412,
+    "cloud_macro_f1_on_solid_classes": 0.7551567444831391,
+    "cloud_roc_auc_macro": 0.9936175897977206,
+    "common_classes": [
+      "BENIGN",
+      "Bot",
+      "DDoS",
+      "DoS Hulk",
+      "DoS Slowhttptest",
+      "DoS slowloris",
+      "FTP-Patator",
+      "Heartbleed",
+      "Infiltration",
+      "PortScan",
+      "SSH-Patator",
+      "Web Attack - Brute Force",
+      "Web Attack - XSS"
+    ],
+    "lab_benign_fpr": 0.01137229879670463,
+    "lab_macro_f1": 0.6619774713201023,
+    "lab_macro_f1_on_common_classes": 0.7128988152678025,
+    "lab_macro_f1_on_solid_classes": 0.7100069134287836,
+    "lab_model": "lab model, whole week (14 classes)",
+    "lab_roc_auc_macro": 0.9961095727761834,
+    "per_class_f1": {
+      "BENIGN": {
+        "cloud": 0.9635327349870709,
+        "cloud_support": 133759,
+        "lab": 0.9918845653781113,
+        "lab_support": 177097
+      },
+      "Bot": {
+        "cloud": 0.0,
+        "cloud_support": 106,
+        "lab": 0.0,
+        "lab_support": 123
+      },
+      "DDoS": {
+        "cloud": 0.5889177835567113,
+        "cloud_support": 5897,
+        "lab": 0.9197820301609428,
+        "lab_support": 3646
+      },
+      "DoS GoldenEye": {
+        "cloud": 0.9062778934840822,
+        "cloud_support": 1569,
+        "lab": 0.0,
+        "lab_support": 0
+      },
+      "DoS Hulk": {
+        "cloud": 0.980993577139861,
+        "cloud_support": 19328,
+        "lab": 0.9610250934329952,
+        "lab_support": 10701
+      },
+      "DoS Slowhttptest": {
+        "cloud": 0.5906210392902408,
+        "cloud_support": 307,
+        "lab": 0.0,
+        "lab_support": 127
+      },
+      "DoS slowloris": {
+        "cloud": 0.7085478887744593,
+        "cloud_support": 588,
+        "lab": 0.8445378151260504,
+        "lab_support": 275
+      },
+      "FTP-Patator": {
+        "cloud": 0.9866666666666667,
+        "cloud_support": 667,
+        "lab": 0.9790897908979089,
+        "lab_support": 398
+      },
+      "Heartbleed": {
+        "cloud": 1.0,
+        "cloud_support": 3,
+        "lab": 1.0,
+        "lab_support": 1
+      },
+      "Infiltration": {
+        "cloud": 0.9166666666666666,
+        "cloud_support": 11,
+        "lab": 0.9230769230769231,
+        "lab_support": 6
+      },
+      "PortScan": {
+        "cloud": 0.9828192920720348,
+        "cloud_support": 2443,
+        "lab": 0.7041595925297114,
+        "lab_support": 1660
+      },
+      "SSH-Patator": {
+        "cloud": 0.9943117178612059,
+        "cloud_support": 437,
+        "lab": 0.9895833333333334,
+        "lab_support": 485
+      },
+      "Web Attack - Brute Force": {
+        "cloud": 0.26198083067092653,
+        "cloud_support": 100,
+        "lab": 0.9545454545454546,
+        "lab_support": 21
+      },
+      "Web Attack - Sql Injection": {
+        "cloud": 0.0,
+        "cloud_support": 3,
+        "lab": null,
+        "lab_support": null
+      },
+      "Web Attack - XSS": {
+        "cloud": 0.3392226148409894,
+        "cloud_support": 62,
+        "lab": 0.0,
+        "lab_support": 3
+      }
+    },
+    "solid_classes": [
+      "BENIGN",
+      "Bot",
+      "DDoS",
+      "DoS Hulk",
+      "DoS Slowhttptest",
+      "DoS slowloris",
+      "FTP-Patator",
+      "PortScan",
+      "SSH-Patator"
+    ],
+    "solid_classes_note": "classes with at least 100 test rows in BOTH test sets; the lab side has no interval"
+  },
+  "week_xgboost_noport": {
+    "caveat": "different feature sets (13 flow-log counters vs about 40 CICFlowMeter features), different splits (the lab week model: 5 days, one split; the cloud model: rows capped per day and class, windowed rows), different class sets and test sizes: indicative, not a controlled experiment",
+    "cloud_benign_fpr": 0.07107608003254104,
+    "cloud_macro_f1": 0.6304531135636265,
+    "cloud_macro_f1_ci95": [
+      0.6045809325829499,
+      0.6479744893523705
+    ],
+    "cloud_macro_f1_cluster_ci95": [
+      0.5444295002023491,
+      0.6615883753163442
+    ],
+    "cloud_macro_f1_on_common_classes": 0.6601215435132898,
+    "cloud_macro_f1_on_solid_classes": 0.779780208117883,
+    "cloud_roc_auc_macro": 0.9813588466982969,
+    "common_classes": [
+      "BENIGN",
+      "Bot",
+      "DDoS",
+      "DoS Hulk",
+      "DoS Slowhttptest",
+      "DoS slowloris",
+      "FTP-Patator",
+      "Heartbleed",
+      "Infiltration",
+      "PortScan",
+      "SSH-Patator",
+      "Web Attack - Brute Force",
+      "Web Attack - XSS"
+    ],
+    "lab_benign_fpr": 0.011722389425004377,
+    "lab_macro_f1": 0.6157490572470002,
+    "lab_macro_f1_on_common_classes": 0.6631143693429233,
+    "lab_macro_f1_on_solid_classes": 0.7964779624817158,
+    "lab_model": "lab model, whole week, no dst_port",
+    "lab_roc_auc_macro": 0.9866853683266433,
+    "per_class_f1": {
+      "BENIGN": {
+        "cloud": 0.9601383457215158,
+        "cloud_support": 130297,
+        "lab": 0.9912721876734518,
+        "lab_support": 177097
+      },
+      "Bot": {
+        "cloud": 0.0,
+        "cloud_support": 7,
+        "lab": 0.0,
+        "lab_support": 123
+      },
+      "DDoS": {
+        "cloud": 0.5900240867121638,
+        "cloud_support": 5894,
+        "lab": 0.9191791233848493,
+        "lab_support": 3646
+      },
+      "DoS GoldenEye": {
+        "cloud": 0.8752166377816292,
+        "cloud_support": 1569,
+        "lab": 0.0,
+        "lab_support": 0
+      },
+      "DoS Hulk": {
+        "cloud": 0.9770948554732338,
+        "cloud_support": 19306,
+        "lab": 0.9544744040640876,
+        "lab_support": 10701
+      },
+      "DoS Slowhttptest": {
+        "cloud": 0.5604790419161677,
+        "cloud_support": 307,
+        "lab": 0.0,
+        "lab_support": 127
+      },
+      "DoS slowloris": {
+        "cloud": 0.6597724922440538,
+        "cloud_support": 588,
+        "lab": 0.8277310924369747,
+        "lab_support": 275
+      },
+      "FTP-Patator": {
+        "cloud": 0.9778761061946902,
+        "cloud_support": 665,
+        "lab": 1.0,
+        "lab_support": 398
+      },
+      "Heartbleed": {
+        "cloud": 1.0,
+        "cloud_support": 3,
+        "lab": 1.0,
+        "lab_support": 1
+      },
+      "Infiltration": {
+        "cloud": 0.72,
+        "cloud_support": 11,
+        "lab": 0.29411764705882354,
+        "lab_support": 6
+      },
+      "PortScan": {
+        "cloud": 0.6345381526104418,
+        "cloud_support": 141,
+        "lab": 0.7067092651757189,
+        "lab_support": 1660
+      },
+      "SSH-Patator": {
+        "cloud": 0.8783185840707964,
+        "cloud_support": 437,
+        "lab": 0.972457627118644,
+        "lab_support": 485
+      },
+      "Web Attack - Brute Force": {
+        "cloud": 0.27424749163879597,
+        "cloud_support": 100,
+        "lab": 0.9545454545454546,
+        "lab_support": 21
+      },
+      "Web Attack - Sql Injection": {
+        "cloud": 0.0,
+        "cloud_support": 3,
+        "lab": null,
+        "lab_support": null
+      },
+      "Web Attack - XSS": {
+        "cloud": 0.3490909090909091,
+        "cloud_support": 62,
+        "lab": 0.0,
+        "lab_support": 3
+      }
+    },
+    "solid_classes": [
+      "BENIGN",
+      "DDoS",
+      "DoS Hulk",
+      "DoS Slowhttptest",
+      "DoS slowloris",
+      "FTP-Patator",
+      "PortScan",
+      "SSH-Patator"
+    ],
+    "solid_classes_note": "classes with at least 100 test rows in BOTH test sets; the lab side has no interval"
+  }
+}

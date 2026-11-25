@@ -1,0 +1,21 @@
+{
+  "note": "experiment, not a shipped model: CIC contains no REJECT traffic, so the benign side of 'rejected = 1' is a guess (short benign rows converted to REJECT)",
+  "synthetic_reject_scan_rows_added": 1782,
+  "train_rows": 492767,
+  "reject_portscan_test_rows": 2443,
+  "benign_short_rows_as_reject": 14318,
+  "with_synthetic_reject_rows": {
+    "reject_portscan_recall": 0.9995906672124437,
+    "reject_portscan_any_attack": 0.9995906672124437,
+    "benign_short_reject_flagged_attack": 0.5068445313591283,
+    "benign_short_reject_flagged_portscan": 0.49008241374493644,
+    "cic_test_macro_f1": 0.6834355635114042,
+    "cic_test_benign_false_positive_rate": 0.06537877825043549
+  },
+  "unmodified_model": {
+    "reject_portscan_recall": 0.00040933278755628325,
+    "reject_portscan_any_attack": 0.03724928366762178,
+    "benign_short_reject_flagged_attack": 0.07878195278670205,
+    "benign_short_reject_flagged_portscan": 0.0
+  }
+}

@@ -1,0 +1,33 @@
+name: idps-iphone
+services:
+  tunnel:
+    image: ngrok/ngrok@sha256:ff3b5c3674432d14a786349908b7bdf28ee56c25662637afcbe7180d471993ef
+    profiles: [remote]
+    network_mode: service:gateway
+    read_only: true
+    tmpfs:
+      - /tmp
+    entrypoint: ["/bin/sh", "-ec"]
+    command:
+      - |
+        IFS= read -r NGROK_AUTHTOKEN
+        IFS= read -r allowed_email
+        test -n "$$NGROK_AUTHTOKEN"
+        case "$$allowed_email" in ''|*[!a-zA-Z0-9.@_+-]*) exit 2;; esac
+        export NGROK_AUTHTOKEN
+        umask 077
+        printf '%s\n' "on_http_request:" \
+          "  - actions:" "      - type: oauth" "        config:" "          provider: google" \
+          "  - expressions:" "      - \"!(actions.ngrok.oauth.identity.email in ['$$allowed_email'])\"" \
+          "    actions:" "      - type: deny" "        config:" "          status_code: 403" > /tmp/access.yml
+        exec ngrok http http://127.0.0.1:8080 --traffic-policy-file=/tmp/access.yml --inspect=false --log=stdout
+  gateway:
+    build:
+      context: .
+      additional_contexts:
+        dashboard: ../../soc/web/dist-iphone
+      dockerfile_inline: |
+        FROM caddy:2@sha256:4e2425f6009577e7c651010f16679c28f7d12df3e7b1914f941a7a3370746b3c
+        COPY Caddyfile /etc/caddy/Caddyfile
+        COPY --from=dashboard . /srv
+    restart: unless-stopped

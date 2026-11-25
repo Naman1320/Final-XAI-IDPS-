@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "idps"
+version = "0.2.0"
+description = "Network IDPS with explainable AI and a SOC dashboard"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "numpy",
+    "pandas",
+    "pyarrow",
+    "nfstream",
+    "scikit-learn",
+    "joblib",
+    "xgboost",
+    "shap",
+    "lime",
+    "scapy",
+    "fastapi",
+    "uvicorn",
+    "websockets",  # uvicorn needs it to serve the /ws/alerts live feed
+    "sqlalchemy",
+    "alembic",  # SOC database migrations (soc/api/migrations)
+    "pydantic",
+    "pydantic-settings",
+    "pyjwt",
+    "anthropic",  # SOC assistant
+    "geoip2",  # attack world map (MaxMind GeoLite2)
+    "argon2-cffi",
+    # Step 11: model signatures (Ed25519), MFA secret encryption, sensor certificates, OIDC keys
+    "cryptography",
+    "segno",  # MFA enrolment QR codes, drawn locally
+    "reportlab",  # SOC weekly PDF report (soc/api/reports.py)
+]
+
+[project.optional-dependencies]
+capture = ["nfstream"]  # already a core dependency; kept so ".[capture]" still works
+cloud = ["boto3"]  # idps.cloud: VPC Flow Logs from S3, network ACL blocking (imported lazily)
+postgres = ["psycopg[binary]"]  # PostgreSQL driver: IDPS_SOC_DATABASE_URL=postgresql+psycopg://...
+dev = ["pytest", "ruff", "httpx"]
+
+[tool.setuptools.packages.find]
+include = ["idps*", "soc*"]
+
+[tool.setuptools.package-data]
+"soc.api.migrations" = ["script.py.mako"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100

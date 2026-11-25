@@ -1,0 +1,22 @@
+# The flow-log exporter (docs/cloud-plan.md step C3): ONE image for the writer and the shipper.
+# A local layer on the lab's sensor image (it already holds Python, scapy, pandas and the current
+# idps/ code in /opt/idps, with PYTHONPATH=/opt/idps because site-packages holds older code),
+# built WITHOUT network. Only boto3 is added, from the wheels cached for the emulator build.
+# Build it with lab/cloud/build_flowlog.sh (build context = repo root, wheels as a named context).
+FROM idps-lab-sensor:latest
+RUN --mount=type=bind,from=wheels,target=/wheels \
+    /opt/venv/bin/pip install --no-index --no-deps \
+        /wheels/boto3-*.whl /wheels/botocore-*.whl /wheels/jmespath-*.whl /wheels/s3transfer-*.whl
+COPY idps ./idps
+# The ONE billing guard; idps.cloud.flowlog_export loads it from lab/cloud/guard.py next to idps/.
+COPY lab/cloud/guard.py ./lab/cloud/guard.py
+# Named volumes copy these folders' owner (nobody) on first use, so the unprivileged writer can
+# write and the unprivileged shipper can keep its state without any chown at run time.
+RUN mkdir -p /var/lib/flowlog-out /var/lib/flowlog-state \
+    && chown 65534:65534 /var/lib/flowlog-out /var/lib/flowlog-state \
+    && find /opt/idps -name __pycache__ -prune -exec rm -rf {} + \
+    && /opt/venv/bin/python -c "import boto3, scapy, idps.cloud.flowlog_export"
+ENV PYTHONDONTWRITEBYTECODE=1
+ENTRYPOINT ["python", "-m", "idps.cloud"]
+# The sensor image's health check looks for /tmp/ready; each service sets its own in compose.
+HEALTHCHECK NONE

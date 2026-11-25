@@ -1,0 +1,77 @@
+/* IAM module styles. Only uses the design system's variables; everything is prefixed iam-. */
+
+.iam-subnav { display: flex; flex-wrap: wrap; gap: 4px; padding: 4px; background: var(--surface-2); border-radius: var(--radius-sm); }
+.iam-subnav a { padding: 8px 14px; border-radius: 9px; color: var(--muted); font-weight: 500; font-size: 14px; min-height: 36px; display: inline-flex; align-items: center; }
+.iam-subnav a:hover { color: var(--text); text-decoration: none; background: var(--surface); }
+.iam-subnav a.active { background: var(--surface); color: var(--text); box-shadow: 0 0 0 1px var(--border); font-weight: 600; }
+
+.iam-skeleton { display: flex; flex-direction: column; gap: 12px; padding: 6px 0; }
+.iam-skel-line { display: block; height: 16px; border-radius: 8px; background: linear-gradient(90deg, var(--surface-2) 25%, var(--border) 50%, var(--surface-2) 75%); background-size: 200% 100%; animation: iam-shimmer 1.4s linear infinite; }
+@keyframes iam-shimmer { to { background-position: -200% 0; } }
+@media (prefers-reduced-motion: reduce) { .iam-skel-line { animation: none; } }
+
+.iam-forbidden { display: flex; flex-direction: column; gap: 4px; padding: 16px; border-radius: 14px; background: var(--warn-wash); color: var(--warn-text); border: 1px solid color-mix(in srgb, var(--warn) 35%, transparent); }
+.iam-forbidden .muted { color: inherit; }
+
+.iam-backdrop { position: fixed; inset: 0; z-index: 50; display: flex; align-items: flex-start; justify-content: center; padding: 5vh 12px; background: rgb(15 23 42 / 55%); overflow-y: auto; }
+.iam-modal { width: min(560px, 100%); background: var(--surface); color: var(--text); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: 0 20px 50px rgb(0 0 0 / 30%); }
+.iam-modal.wide { width: min(820px, 100%); }
+.iam-modal:focus { outline: none; }
+.iam-modal-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 12px; }
+.iam-modal-head h2 { margin: 0; overflow-wrap: anywhere; }
+.iam-modal-foot { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; margin-top: 6px; }
+.iam-form { display: flex; flex-direction: column; gap: 14px; }
+.iam-form .field-block, .iam-form label.field { min-width: 0; }
+.iam-form input:not([type="checkbox"]):not([type="radio"]), .iam-form select, .iam-form textarea { width: 100%; }
+.iam-field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.iam-field > label { font-size: 13px; color: var(--muted); }
+.iam-field > input:not([type="checkbox"]), .iam-field > select, .iam-field > textarea { width: 100%; }
+.iam-field-error { color: var(--danger-text); font-size: 12px; }
+input[aria-invalid="true"], textarea[aria-invalid="true"] { border-color: var(--danger); }
+.iam-hint { font-size: 12px; color: var(--muted); }
+
+.iam-toasts { position: fixed; right: 16px; bottom: 16px; z-index: 60; display: flex; flex-direction: column; gap: 8px; max-width: min(380px, calc(100vw - 32px)); }
+.iam-toast { display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border-radius: 14px; background: var(--surface); border: 1px solid var(--border); box-shadow: 0 8px 24px rgb(0 0 0 / 20%); overflow-wrap: anywhere; }
+.iam-toast.ok { border-left: 4px solid var(--ok); }
+.iam-toast.danger { border-left: 4px solid var(--danger); }
+.iam-toast .link-button { margin-left: auto; font-size: 18px; line-height: 1; }
+
+.iam-pager { display: flex; align-items: center; justify-content: flex-end; gap: 12px; margin-top: 10px; }
+
+.iam-filters { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; margin-bottom: 12px; }
+.iam-filters label.field { flex: 1 1 150px; min-width: 0; }
+.iam-filters input:not([type="checkbox"]), .iam-filters select { width: 100%; }
+
+.iam-checklist, .iam-permgroup { border: 1px solid var(--border); border-radius: 14px; margin: 0; padding: 10px 12px; min-width: 0; }
+.iam-checklist legend, .iam-permgroup legend { font-size: 13px; font-weight: 600; padding: 0 6px; }
+.iam-checks { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; max-height: 240px; overflow-y: auto; }
+.iam-permgroup .iam-checks { max-height: none; }
+.iam-checks label.field.inline { align-items: flex-start; color: var(--text); }
+.iam-checks code { font-size: 12px; }
+.iam-checklist > input[type="search"] { width: 100%; margin-top: 6px; }
+.iam-permissions { display: flex; flex-direction: column; gap: 10px; }
+.iam-selectall { padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+
+.iam-stats { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+.iam-stat { padding: 14px; border-radius: 14px; background: var(--surface-2); display: flex; flex-direction: column; gap: 2px; }
+.iam-stat .value { font-size: 28px; font-weight: 600; }
+.iam-stat .label { font-size: 13px; color: var(--muted); }
+.iam-shortcuts { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.iam-chips { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; margin: 0; padding: 0; }
+.iam-chips li { max-width: 100%; }
+.iam-chips code { font-size: 12px; padding: 3px 8px; border-radius: 8px; background: var(--surface-2); display: inline-block; overflow-wrap: anywhere; }
+.iam-chips code.denied { background: var(--danger-wash); color: var(--danger-text); text-decoration: line-through; }
+.iam-chips code.denied::after { content: " (denied)"; text-decoration: none; display: inline-block; }
+
+.iam-details { margin: 0; max-width: 420px; }
+.iam-details summary { cursor: pointer; color: var(--accent); font-size: 12px; }
+.iam-details pre { margin: 6px 0 0; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 12px; font-family: var(--mono); }
+.iam-ua { max-width: 260px; overflow-wrap: anywhere; font-size: 12px; }
+.iam-lock { display: inline-flex; align-items: center; gap: 4px; }
+
+@media (max-width: 760px) {
+  .iam-backdrop { padding: 0; }
+  .iam-modal, .iam-modal.wide { min-height: 100%; border-radius: 0; width: 100%; }
+  .iam-toasts { left: 12px; right: 12px; max-width: none; }
+}

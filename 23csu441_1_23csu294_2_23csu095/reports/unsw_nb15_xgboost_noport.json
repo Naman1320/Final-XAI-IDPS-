@@ -1,0 +1,1560 @@
+{
+  "classes_in_train": [
+    "Analysis",
+    "BENIGN",
+    "Backdoor",
+    "DoS",
+    "Exploits",
+    "Fuzzers",
+    "Generic",
+    "Reconnaissance",
+    "Shellcode",
+    "Worms"
+  ],
+  "classes_missing_from_train": [],
+  "dataset": "UNSW-NB15",
+  "dropped_features": [
+    "sport",
+    "dsport"
+  ],
+  "faithfulness": {
+    "file": "reports/unsw_nb15_xgboost_noport_faithfulness.json",
+    "lime": {
+      "label_flip_rate": 0.87,
+      "mean_confidence_after": 0.12914134562015533,
+      "mean_drop": 0.6345535516738892,
+      "median_drop": 0.7317236065864563,
+      "ratio_to_random": 2.8122270580968505,
+      "share_flows_beating_random": 0.93
+    },
+    "random_mean_drop": 0.22564093814790248,
+    "shap": {
+      "label_flip_rate": 0.84,
+      "mean_confidence_after": 0.17132331430912018,
+      "mean_drop": 0.5923715233802795,
+      "median_drop": 0.6619201898574829,
+      "ratio_to_random": 2.6252839056713793,
+      "share_flows_beating_random": 0.89
+    }
+  },
+  "features": [
+    "proto",
+    "state",
+    "dur",
+    "sbytes",
+    "dbytes",
+    "sttl",
+    "dttl",
+    "sloss",
+    "dloss",
+    "service",
+    "sload",
+    "dload",
+    "spkts",
+    "dpkts",
+    "swin",
+    "dwin",
+    "stcpb",
+    "dtcpb",
+    "smeansz",
+    "dmeansz",
+    "trans_depth",
+    "res_bdy_len",
+    "sjit",
+    "djit",
+    "sintpkt",
+    "dintpkt",
+    "tcprtt",
+    "synack",
+    "ackdat",
+    "is_sm_ips_ports",
+    "ct_state_ttl",
+    "ct_flw_http_mthd",
+    "is_ftp_login",
+    "ct_ftp_cmd",
+    "ct_srv_src",
+    "ct_srv_dst",
+    "ct_dst_ltm",
+    "ct_src_ltm",
+    "ct_src_dport_ltm",
+    "ct_dst_sport_ltm",
+    "ct_dst_src_ltm"
+  ],
+  "macro_f1_caveat": "per-class and macro scores of classes with few test rows or an effective gap far below the flow timeout (see per_class_test_table) are soft: read them with the bootstrap interval, and the gap column shows which classes are scored on bursts that the shrunk gap barely separates",
+  "metrics": {
+    "test": {
+      "accuracy": 0.9542942603366832,
+      "anomaly": {
+        "benign_false_positive_rate": 0.010633978249179681,
+        "detection_rate_per_class": {
+          "Analysis": 0.06074766355140187,
+          "Backdoor": 0.08888888888888889,
+          "DoS": 0.060240963855421686,
+          "Exploits": 0.0368309052218039,
+          "Fuzzers": 0.07849588719153937,
+          "Generic": 0.22868741542625168,
+          "Reconnaissance": 0.027869626830420408,
+          "Shellcode": 0.006802721088435374,
+          "Worms": 0.0625
+        },
+        "n": 109658,
+        "roc_auc": 0.9670690917683153
+      },
+      "benign_false_positive_rate": 0.011577757536516577,
+      "bootstrap_95ci": {
+        "level": 0.95,
+        "macro_f1": [
+          0.6296419737791762,
+          0.6573278544320474
+        ],
+        "method": "percentile bootstrap over test rows",
+        "n_resamples": 200,
+        "per_class_f1": {
+          "Analysis": [
+            0.2617424242424243,
+            0.31504751702922434
+          ],
+          "BENIGN": [
+            0.9934401420381285,
+            0.9940975507987402
+          ],
+          "Backdoor": [
+            0.2341665634570348,
+            0.3118534871147955
+          ],
+          "DoS": [
+            0.39343937743864177,
+            0.449338261755478
+          ],
+          "Exploits": [
+            0.8062058958926422,
+            0.8212451835464204
+          ],
+          "Fuzzers": [
+            0.8224141649684397,
+            0.838635761763087
+          ],
+          "Generic": [
+            0.9178712798893757,
+            0.9308528133194787
+          ],
+          "Reconnaissance": [
+            0.8145971445928709,
+            0.8396985593532129
+          ],
+          "Shellcode": [
+            0.4584380597107106,
+            0.5295422813738945
+          ],
+          "Worms": [
+            0.45569620253164556,
+            0.6988253012048193
+          ]
+        },
+        "seed": 20260518
+      },
+      "by_session": {
+        "classes_in_every_session": [
+          "Analysis",
+          "BENIGN",
+          "Backdoor",
+          "DoS",
+          "Exploits",
+          "Fuzzers",
+          "Generic",
+          "Reconnaissance",
+          "Shellcode",
+          "Worms"
+        ],
+        "note": "scores on the deduplicated test rows of one capture session each; the attack prior and the class set differ between sessions",
+        "sessions": {
+          "0": {
+            "accuracy": 0.9872843916868349,
+            "attack_share": 0.054415888748031195,
+            "benign_false_positive_rate": 0.0,
+            "class_counts": {
+              "Analysis": 76,
+              "BENIGN": 49229,
+              "Backdoor": 63,
+              "DoS": 200,
+              "Exploits": 840,
+              "Fuzzers": 914,
+              "Generic": 412,
+              "Reconnaissance": 282,
+              "Shellcode": 42,
+              "Worms": 4
+            },
+            "common_classes": {
+              "accuracy": 0.9872843916868349,
+              "benign_false_positive_rate": 0.0,
+              "classes": [
+                "Analysis",
+                "BENIGN",
+                "Backdoor",
+                "DoS",
+                "Exploits",
+                "Fuzzers",
+                "Generic",
+                "Reconnaissance",
+                "Shellcode",
+                "Worms"
+              ],
+              "excluded_rows_total": 0,
+              "excluded_rows_true_class_outside": {},
+              "kept_rows_predicted_outside": 0,
+              "macro_f1": 0.5841775387561041,
+              "n": 52062,
+              "note": "macro-F1 over exactly these classes; rows of other true classes excluded; a prediction outside the list counts as a miss for the true class",
+              "per_class": {
+                "Analysis": {
+                  "f1": 0.2807017543859649,
+                  "precision": 0.42105263157894735,
+                  "recall": 0.21052631578947367,
+                  "support": 76
+                },
+                "BENIGN": {
+                  "f1": 0.9993605424224277,
+                  "precision": 0.9987219021342205,
+                  "recall": 1.0,
+                  "support": 49229
+                },
+                "Backdoor": {
+                  "f1": 0.45161290322580644,
+                  "precision": 0.7,
+                  "recall": 0.3333333333333333,
+                  "support": 63
+                },
+                "DoS": {
+                  "f1": 0.40987654320987654,
+                  "precision": 0.40487804878048783,
+                  "recall": 0.415,
+                  "support": 200
+                },
+                "Exploits": {
+                  "f1": 0.7651951375559821,
+                  "precision": 0.8271092669432918,
+                  "recall": 0.7119047619047619,
+                  "support": 840
+                },
+                "Fuzzers": {
+                  "f1": 0.9248491497531541,
+                  "precision": 0.9273927392739274,
+                  "recall": 0.9223194748358862,
+                  "support": 914
+                },
+                "Generic": {
+                  "f1": 0.8938826466916354,
+                  "precision": 0.9203084832904884,
+                  "recall": 0.8689320388349514,
+                  "support": 412
+                },
+                "Reconnaissance": {
+                  "f1": 0.8588709677419355,
+                  "precision": 0.9953271028037384,
+                  "recall": 0.7553191489361702,
+                  "support": 282
+                },
+                "Shellcode": {
+                  "f1": 0.25742574257425743,
+                  "precision": 0.14942528735632185,
+                  "recall": 0.9285714285714286,
+                  "support": 42
+                },
+                "Worms": {
+                  "f1": 0.0,
+                  "precision": 0.0,
+                  "recall": 0.0,
+                  "support": 4
+                }
+              }
+            },
+            "macro_f1": 0.5841775387561041,
+            "n": 52062
+          },
+          "1": {
+            "accuracy": 0.924473921800125,
+            "attack_share": 0.27262309882630736,
+            "benign_false_positive_rate": 0.025182603714135676,
+            "class_counts": {
+              "Analysis": 352,
+              "BENIGN": 41894,
+              "Backdoor": 297,
+              "DoS": 1045,
+              "Exploits": 5269,
+              "Fuzzers": 3341,
+              "Generic": 3283,
+              "Reconnaissance": 1835,
+              "Shellcode": 252,
+              "Worms": 28
+            },
+            "common_classes": {
+              "accuracy": 0.924473921800125,
+              "benign_false_positive_rate": 0.025182603714135676,
+              "classes": [
+                "Analysis",
+                "BENIGN",
+                "Backdoor",
+                "DoS",
+                "Exploits",
+                "Fuzzers",
+                "Generic",
+                "Reconnaissance",
+                "Shellcode",
+                "Worms"
+              ],
+              "excluded_rows_total": 0,
+              "excluded_rows_true_class_outside": {},
+              "kept_rows_predicted_outside": 0,
+              "macro_f1": 0.6535407037213418,
+              "n": 57596,
+              "note": "macro-F1 over exactly these classes; rows of other true classes excluded; a prediction outside the list counts as a miss for the true class",
+              "per_class": {
+                "Analysis": {
+                  "f1": 0.2914193200215866,
+                  "precision": 0.1798800799467022,
+                  "recall": 0.7670454545454546,
+                  "support": 352
+                },
+                "BENIGN": {
+                  "f1": 0.987212338039064,
+                  "precision": 0.9999265462024387,
+                  "recall": 0.9748173962858643,
+                  "support": 41894
+                },
+                "Backdoor": {
+                  "f1": 0.24969097651421507,
+                  "precision": 0.197265625,
+                  "recall": 0.3400673400673401,
+                  "support": 297
+                },
+                "DoS": {
+                  "f1": 0.42689760570555274,
+                  "precision": 0.4564270152505447,
+                  "recall": 0.40095693779904307,
+                  "support": 1045
+                },
+                "Exploits": {
+                  "f1": 0.8221628289473685,
+                  "precision": 0.8968378560215295,
+                  "recall": 0.7589675460239135,
+                  "support": 5269
+                },
+                "Fuzzers": {
+                  "f1": 0.8066313736416829,
+                  "precision": 0.7544956997654417,
+                  "recall": 0.866507033822209,
+                  "support": 3341
+                },
+                "Generic": {
+                  "f1": 0.9285600636435959,
+                  "precision": 0.972018654230513,
+                  "recall": 0.8888212001218397,
+                  "support": 3283
+                },
+                "Reconnaissance": {
+                  "f1": 0.8239077995175557,
+                  "precision": 0.8106540084388185,
+                  "recall": 0.8376021798365123,
+                  "support": 1835
+                },
+                "Shellcode": {
+                  "f1": 0.5878136200716846,
+                  "precision": 0.4205128205128205,
+                  "recall": 0.9761904761904762,
+                  "support": 252
+                },
+                "Worms": {
+                  "f1": 0.6111111111111112,
+                  "precision": 0.5,
+                  "recall": 0.7857142857142857,
+                  "support": 28
+                }
+              }
+            },
+            "macro_f1": 0.6535407037213418,
+            "n": 57596
+          }
+        }
+      },
+      "confusion_matrix": {
+        "labels": [
+          "Analysis",
+          "BENIGN",
+          "Backdoor",
+          "DoS",
+          "Exploits",
+          "Fuzzers",
+          "Generic",
+          "Reconnaissance",
+          "Shellcode",
+          "Worms"
+        ],
+        "matrix": [
+          [
+            286,
+            56,
+            56,
+            19,
+            8,
+            3,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            156,
+            90068,
+            0,
+            24,
+            43,
+            789,
+            2,
+            3,
+            38,
+            0
+          ],
+          [
+            195,
+            0,
+            122,
+            14,
+            10,
+            6,
+            0,
+            3,
+            9,
+            1
+          ],
+          [
+            184,
+            4,
+            84,
+            502,
+            321,
+            47,
+            14,
+            19,
+            69,
+            1
+          ],
+          [
+            225,
+            1,
+            89,
+            439,
+            4597,
+            118,
+            81,
+            329,
+            214,
+            16
+          ],
+          [
+            180,
+            3,
+            61,
+            39,
+            61,
+            3738,
+            17,
+            3,
+            153,
+            0
+          ],
+          [
+            138,
+            1,
+            58,
+            62,
+            107,
+            25,
+            3276,
+            0,
+            26,
+            2
+          ],
+          [
+            175,
+            1,
+            72,
+            21,
+            31,
+            13,
+            1,
+            1750,
+            50,
+            3
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            6,
+            0,
+            3,
+            285,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            3,
+            4,
+            1,
+            0,
+            0,
+            2,
+            22
+          ]
+        ]
+      },
+      "macro_f1": 0.6448040399861465,
+      "n": 109658,
+      "not_identical_to_train": {
+        "accuracy": 0.9561153019747184,
+        "benign_false_positive_rate": 0.01136426569786117,
+        "macro_f1": 0.6440613212220963,
+        "n": 107509,
+        "note": "test rows whose feature vector (this variant's) is in no train row"
+      },
+      "per_class": {
+        "Analysis": {
+          "f1": 0.2907981698017285,
+          "precision": 0.18583495776478232,
+          "recall": 0.6682242990654206,
+          "support": 428
+        },
+        "BENIGN": {
+          "f1": 0.9938154112668752,
+          "precision": 0.9992677568952892,
+          "recall": 0.9884222424634834,
+          "support": 91123
+        },
+        "Backdoor": {
+          "f1": 0.270509977827051,
+          "precision": 0.22509225092250923,
+          "recall": 0.3388888888888889,
+          "support": 360
+        },
+        "DoS": {
+          "f1": 0.4239864864864865,
+          "precision": 0.44701691896705253,
+          "recall": 0.40321285140562246,
+          "support": 1245
+        },
+        "Exploits": {
+          "f1": 0.8142768576742538,
+          "precision": 0.8871092242377461,
+          "recall": 0.7524963169094778,
+          "support": 6109
+        },
+        "Fuzzers": {
+          "f1": 0.830574380624375,
+          "precision": 0.7876106194690266,
+          "recall": 0.8784958871915394,
+          "support": 4255
+        },
+        "Generic": {
+          "f1": 0.9246401354784082,
+          "precision": 0.9660867000884695,
+          "recall": 0.8866035182679296,
+          "support": 3695
+        },
+        "Reconnaissance": {
+          "f1": 0.8280104092737166,
+          "precision": 0.8293838862559242,
+          "recall": 0.8266414737836562,
+          "support": 2117
+        },
+        "Shellcode": {
+          "f1": 0.5,
+          "precision": 0.33687943262411346,
+          "recall": 0.9693877551020408,
+          "support": 294
+        },
+        "Worms": {
+          "f1": 0.5714285714285714,
+          "precision": 0.4888888888888889,
+          "recall": 0.6875,
+          "support": 32
+        }
+      },
+      "roc_auc": {
+        "macro": 0.9940811779502235,
+        "per_class": {
+          "Analysis": 0.9905928585912773,
+          "BENIGN": 0.9988127988256097,
+          "Backdoor": 0.9924614738299573,
+          "DoS": 0.9813393650052415,
+          "Exploits": 0.9945565542349393,
+          "Fuzzers": 0.9947986081689066,
+          "Generic": 0.9976614874518267,
+          "Reconnaissance": 0.997260743084367,
+          "Shellcode": 0.9985806930211462,
+          "Worms": 0.9947471972889643
+        }
+      },
+      "train_overlap": {
+        "rows": 2149,
+        "share": 0.019597293403126083
+      }
+    },
+    "validation": {
+      "accuracy": 0.9588071843937094,
+      "anomaly": {
+        "benign_false_positive_rate": 0.010050137253567458,
+        "detection_rate_per_class": {
+          "Analysis": 0.08090614886731391,
+          "Backdoor": 0.08695652173913043,
+          "DoS": 0.07900677200902935,
+          "Exploits": 0.040872470033405384,
+          "Fuzzers": 0.07844092570036541,
+          "Generic": 0.288844047275872,
+          "Reconnaissance": 0.021940516821062895,
+          "Shellcode": 0.007042253521126761,
+          "Worms": 0.25806451612903225
+        },
+        "n": 104727,
+        "roc_auc": 0.966084636833479
+      },
+      "benign_false_positive_rate": 0.012159985480614352,
+      "confusion_matrix": {
+        "labels": [
+          "Analysis",
+          "BENIGN",
+          "Backdoor",
+          "DoS",
+          "Exploits",
+          "Fuzzers",
+          "Generic",
+          "Reconnaissance",
+          "Shellcode",
+          "Worms"
+        ],
+        "matrix": [
+          [
+            209,
+            0,
+            57,
+            18,
+            24,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            115,
+            87086,
+            0,
+            28,
+            44,
+            852,
+            0,
+            0,
+            33,
+            0
+          ],
+          [
+            192,
+            0,
+            113,
+            2,
+            29,
+            1,
+            1,
+            2,
+            5,
+            0
+          ],
+          [
+            175,
+            0,
+            59,
+            358,
+            218,
+            15,
+            6,
+            17,
+            37,
+            1
+          ],
+          [
+            192,
+            1,
+            82,
+            363,
+            3858,
+            88,
+            61,
+            295,
+            137,
+            12
+          ],
+          [
+            171,
+            2,
+            76,
+            23,
+            70,
+            3643,
+            11,
+            1,
+            107,
+            1
+          ],
+          [
+            129,
+            0,
+            50,
+            27,
+            77,
+            20,
+            3148,
+            3,
+            14,
+            1
+          ],
+          [
+            170,
+            0,
+            78,
+            8,
+            53,
+            6,
+            0,
+            1695,
+            40,
+            1
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            1,
+            5,
+            0,
+            0,
+            277,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            4,
+            0,
+            0,
+            1,
+            0,
+            26
+          ]
+        ]
+      },
+      "macro_f1": 0.6654601651459395,
+      "n": 104727,
+      "per_class": {
+        "Analysis": {
+          "f1": 0.25150421179302046,
+          "precision": 0.15447154471544716,
+          "recall": 0.6763754045307443,
+          "support": 309
+        },
+        "BENIGN": {
+          "f1": 0.9938658008410985,
+          "precision": 0.9999655524807955,
+          "recall": 0.9878400145193856,
+          "support": 88158
+        },
+        "Backdoor": {
+          "f1": 0.2627906976744186,
+          "precision": 0.21941747572815534,
+          "recall": 0.32753623188405795,
+          "support": 345
+        },
+        "DoS": {
+          "f1": 0.4177362893815636,
+          "precision": 0.4323671497584541,
+          "recall": 0.4040632054176072,
+          "support": 886
+        },
+        "Exploits": {
+          "f1": 0.8150417238829619,
+          "precision": 0.8812243033348561,
+          "recall": 0.7581057182157594,
+          "support": 5089
+        },
+        "Fuzzers": {
+          "f1": 0.8341156267887808,
+          "precision": 0.7868250539956804,
+          "recall": 0.8874543239951279,
+          "support": 4105
+        },
+        "Generic": {
+          "f1": 0.9401224428848738,
+          "precision": 0.9752168525402726,
+          "recall": 0.9074661285673105,
+          "support": 3469
+        },
+        "Reconnaissance": {
+          "f1": 0.8339483394833949,
+          "precision": 0.8416087388282025,
+          "recall": 0.8264261335933691,
+          "support": 2051
+        },
+        "Shellcode": {
+          "f1": 0.5931477516059958,
+          "precision": 0.42615384615384616,
+          "recall": 0.9753521126760564,
+          "support": 284
+        },
+        "Worms": {
+          "f1": 0.7123287671232876,
+          "precision": 0.6190476190476191,
+          "recall": 0.8387096774193549,
+          "support": 31
+        }
+      },
+      "roc_auc": {
+        "macro": 0.9948955967984657,
+        "per_class": {
+          "Analysis": 0.9914307574218906,
+          "BENIGN": 0.9987900532497827,
+          "Backdoor": 0.9927962758863139,
+          "DoS": 0.9834095419757802,
+          "Exploits": 0.9952988858772707,
+          "Fuzzers": 0.9945863101787031,
+          "Generic": 0.9983581053090661,
+          "Reconnaissance": 0.9975960864069314,
+          "Shellcode": 0.9991345100562299,
+          "Worms": 0.9975554416226888
+        }
+      },
+      "train_overlap": {
+        "rows": 2424,
+        "share": 0.02314589360909794
+      }
+    }
+  },
+  "model": "xgboost",
+  "model_file": "models/unsw_nb15_xgboost_noport.joblib",
+  "per_class_test_table": [
+    {
+      "class": "Analysis",
+      "effective_gap_s": 6.0,
+      "f1": 0.2907981698017285,
+      "f1_ci95": [
+        0.2617424242424243,
+        0.31504751702922434
+      ],
+      "gap_shrunk": true,
+      "gap_zero": false,
+      "precision": 0.18583495776478232,
+      "recall": 0.6682242990654206,
+      "test_support": 428
+    },
+    {
+      "class": "BENIGN",
+      "effective_gap_s": 120.0,
+      "f1": 0.9938154112668752,
+      "f1_ci95": [
+        0.9934401420381285,
+        0.9940975507987402
+      ],
+      "gap_shrunk": false,
+      "gap_zero": false,
+      "precision": 0.9992677568952892,
+      "recall": 0.9884222424634834,
+      "test_support": 91123
+    },
+    {
+      "class": "Backdoor",
+      "effective_gap_s": 4.0,
+      "f1": 0.270509977827051,
+      "f1_ci95": [
+        0.2341665634570348,
+        0.3118534871147955
+      ],
+      "gap_shrunk": true,
+      "gap_zero": false,
+      "precision": 0.22509225092250923,
+      "recall": 0.3388888888888889,
+      "test_support": 360
+    },
+    {
+      "class": "DoS",
+      "effective_gap_s": 17.0,
+      "f1": 0.4239864864864865,
+      "f1_ci95": [
+        0.39343937743864177,
+        0.449338261755478
+      ],
+      "gap_shrunk": true,
+      "gap_zero": false,
+      "precision": 0.44701691896705253,
+      "recall": 0.40321285140562246,
+      "test_support": 1245
+    },
+    {
+      "class": "Exploits",
+      "effective_gap_s": 120.0,
+      "f1": 0.8142768576742538,
+      "f1_ci95": [
+        0.8062058958926422,
+        0.8212451835464204
+      ],
+      "gap_shrunk": false,
+      "gap_zero": false,
+      "precision": 0.8871092242377461,
+      "recall": 0.7524963169094778,
+      "test_support": 6109
+    },
+    {
+      "class": "Fuzzers",
+      "effective_gap_s": 76.0,
+      "f1": 0.830574380624375,
+      "f1_ci95": [
+        0.8224141649684397,
+        0.838635761763087
+      ],
+      "gap_shrunk": true,
+      "gap_zero": false,
+      "precision": 0.7876106194690266,
+      "recall": 0.8784958871915394,
+      "test_support": 4255
+    },
+    {
+      "class": "Generic",
+      "effective_gap_s": 64.0,
+      "f1": 0.9246401354784082,
+      "f1_ci95": [
+        0.9178712798893757,
+        0.9308528133194787
+      ],
+      "gap_shrunk": true,
+      "gap_zero": false,
+      "precision": 0.9660867000884695,
+      "recall": 0.8866035182679296,
+      "test_support": 3695
+    },
+    {
+      "class": "Reconnaissance",
+      "effective_gap_s": 120.0,
+      "f1": 0.8280104092737166,
+      "f1_ci95": [
+        0.8145971445928709,
+        0.8396985593532129
+      ],
+      "gap_shrunk": false,
+      "gap_zero": false,
+      "precision": 0.8293838862559242,
+      "recall": 0.8266414737836562,
+      "test_support": 2117
+    },
+    {
+      "class": "Shellcode",
+      "effective_gap_s": 120.0,
+      "f1": 0.5,
+      "f1_ci95": [
+        0.4584380597107106,
+        0.5295422813738945
+      ],
+      "gap_shrunk": false,
+      "gap_zero": false,
+      "precision": 0.33687943262411346,
+      "recall": 0.9693877551020408,
+      "test_support": 294
+    },
+    {
+      "class": "Worms",
+      "effective_gap_s": 23.0,
+      "f1": 0.5714285714285714,
+      "f1_ci95": [
+        0.45569620253164556,
+        0.6988253012048193
+      ],
+      "gap_shrunk": true,
+      "gap_zero": false,
+      "precision": 0.4888888888888889,
+      "recall": 0.6875,
+      "test_support": 32
+    }
+  ],
+  "seed": 42,
+  "split": {
+    "allow_unseen_test_classes": true,
+    "categorical_encoding": {
+      "categories": {
+        "proto": {
+          "3pc": 22,
+          "any": 7,
+          "arp": 4,
+          "bbn-rcc": 23,
+          "chaos": 24,
+          "emcon": 17,
+          "ggp": 25,
+          "gre": 10,
+          "hmp": 26,
+          "icmp": 9,
+          "idpr-cmtp": 27,
+          "ipnip": 28,
+          "ipv6": 14,
+          "kryptolan": 29,
+          "leaf-1": 30,
+          "mobile": 15,
+          "nvp": 18,
+          "ospf": 5,
+          "pim": 11,
+          "rsvp": 8,
+          "sctp": 6,
+          "secure-vmtp": 20,
+          "sep": 16,
+          "snp": 19,
+          "sun-nd": 12,
+          "swipe": 13,
+          "tcp": 1,
+          "udp": 2,
+          "unas": 3,
+          "vmtp": 21
+        },
+        "service": {
+          "-": 1,
+          "dhcp": 11,
+          "dns": 2,
+          "ftp": 6,
+          "ftp-data": 4,
+          "http": 3,
+          "irc": 12,
+          "pop3": 8,
+          "radius": 13,
+          "smtp": 5,
+          "snmp": 10,
+          "ssh": 7,
+          "ssl": 9
+        },
+        "state": {
+          "ACC": 10,
+          "CLO": 6,
+          "CON": 2,
+          "ECO": 7,
+          "ECR": 11,
+          "FIN": 1,
+          "INT": 3,
+          "MAS": 12,
+          "PAR": 9,
+          "REQ": 4,
+          "RST": 5,
+          "TXD": 13,
+          "URH": 8,
+          "no": 14
+        }
+      },
+      "fitted_on_rows": 329222,
+      "max_categories_per_column": 30,
+      "other_code": 0,
+      "scheme": "ordinal code by training-set frequency; 0 = other / unseen in training",
+      "share_other_by_split": {
+        "test": {
+          "proto": 0.006178024657905433,
+          "service": 0.0,
+          "state": 0.0
+        },
+        "train": {
+          "proto": 0.008942294257370406,
+          "service": 0.0,
+          "state": 0.0
+        },
+        "validation": {
+          "proto": 0.006423415667836567,
+          "service": 0.0,
+          "state": 0.0
+        }
+      },
+      "values_coded_other_by_split": {
+        "test": {
+          "proto": [
+            "a/n",
+            "aes-sp3-d",
+            "argus",
+            "aris",
+            "ax.25",
+            "bna",
+            "br-sat-mon",
+            "cbt",
+            "cftp",
+            "compaq-peer",
+            "cphb",
+            "cpnx",
+            "crtp",
+            "crudp",
+            "dcn",
+            "ddp",
+            "ddx",
+            "dgp",
+            "egp",
+            "eigrp",
+            "encap",
+            "etherip",
+            "fc",
+            "fire",
+            "gmtp",
+            "i-nlsp",
+            "iatp",
+            "ib",
+            "idpr",
+            "idrp",
+            "ifmp",
+            "igmp",
+            "igp",
+            "il",
+            "ip",
+            "ipcomp",
+            "ipcv",
+            "ipip",
+            "iplt",
+            "ippc",
+            "ipv6-frag",
+            "ipv6-no",
+            "ipv6-opts",
+            "ipv6-route",
+            "ipx-n-ip",
+            "irtp",
+            "isis",
+            "iso-ip",
+            "iso-tp4",
+            "l2tp",
+            "larp",
+            "leaf-2",
+            "merit-inp",
+            "mfe-nsp",
+            "mhrp",
+            "micp",
+            "mtp",
+            "mux",
+            "narp",
+            "netblt",
+            "nsfnet-igp",
+            "pgm",
+            "pipe",
+            "pnni",
+            "pri-enc",
+            "prm",
+            "ptp",
+            "pup",
+            "pvp",
+            "qnx",
+            "rdp",
+            "rvd",
+            "sat-expak",
+            "sat-mon",
+            "sccopmce",
+            "scps",
+            "sdrp",
+            "skip",
+            "sm",
+            "smp",
+            "sprite-rpc",
+            "sps",
+            "srp",
+            "st2",
+            "stp",
+            "tcf",
+            "tlsp",
+            "tp++",
+            "trunk-1",
+            "trunk-2",
+            "ttp",
+            "uti",
+            "vines",
+            "visa",
+            "vrrp",
+            "wb-expak",
+            "wb-mon",
+            "wsn",
+            "xnet",
+            "xns-idp",
+            "xtp",
+            "zero"
+          ],
+          "service": [],
+          "state": []
+        },
+        "validation": {
+          "proto": [
+            "a/n",
+            "aes-sp3-d",
+            "argus",
+            "aris",
+            "ax.25",
+            "bna",
+            "br-sat-mon",
+            "cbt",
+            "cftp",
+            "compaq-peer",
+            "cphb",
+            "cpnx",
+            "crtp",
+            "crudp",
+            "dcn",
+            "ddp",
+            "ddx",
+            "dgp",
+            "egp",
+            "eigrp",
+            "encap",
+            "etherip",
+            "fc",
+            "fire",
+            "gmtp",
+            "i-nlsp",
+            "iatp",
+            "ib",
+            "idpr",
+            "idrp",
+            "ifmp",
+            "igmp",
+            "igp",
+            "il",
+            "ip",
+            "ipcomp",
+            "ipcv",
+            "ipip",
+            "iplt",
+            "ippc",
+            "ipv6-frag",
+            "ipv6-no",
+            "ipv6-opts",
+            "ipv6-route",
+            "ipx-n-ip",
+            "irtp",
+            "isis",
+            "iso-ip",
+            "iso-tp4",
+            "l2tp",
+            "larp",
+            "leaf-2",
+            "merit-inp",
+            "mfe-nsp",
+            "mhrp",
+            "micp",
+            "mtp",
+            "mux",
+            "narp",
+            "netblt",
+            "nsfnet-igp",
+            "pgm",
+            "pipe",
+            "pnni",
+            "pri-enc",
+            "prm",
+            "ptp",
+            "pup",
+            "pvp",
+            "qnx",
+            "rdp",
+            "rvd",
+            "sat-expak",
+            "sat-mon",
+            "sccopmce",
+            "scps",
+            "sdrp",
+            "skip",
+            "sm",
+            "smp",
+            "sprite-rpc",
+            "sps",
+            "srp",
+            "st2",
+            "stp",
+            "tcf",
+            "tlsp",
+            "tp++",
+            "trunk-1",
+            "trunk-2",
+            "ttp",
+            "uti",
+            "vines",
+            "visa",
+            "vrrp",
+            "wb-expak",
+            "wb-mon",
+            "wsn",
+            "xnet",
+            "xns-idp",
+            "xtp",
+            "zero"
+          ],
+          "service": [],
+          "state": []
+        }
+      }
+    },
+    "class_counts_before_duplicates": {
+      "test": {
+        "Analysis": 515,
+        "BENIGN": 98565,
+        "Backdoor": 456,
+        "DoS": 3215,
+        "Exploits": 8700,
+        "Fuzzers": 4699,
+        "Generic": 30436,
+        "Reconnaissance": 2756,
+        "Shellcode": 295,
+        "Worms": 32
+      },
+      "train": {
+        "Analysis": 1499,
+        "BENIGN": 298157,
+        "Backdoor": 1380,
+        "DoS": 9118,
+        "Exploits": 25218,
+        "Fuzzers": 14112,
+        "Generic": 92424,
+        "Reconnaissance": 8338,
+        "Shellcode": 896,
+        "Worms": 104
+      },
+      "validation": {
+        "Analysis": 404,
+        "BENIGN": 96536,
+        "Backdoor": 440,
+        "DoS": 2414,
+        "Exploits": 8015,
+        "Fuzzers": 4655,
+        "Generic": 28174,
+        "Reconnaissance": 2641,
+        "Shellcode": 286,
+        "Worms": 33
+      }
+    },
+    "day_key": "capture session (UNSW-NB15 has two captures, 26 days apart)",
+    "dropped_by_gap": {
+      "per_class": {
+        "Analysis": 259,
+        "BENIGN": 6742,
+        "Backdoor": 53,
+        "DoS": 1606,
+        "Exploits": 2592,
+        "Fuzzers": 780,
+        "Generic": 6488,
+        "Reconnaissance": 252,
+        "Shellcode": 34,
+        "Worms": 5
+      },
+      "total": 18811
+    },
+    "duplicates_dropped": {
+      "test": 38954,
+      "train": 122024,
+      "validation": 37891
+    },
+    "effective_gap_ms": {
+      "Analysis": 6000.0,
+      "Backdoor": 4000.0,
+      "DoS": 17000.0,
+      "Fuzzers": 76000.0,
+      "Generic": 64000.0,
+      "Worms": 23000.0
+    },
+    "gap_ms": 120000,
+    "identical_to_train": {
+      "test": {
+        "rows": 1347,
+        "share": 0.012166373120173418
+      },
+      "validation": {
+        "rows": 1599,
+        "share": 0.01512671819274031
+      }
+    },
+    "identical_to_train_note": "shared-split figure on the numeric features plus raw category ids; every variant's own train overlap (on the encoded vector it trains on, after its own deduplication) is metrics.<part>.train_overlap in that variant's report",
+    "max_drop_share": 0.1,
+    "mode": "class-time",
+    "parts": {
+      "test": {
+        "class_counts": {
+          "Analysis": 447,
+          "BENIGN": 91271,
+          "Backdoor": 379,
+          "DoS": 1264,
+          "Exploits": 6129,
+          "Fuzzers": 4329,
+          "Generic": 3915,
+          "Reconnaissance": 2654,
+          "Shellcode": 295,
+          "Worms": 32
+        },
+        "first_start": "2015-01-22T12:46:11+00:00",
+        "first_start_ms": 1421930771000,
+        "last_start": "2015-02-18T12:21:08+00:00",
+        "last_start_ms": 1424262068000,
+        "rows": 110715
+      },
+      "train": {
+        "class_counts": {
+          "Analysis": 1111,
+          "BENIGN": 275099,
+          "Backdoor": 1143,
+          "DoS": 3175,
+          "Exploits": 15514,
+          "Fuzzers": 12610,
+          "Generic": 11774,
+          "Reconnaissance": 7797,
+          "Shellcode": 896,
+          "Worms": 103
+        },
+        "first_start": "2015-01-22T11:49:37+00:00",
+        "first_start_ms": 1421927377000,
+        "last_start": "2015-02-18T07:59:30+00:00",
+        "last_start_ms": 1424246370000,
+        "rows": 329222
+      },
+      "validation": {
+        "class_counts": {
+          "Analysis": 328,
+          "BENIGN": 88311,
+          "Backdoor": 364,
+          "DoS": 905,
+          "Exploits": 5108,
+          "Fuzzers": 4237,
+          "Generic": 3579,
+          "Reconnaissance": 2558,
+          "Shellcode": 286,
+          "Worms": 31
+        },
+        "first_start": "2015-01-22T12:45:37+00:00",
+        "first_start_ms": 1421930737000,
+        "last_start": "2015-02-18T10:12:22+00:00",
+        "last_start_ms": 1424254342000,
+        "rows": 105707
+      }
+    },
+    "split_features_note": "duplicates and train overlap are decided on the numeric features plus the raw proto/state/service strings (as ids); the model sees the train-fitted codes",
+    "test_frac": 0.2,
+    "train_frac": 0.6000000000000001,
+    "train_overlap_features": [
+      "sport",
+      "dsport",
+      "dur",
+      "sbytes",
+      "dbytes",
+      "sttl",
+      "dttl",
+      "sloss",
+      "dloss",
+      "sload",
+      "dload",
+      "spkts",
+      "dpkts",
+      "swin",
+      "dwin",
+      "stcpb",
+      "dtcpb",
+      "smeansz",
+      "dmeansz",
+      "trans_depth",
+      "res_bdy_len",
+      "sjit",
+      "djit",
+      "sintpkt",
+      "dintpkt",
+      "tcprtt",
+      "synack",
+      "ackdat",
+      "is_sm_ips_ports",
+      "ct_state_ttl",
+      "ct_flw_http_mthd",
+      "is_ftp_login",
+      "ct_ftp_cmd",
+      "ct_srv_src",
+      "ct_srv_dst",
+      "ct_dst_ltm",
+      "ct_src_ltm",
+      "ct_src_dport_ltm",
+      "ct_dst_sport_ltm",
+      "ct_dst_src_ltm",
+      "proto",
+      "state",
+      "service"
+    ],
+    "val_frac": 0.2
+  },
+  "test_set_note": "every number is on the DEDUPLICATED test set (exact duplicates removed inside each part, on this variant's own vector); that removed easy repeats, so the BENIGN false-positive rate is pessimistic",
+  "timing_seconds": {
+    "classifier_inference_on_test": 0.44310399999812944,
+    "classifier_inference_us_per_flow": 4.04078133832579,
+    "isolation_forest_scoring_on_test": 0.641907707999053,
+    "test_rows": 109658,
+    "train_classifier": 17.03969849999703,
+    "train_isolation_forest": 2.1411359170015203,
+    "train_rows": 325097
+  },
+  "variant_duplicates_removed": {
+    "test": 1057,
+    "train": 4125,
+    "validation": 980
+  },
+  "variant_parts": {
+    "test": {
+      "class_counts": {
+        "Analysis": 428,
+        "BENIGN": 91123,
+        "Backdoor": 360,
+        "DoS": 1245,
+        "Exploits": 6109,
+        "Fuzzers": 4255,
+        "Generic": 3695,
+        "Reconnaissance": 2117,
+        "Shellcode": 294,
+        "Worms": 32
+      },
+      "rows": 109658
+    },
+    "train": {
+      "class_counts": {
+        "Analysis": 1025,
+        "BENIGN": 274033,
+        "Backdoor": 1081,
+        "DoS": 3078,
+        "Exploits": 15434,
+        "Fuzzers": 12202,
+        "Generic": 11312,
+        "Reconnaissance": 5947,
+        "Shellcode": 882,
+        "Worms": 103
+      },
+      "rows": 325097
+    },
+    "validation": {
+      "class_counts": {
+        "Analysis": 309,
+        "BENIGN": 88158,
+        "Backdoor": 345,
+        "DoS": 886,
+        "Exploits": 5089,
+        "Fuzzers": 4105,
+        "Generic": 3469,
+        "Reconnaissance": 2051,
+        "Shellcode": 284,
+        "Worms": 31
+      },
+      "rows": 104727
+    }
+  },
+  "version": "xgboost-202611172305-5b22d75e",
+  "versions": {
+    "joblib": "1.6.0",
+    "numpy": "2.5.4",
+    "pandas": "3.1.1",
+    "python": "3.12.0",
+    "scikit-learn": "1.9.1",
+    "xgboost": "3.4.1"
+  }
+}

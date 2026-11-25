@@ -1,0 +1,355 @@
+# Isolated IDPS lab. attacker -> sensor (router, inline) -> victim/dvwa.
+# Run attacks only against these containers.
+#
+# Isolation (see lab/README.md):
+# - The networks are not "internal", because Docker drops packets on internal
+#   networks whose destination is outside the subnet, which stops the sensor
+#   routing. Instead no container has a default route.
+# - attacker, victim and dvwa have no NET_ADMIN. Each shares the network
+#   namespace of a small "*-net" container that sets its routes and firewall
+#   rules (no Docker DNS, no gateway access) and then idles, so nothing inside
+#   an endpoint can undo them.
+# - The sensor forwards only between the two lab subnets (sensor/nftables.conf).
+# - The lab SOC sits on a third network, mgmt_net, shared only with the sensor
+#   (lab_mgmt). The sensor never forwards to or from it (rules bound to interfaces,
+#   strict reverse-path filtering), so attacker and victim can't reach the SOC.
+#   The SOC has no default route, accepts only TCP 8443 (and 8444 from the sensor) and opens no connections
+#   (soc/netguard.sh); its port is published on 127.0.0.1 only, for the dashboard.
+# - Every setup step fails closed: endpoints start only once their *-net
+#   container reports healthy.
+# - Rules next to the model (roadmap step 8): the optional `suricata` service (profile
+#   `rules`) shares the sensor's network namespace to read lab_attack, loads the ET Open rules
+#   read-only and writes only alert events to a volume that the sensor mounts read-only.
+name: idps-lab
+
+networks:
+  attack_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.10.1.0/24
+  victim_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.10.2.0/24
+  mgmt_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.10.3.0/24
+
+volumes:
+  soc_data: {}     # SOC only: database, JWT secret, TLS keys
+  soc_shared: {}   # ca.pem and the sensor token; read-only in the sensor
+  soc_pg: {}       # the SOC's PostgreSQL data (soc-db)
+  soc_db_secret: {} # the database password soc-db makes on first start; read-only in the SOC
+  suricata_eve: {} # Suricata's alert log (eve.json): written by `suricata`, read-only in the sensor
+  idps-suricata:
+    # The ET Open rules, made by scripts/suricata_compare.py's setup (docs/live.md, "Suricata
+    # comparison"). Created outside this file, so `down -v` never deletes the 46 MB rule set.
+    external: true
+
+services:
+  sensor:
+    # The repo is copied into the image rather than bind-mounted, because macOS
+    # blocks Docker from mounting folders under ~/Desktop. Rebuild after code
+    # changes: docker compose up -d --build sensor
+    build:
+      context: ..
+      dockerfile: lab/sensor/Dockerfile
+    container_name: idps-sensor
+    hostname: sensor
+    init: true   # reap exited children (start.sh ends in `sleep infinity`, which doesn't)
+    cap_add: [NET_ADMIN, NET_RAW]
+    sysctls:
+      net.ipv4.ip_forward: "1"
+      # Drop packets whose source address doesn't belong behind the interface they came in on.
+      net.ipv4.conf.all.rp_filter: "1"
+      net.ipv4.conf.default.rp_filter: "1"
+    networks:
+      attack_net:
+        ipv4_address: 10.10.1.2
+      victim_net:
+        ipv4_address: 10.10.2.2
+      mgmt_net:
+        ipv4_address: 10.10.3.2
+    volumes:
+      - soc_shared:/run/idps-soc:ro
+      - suricata_eve:/run/idps-rules:ro   # IDPS_RULES_EVE=/run/idps-rules/eve.json, see lab/README.md
+
+  suricata:
+    # Rules next to the model. Not started by a plain `up` (profile `rules`):
+    #   docker compose --profile rules up -d --build suricata
+    # It sees lab_attack because it shares the sensor's network namespace: it has no network of its
+    # own, but it DOES share the sensor's interfaces, addresses and gateway (including lab_mgmt), so
+    # it is as trusted as the sensor. Hence the hardening below. Image and configuration:
+    # lab/suricata/ (run.sh starts suricata directly, as root, without the image's entrypoint).
+    profiles: ["rules"]
+    build:
+      context: ./suricata
+    image: idps-lab-suricata
+    container_name: idps-suricata
+    network_mode: service:sensor
+    depends_on:
+      sensor: {condition: service_healthy}
+    # Only NET_RAW (capture) and DAC_READ_SEARCH (read the rules volume, whose folder belongs to the
+    # `suricata` user). No NET_ADMIN: without it Suricata cannot change the interface's offload
+    # settings or join promiscuous mode (promisc is off in suricata.yaml), it only warns. No
+    # CHOWN/SETUID/SETGID/DAC_OVERRIDE/SYS_NICE: those were for the image's entrypoint, which is not used.
+    cap_drop: [ALL]
+    cap_add: [NET_RAW, DAC_READ_SEARCH]
+    security_opt: ["no-new-privileges:true"]
+    mem_limit: 3g      # ET Open needs 1 to 2 GB; Suricata is stopped by the kernel, not the sensor, if it grows
+    pids_limit: 512
+    environment:
+      EVE_MAX_MB: "32"   # run.sh empties eve.json when it passes this size
+    # -k none: lab captures carry unfilled checksums, so without it every packet raises "SURICATA
+    # TCPv4 invalid checksum". HOME_NET is the protected network and EXTERNAL_NET is any: with the
+    # default (everything private is "home") most ET rules, written $EXTERNAL_NET -> $HOME_NET, never
+    # fire. -S loads exactly the ET Open file from the read-only rules volume.
+    command:
+      - "-i"
+      - "lab_attack"
+      - "-k"
+      - "none"
+      - "-c"
+      - "/etc/idps/suricata.yaml"
+      - "-S"
+      - "/rules-volume/rules/suricata.rules"
+      - "--set"
+      - "vars.address-groups.HOME_NET=[10.10.2.0/24]"
+      - "--set"
+      - "vars.address-groups.EXTERNAL_NET=any"
+      - "--init-errors-fatal"
+    volumes:
+      - idps-suricata:/rules-volume:ro
+      - suricata_eve:/eve   # written by Suricata (root), read-only in the sensor
+
+  soc-net:
+    # Holds the SOC's network namespace: no default route, inbound TCP 8443 (and 8444 from the sensor), outbound
+    # replies only (soc/netguard.sh). The SOC itself has no capabilities to change that.
+    # LAB_SOC_EGRESS_HOSTS (comma-separated host names, blank = none) opens HTTPS to just those
+    # hosts, e.g. api.abuseipdb.com for IP reputation or hooks.slack.com for Slack.
+    build:
+      context: .
+      dockerfile: soc/Dockerfile.net
+    container_name: idps-soc-net
+    hostname: soc
+    cap_add: [NET_ADMIN]
+    environment:
+      SOC_EGRESS_HOSTS: "${LAB_SOC_EGRESS_HOSTS:-}${ANTHROPIC_API_KEY:+,api.anthropic.com}${GEMINI_API_KEY:+,generativelanguage.googleapis.com}${GROQ_API_KEY:+,api.groq.com}"
+      # Email: the SOC may reach its configured mail server on its configured port (and nothing
+      # else on that port). Blank LAB_SMTP_HOST = no email, no exception.
+      SOC_EGRESS_SMTP_HOST: ${LAB_SMTP_HOST:-}
+      SOC_EGRESS_SMTP_PORT: ${LAB_SMTP_PORT:-}
+      SOC_EGRESS_SMTP_SECURITY: ${LAB_SMTP_SECURITY:-}  # blank port + ssl means 465
+      # Extra sensors allowed on the mutual-TLS port 8444 (mgmt_net host addresses, comma-separated),
+      # e.g. 10.10.3.3 for the cloud collector (lab/cloud/README.md). Blank = the lab sensor only.
+      SOC_EXTRA_SENSOR_ADDRS: ${LAB_SOC_EXTRA_SENSOR_ADDRS:-}
+    ports:
+      - "127.0.0.1:8443:8443"   # the dashboard, from this machine only
+    networks:
+      mgmt_net:
+        ipv4_address: 10.10.3.10
+
+  soc-db:
+    # The SOC's PostgreSQL (roadmap step 10). It joins soc-net's network namespace, so it is
+    # reachable only on the SOC's own loopback (127.0.0.1:5432): netguard.sh drops anything else,
+    # and nothing is published. It makes its own password on first start (soc/db-start.sh).
+    # LAB_SOC_DATABASE=sqlite in lab/.env keeps the SOC on SQLite instead.
+    build:
+      context: .
+      dockerfile: soc/Dockerfile.db
+    container_name: idps-soc-db
+    network_mode: service:soc-net
+    cap_drop: [ALL]
+    # The official entrypoint fixes the data directory's owner as root, then drops to postgres.
+    cap_add: [CHOWN, DAC_OVERRIDE, FOWNER, SETUID, SETGID]
+    security_opt: ["no-new-privileges:true"]
+    shm_size: 256m
+    mem_limit: 1g
+    healthcheck:
+      test: ["CMD", "pg_isready", "-h", "127.0.0.1", "-U", "idps", "-d", "idps"]
+      interval: 3s
+      timeout: 3s
+      retries: 30
+      start_period: 2m
+    volumes:
+      - soc_pg:/var/lib/postgresql/data
+      - soc_db_secret:/run/idps-db
+    depends_on:
+      soc-net: {condition: service_healthy}
+
+  soc:
+    # Same image as the sensor (it already holds idps/ and soc/), different command. Rebuild
+    # both after code changes: docker compose up -d --build sensor soc
+    build:
+      context: ..
+      dockerfile: lab/sensor/Dockerfile
+    container_name: idps-soc
+    command: ["/opt/idps/lab/soc/start.sh"]
+    network_mode: service:soc-net
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    environment:
+      GROQ_API_KEY: ${GROQ_API_KEY:-}
+      IDPS_SOC_GROQ_MODEL: ${IDPS_SOC_GROQ_MODEL:-openai/gpt-oss-20b}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      IDPS_SOC_GEMINI_MODEL: ${IDPS_SOC_GEMINI_MODEL:-gemini-3.8-flash}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      LAB_SOC_ADMIN_PASSWORD: ${LAB_SOC_ADMIN_PASSWORD:-}
+      # postgres (default; soc-db) or sqlite (the old soc.db file in the SOC's volume).
+      LAB_SOC_DATABASE: ${LAB_SOC_DATABASE:-postgres}
+      # Sensors must use the mutual-TLS port 8444 with their certificate (lab/soc/bootstrap.py);
+      # false lets them use 8443 with the token alone.
+      LAB_SOC_SENSOR_MTLS: ${LAB_SOC_SENSOR_MTLS:-true}
+      # Admins sign in with a password and an authenticator app code (they set it up at their
+      # first sign-in). false turns that requirement off (lab only).
+      IDPS_SOC_MFA_REQUIRED_FOR_ADMINS: ${LAB_SOC_MFA_REQUIRED_FOR_ADMINS:-}
+      # Optional single sign-on (OpenID Connect); see docs/soc.md. Off while the issuer is blank.
+      # The SOC can reach the provider only if its host is in LAB_SOC_EGRESS_HOSTS.
+      IDPS_SOC_OIDC_ISSUER: ${LAB_SOC_OIDC_ISSUER:-}
+      IDPS_SOC_OIDC_CLIENT_ID: ${LAB_SOC_OIDC_CLIENT_ID:-}
+      IDPS_SOC_OIDC_CLIENT_SECRET: ${LAB_SOC_OIDC_CLIENT_SECRET:-}
+      IDPS_SOC_OIDC_REDIRECT_URI: ${LAB_SOC_OIDC_REDIRECT_URI:-}
+      # Data retention (docs/soc.md, "Data retention"); blank keeps the SOC's defaults.
+      IDPS_SOC_ALERT_RETENTION_DAYS: ${LAB_ALERT_RETENTION_DAYS:-}
+      IDPS_SOC_AUDIT_RETENTION_DAYS: ${LAB_AUDIT_RETENTION_DAYS:-}
+      # Analysts can't confirm a block of these (the lab gateways, sensor, victims, SOC).
+      IDPS_SOC_BLOCK_ALLOWLIST: 10.10.1.1,10.10.1.2,10.10.2.0/24,10.10.3.0/24
+      # Made-up, clearly labelled map locations for the lab's private addresses.
+      IDPS_SOC_GEO_DEMO: ${LAB_SOC_GEO_DEMO:-false}
+      # Where the protected site is, for the live attack map (blank: no home marker).
+      IDPS_SOC_HOME_LAT: ${LAB_SOC_HOME_LAT:-}
+      IDPS_SOC_HOME_LON: ${LAB_SOC_HOME_LON:-}
+      IDPS_SOC_HOME_LABEL: ${LAB_SOC_HOME_LABEL:-Lab (demo)}
+      # Real locations for public addresses: the MaxMind GeoLite2 City file, copied into the
+      # SOC's volume (it can't be mounted from ~/Desktop and must not go in the image or git).
+      IDPS_SOC_GEOIP_DB: ${LAB_SOC_GEOIP_DB:-}
+      # Integrations (docs/soc.md, "Integrations"): every one optional, values only in lab/.env
+      # (git-ignored). This SOC can't open outbound connections (soc/netguard.sh), so in the lab
+      # they are tried against receivers on its own loopback (lab/README.md).
+      IDPS_SOC_PUBLIC_URL: ${LAB_SOC_PUBLIC_URL:-}
+      IDPS_SOC_NOTIFY_MIN_SEVERITY: ${LAB_NOTIFY_MIN_SEVERITY:-}
+      IDPS_SOC_NOTIFY_ALLOW_PRIVATE: ${LAB_NOTIFY_ALLOW_PRIVATE:-}
+      IDPS_SOC_NOTIFY_ALLOW_HTTP: ${LAB_NOTIFY_ALLOW_HTTP:-}
+      IDPS_SOC_WEBHOOK_URL: ${LAB_WEBHOOK_URL:-}
+      IDPS_SOC_WEBHOOK_SECRET: ${LAB_WEBHOOK_SECRET:-}
+      IDPS_SOC_SLACK_WEBHOOK_URL: ${LAB_SLACK_WEBHOOK_URL:-}
+      IDPS_SOC_SMTP_HOST: ${LAB_SMTP_HOST:-}
+      IDPS_SOC_SMTP_PORT: ${LAB_SMTP_PORT:-}
+      IDPS_SOC_SMTP_SECURITY: ${LAB_SMTP_SECURITY:-}
+      IDPS_SOC_SMTP_USERNAME: ${LAB_SMTP_USERNAME:-}
+      IDPS_SOC_SMTP_PASSWORD: ${LAB_SMTP_PASSWORD:-}
+      IDPS_SOC_SMTP_FROM: ${LAB_SMTP_FROM:-}
+      IDPS_SOC_SMTP_TO: ${LAB_SMTP_TO:-}
+      IDPS_SOC_SYSLOG_HOST: ${LAB_SYSLOG_HOST:-}
+      IDPS_SOC_SYSLOG_PORT: ${LAB_SYSLOG_PORT:-}
+      IDPS_SOC_SYSLOG_PROTOCOL: ${LAB_SYSLOG_PROTOCOL:-}
+      IDPS_SOC_SYSLOG_CA_FILE: ${LAB_SYSLOG_CA_FILE:-}
+      IDPS_SOC_ABUSEIPDB_KEY: ${LAB_ABUSEIPDB_KEY:-}
+      # Step 13: privacy notice contacts, the access log's retention, and the weekly PDF report
+      # (emailed through the SMTP settings above when LAB_REPORT_EMAIL_ENABLED=true).
+      IDPS_SOC_PRIVACY_CONTROLLER_NAME: ${LAB_PRIVACY_CONTROLLER_NAME:-}
+      IDPS_SOC_PRIVACY_CONTACT_EMAIL: ${LAB_PRIVACY_CONTACT_EMAIL:-}
+      IDPS_SOC_PRIVACY_GRIEVANCE_OFFICER: ${LAB_PRIVACY_GRIEVANCE_OFFICER:-}
+      IDPS_SOC_ACCESS_LOG_RETENTION_DAYS: ${LAB_ACCESS_LOG_RETENTION_DAYS:-}
+      IDPS_SOC_REPORT_EMAIL_ENABLED: ${LAB_REPORT_EMAIL_ENABLED:-}
+      IDPS_SOC_REPORT_EMAIL_TO: ${LAB_REPORT_EMAIL_TO:-}
+      IDPS_SOC_REPORT_MASK_IPS: ${LAB_REPORT_MASK_IPS:-}
+      # Live demo (docs/soc.md, "Live demo"): the secret the host-side demo runner
+      # (scripts/demo_runner.py) sends. Blank or unset = demo mode off. Only a token goes in;
+      # no route to the attacker is opened.
+      IDPS_SOC_C6_TOKEN: ${IDPS_SOC_C6_TOKEN:-}
+      IDPS_SOC_DEMO_TOKEN: ${IDPS_SOC_DEMO_TOKEN:-}
+    healthcheck:
+      test: ["CMD", "python", "-c", "import ssl,urllib.request; urllib.request.urlopen('https://127.0.0.1:8443/health', context=ssl.create_default_context(cafile='/run/idps-soc/ca.pem'), timeout=2)"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+      # The first start after step 10 copies an old soc.db into PostgreSQL (minutes for 1M alerts).
+      start_period: 30m
+    volumes:
+      - soc_data:/var/lib/idps-soc
+      - soc_shared:/run/idps-soc
+      - soc_db_secret:/run/idps-db:ro
+    depends_on:
+      soc-net: {condition: service_healthy}
+      soc-db: {condition: service_healthy}
+
+  attacker-net:
+    build: ./netns
+    container_name: idps-attacker-net
+    hostname: attacker
+    cap_add: [NET_ADMIN]
+    environment:
+      PEER_NET: 10.10.2.0/24
+      SENSOR_IP: 10.10.1.2
+      GATEWAY_IP: 10.10.1.1
+    networks:
+      attack_net:
+        ipv4_address: 10.10.1.10
+    depends_on:
+      sensor: {condition: service_healthy}
+
+  attacker:
+    # Attack scripts are copied in at build time (no bind mount; see sensor).
+    build:
+      context: .
+      dockerfile: attacker/Dockerfile
+    container_name: idps-attacker
+    network_mode: service:attacker-net
+    depends_on:
+      attacker-net: {condition: service_healthy}
+
+  victim-net:
+    build: ./netns
+    container_name: idps-victim-net
+    hostname: victim
+    cap_add: [NET_ADMIN]
+    environment:
+      PEER_NET: 10.10.1.0/24
+      SENSOR_IP: 10.10.2.2
+      GATEWAY_IP: 10.10.2.1
+    networks:
+      victim_net:
+        ipv4_address: 10.10.2.10
+    depends_on:
+      sensor: {condition: service_healthy}
+
+  victim:
+    build: ./victim
+    container_name: idps-victim
+    network_mode: service:victim-net
+    environment:
+      # Checked by the victim's entrypoint, so `docker compose down` still works without .env.
+      # Note: anyone with Docker access can read it with `docker inspect`; it is lab-only.
+      LAB_VICTIM_PASSWORD: ${LAB_VICTIM_PASSWORD:-}
+    depends_on:
+      victim-net: {condition: service_healthy}
+
+  dvwa-net:
+    build: ./netns
+    container_name: idps-dvwa-net
+    hostname: dvwa
+    cap_add: [NET_ADMIN]
+    environment:
+      PEER_NET: 10.10.1.0/24
+      SENSOR_IP: 10.10.2.2
+      GATEWAY_IP: 10.10.2.1
+    networks:
+      victim_net:
+        ipv4_address: 10.10.2.11
+    depends_on:
+      sensor: {condition: service_healthy}
+
+  dvwa:
+    # Pinned by digest so the target web app never changes between experiments.
+    image: vulnerables/web-dvwa@sha256:dae203fe11646a86937bf04db0079adef295f426da68a92b40e3b181f337daa7
+    # The image is only published for amd64; on Apple Silicon it runs under emulation.
+    platform: linux/amd64
+    container_name: idps-dvwa
+    network_mode: service:dvwa-net
+    depends_on:
+      dvwa-net: {condition: service_healthy}

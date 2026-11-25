@@ -1,0 +1,41 @@
+# Copy to terraform.tfvars (git-ignored) and fill in. Every variable is listed; the ones marked
+# REQUIRED have no default. Values below are placeholders, not real addresses.
+
+# ---- REQUIRED ----------------------------------------------------------------------------------
+# Your own public IPv4 as x.x.x.x/32 (find it with: curl -s https://checkip.amazonaws.com).
+# Each entry must be a /24 or narrower with no host bits set; 0.0.0.0/0 is rejected.
+admin_cidrs = ["203.0.113.25/32"]
+
+# (The cost budget is a separate stack: see budget/ and README.md.)
+
+# ---- General -----------------------------------------------------------------------------------
+# aws_region            = "eu-west-1"
+# name_prefix           = "idps-fyp"
+# force_destroy_buckets = true            # destroy also deletes flow logs AND the models bucket
+# ssm_prefix            = "/idps-fyp"
+
+# ---- SOC host ----------------------------------------------------------------------------------
+# soc_vpc_cidr       = "10.50.0.0/16"
+# soc_instance_type  = "t3.micro"         # t3.small is more comfortable (1 GB RAM is tight)
+# soc_root_volume_gb = 20
+# Public IPv4 /32s of the lab sensor and of wherever the cloud collector runs (may reach 443/80).
+# sensor_cidrs       = ["198.51.100.10/32"]
+# Public git repository with this project, cloned on first boot (empty = copy it yourself).
+# repo_url           = "https://example.com/you/idps-final-year-project.git"
+# repo_ref           = "main"
+# SOC refuses every block request until this is set (gateways, DNS, SOC host, sensors, analysts).
+# block_allowlist    = ["10.50.0.0/16", "203.0.113.25/32"]
+# compose_version    = "v2.40.3"          # check the release exists before deploying
+
+# ---- Target VPC --------------------------------------------------------------------------------
+# target_vpc_cidr         = "10.60.0.0/16"
+# victim_instance_type    = "t3.micro"
+# victim_web_open         = false         # true opens port 80 to victim_web_cidrs
+# victim_web_cidrs        = ["0.0.0.0/0"] # only used when victim_web_open = true (max 4)
+# attacker_cidrs          = ["198.51.100.77/32"]  # your own test attacker, max 4
+# attacker_ports          = [22, 80]
+# flow_log_retention_days = 7
+
+# ---- Collector ---------------------------------------------------------------------------------
+# IAM users/roles that may assume the collector role. Empty (default) = the role is not created.
+# collector_trusted_principal_arns = ["arn:aws:iam::111122223333:user/your-user"]
